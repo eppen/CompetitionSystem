@@ -19,7 +19,7 @@ public class BaseUser {
 	private Integer isAdmin = 0;
 
 	/** 用户姓名 */
-	private String name;
+	private String name = "学生";
 
 	/** 用户登录名 */
 	private String username;
@@ -34,16 +34,16 @@ public class BaseUser {
 	private Integer sex = 0;
 
 	/** 用户邮箱 */
-	private String email;
+	private String email = "";
 
 	/** 用户QQ */
-	private String qq;
+	private String qq = "";
 
 	/** 用户手机号 */
-	private String telephone;
+	private String telephone = "";
 
 	/** 用户班级 */
-	private String classes;
+	private String classes = "";
 
 	/** 用户头像 */
 	private byte[] pic;

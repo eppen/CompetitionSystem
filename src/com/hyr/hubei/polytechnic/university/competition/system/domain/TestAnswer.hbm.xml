@@ -13,13 +13,13 @@
 		<!-- 提交者:学生 多对一 -->
 		<many-to-one name="student" class="User" column="answers"></many-to-one>
 		<!-- 结果 -->
-		<property name="result" column="result"></property>
+		<property name="result" column="result" length="20"></property>
 		<!-- 得分 -->
 		<property name="scores" column="scores" type="double"></property>
 		<!-- 提交时间 -->
 		<property name="submitTime" column="submitTime" type="timestamp"></property>
 		<!-- 关联的评测点 一对多单向关联 -->
-		<list name="scoringPoints">
+		<list name="scoringPoints" cascade="delete">
 			<key column="answerId"></key>
 			<index column="id" type="Long"></index>
 			<one-to-many class="ScoringPoint" />
@@ -39,7 +39,7 @@
 		<!-- 代码长度 -->
 		<property name="codeLength" column="codeLength"></property>
 		<!-- 是否被删除 -->
-		<property name="isdel" column="isdel" length="2"></property>
+		<property name="isdel" column="isdel" length="2" not-null="true"></property>
 
 	</class>
 

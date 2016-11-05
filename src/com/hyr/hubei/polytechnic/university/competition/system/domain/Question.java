@@ -15,7 +15,7 @@ public class Question {
 	private Long id;
 
 	/** 试题类型 0无类型 1结果填空 2代码填空 3程序设定。 要和创建主题表中对应一致 */
-	private Integer type;
+	private Integer type = 0;
 
 	/** 语言 JAVA */
 	private String language;
@@ -66,7 +66,7 @@ public class Question {
 	private Blob images;
 
 	/** 是否删除 0未删除 1已删除 默认值0 */
-	private Integer isdel;
+	private Integer isdel = 0;
 
 	public Long getId() {
 		return id;

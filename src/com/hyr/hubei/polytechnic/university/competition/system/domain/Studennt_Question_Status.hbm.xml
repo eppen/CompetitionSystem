@@ -15,7 +15,7 @@
 		<!-- 所属学生 -->
 		<many-to-one name="student" column="studentId" class="User"></many-to-one>
 		<!-- 状态 -->
-		<property name="status" column="status"></property>
+		<property name="status" column="status" not-null="true"></property>
 
 	</class>
 

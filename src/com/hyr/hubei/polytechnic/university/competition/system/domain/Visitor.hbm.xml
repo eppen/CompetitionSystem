@@ -11,11 +11,11 @@
 			<generator class="native" />
 		</id>
 		<!-- 用户自身 -->
-		<many-to-one name="userself" class="User" column="userself"></many-to-one>
+		<many-to-one name="userself" class="User" column="userself"  not-null="true"></many-to-one>
 		<!-- 访问用户 -->
-		<many-to-one name="visitors" class="User" column="visitors"></many-to-one>
+		<many-to-one name="visitors" class="User" column="visitors" not-null="true"></many-to-one>
 		<!-- 访问时间 -->
-		<property name="visitorTime" column="visitorTime" type="timestamp"></property>
+		<property name="visitorTime" column="visitorTime" type="timestamp" not-null="true"></property>
 
 	</class>
 

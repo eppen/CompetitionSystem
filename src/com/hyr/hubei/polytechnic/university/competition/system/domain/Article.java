@@ -63,5 +63,5 @@ public class Article {
 	public void setIsdel(Integer isdel) {
 		this.isdel = isdel;
 	}
-
+	
 }

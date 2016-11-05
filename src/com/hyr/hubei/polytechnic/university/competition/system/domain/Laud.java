@@ -16,7 +16,7 @@ public class Laud {
 	private Date laudTime;
 
 	/** 点赞状态 0用户未点赞 1用户已点赞 默认值0 */
-	private Integer status;
+	private Integer status = 0;
 
 	public LaudPK getLaudPK() {
 		return laudPK;

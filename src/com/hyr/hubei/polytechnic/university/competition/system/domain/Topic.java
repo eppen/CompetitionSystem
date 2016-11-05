@@ -11,14 +11,14 @@ import java.util.List;
  * @author 黄跃然
  */
 public class Topic extends Article {
-	/** 主题类型 新增题目 知识讨论 */
-	private Integer type;
+	/** 主题类型 0新增题目 1知识讨论 默认为1 */
+	private Integer type = 1;
 
 	/** 试题标题 */
 	private String title;
 
-	/** 试题类型 0无类型 1结果填空 2代码设计 3程序设计。 要和试题表中对应一致 */
-	private Integer questionType;
+	/** 试题类型 0无类型 1结果填空 2代码设计 3程序设计。 要和试题表中对应一致。默认为0 */
+	private Integer questionType = 0;
 
 	/** 主题内容 */
 	private String content;
@@ -74,8 +74,8 @@ public class Topic extends Article {
 	/** 主题下的回复 */
 	private List<Reply> replies;
 
-	/** 主题的总回复数 */
-	private int replyCount;
+	/** 主题的总回复数 默认为0 */
+	private int replyCount = 0;
 
 	/** 最新的回复记录 */
 	private Reply lastReply;
@@ -83,7 +83,7 @@ public class Topic extends Article {
 	/** 最近更新时间，以最后一次回复的时间为准 */
 	private Date lastUpdateTime;
 
-	/** 点赞数 */
+	/** 点赞数 默认为0 */
 	private Integer laudCount = 0;
 
 	public Integer getType() {

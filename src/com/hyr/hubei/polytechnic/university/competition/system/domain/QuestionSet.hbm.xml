@@ -11,21 +11,21 @@
 			<generator class="native" />
 		</id>
 		<!-- 试题集名称 -->
-		<property name="title" column="title"></property>
+		<property name="title" column="title" not-null="true"></property>
 		<!-- 试题集描述 -->
-		<property name="description" column="description"></property>
+		<property name="description" column="description" not-null="true"></property>
 		<!-- 关联的试题 一对多 -->
-		<list name="questions">
+		<list name="questions" cascade="delete" lazy="true">
 			<key column="topicId"></key>
 			<index column="createTime" type="Date"></index>
 			<one-to-many class="Question" />
 		</list>
 		<!-- 总题数 -->
-		<property name="questionCount" column="questionCount"></property>
+		<property name="questionCount" column="questionCount" not-null="true"></property>
 		<!-- 更新时间 -->
-		<property name="updateTime" column="updateTime" type="timestamp"></property>
+		<property name="updateTime" column="updateTime" type="timestamp" not-null="true"></property>
 		<!-- 是否被删除 -->
-		<property name="isdel" column="isdel" length="2"></property>
+		<property name="isdel" column="isdel" length="2" not-null="true"></property>
 
 	</class>
 

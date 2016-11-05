@@ -11,7 +11,7 @@
 			<generator class="native" />
 		</id>
 		<!-- 结果 -->
-		<property name="result" column="result"></property>
+		<property name="result" column="result" length="20"></property>
 		<!-- 得分 -->
 		<property name="score" column="score" type="double"></property>
 		<!-- CPU使用 -->

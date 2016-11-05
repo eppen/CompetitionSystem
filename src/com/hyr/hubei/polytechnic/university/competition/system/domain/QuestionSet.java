@@ -23,13 +23,13 @@ public class QuestionSet {
 	private List<Question> questions;
 
 	/** 试题集中试题总数 */
-	private Integer questionCount;
+	private Integer questionCount = 0;
 
 	/** 更新时间 以最后添加的试题时间为准 */
 	private Date updateTime;
 
 	/** 是否被删除 0未删除 1已删除 默认值0。如果删除试题集，需要将一系列的试题和评测答案都删除. */
-	private Integer isdel;
+	private Integer isdel = 0;
 
 	public Long getId() {
 		return id;

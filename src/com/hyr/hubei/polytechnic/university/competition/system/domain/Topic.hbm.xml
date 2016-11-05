@@ -15,9 +15,9 @@
 		<!-- 发表时间采用timestamp类型 -->
 		<property name="postTime" column="postTime" type="timestamp"></property>
 		<!-- ip地址 -->
-		<property name="ipAddr" column="ipAddr" length="25"></property>
+		<property name="ipAddr" column="ipAddr" length="25" not-null="true"></property>
 		<!-- 是否删除 -->
-		<property name="isdel" column="isdel" length="2"></property>
+		<property name="isdel" column="isdel" length="2" not-null="true"></property>
 
 		<!-- 主题标题 -->
 		<property name="title" column="title"></property>
@@ -60,7 +60,7 @@
 		<!-- 样例答案 存放xml文件 -->
 		<property name="testAnswers" column="testAnswers" type="binary"></property>
 		<!-- 回复 一对多 -->
-		<list name="replies">
+		<list name="replies" cascade="delete">
 			<key column="topicId"></key>
 			<index column="postTime" type="Date"></index>
 			<one-to-many class="Reply" />
@@ -73,7 +73,7 @@
 		<!-- 最近更新时间 -->
 		<property name="lastUpdateTime" column="lastUpdateTime" type="timestamp"></property>
 		<!-- 点赞数 -->
-		<property name="laudCount" column="laudCount"></property>
+		<property name="laudCount" column="laudCount" not-null="true"></property>
 
 
 	</class>
