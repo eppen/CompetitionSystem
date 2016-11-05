@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<property name="dialect">
+			org.hibernate.dialect.MySQL5Dialect
+		</property>
+
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">30</property>
+
+		<!-- Disable the second-level cache -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+		<property name="hibernate.cache.region.factory_class">
+			org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		<property name="cache.use_query_cache">true</property>
+		<property name="hibernate.connection.isolation">2</property>
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">false</property>
+
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hbm2ddl.auto">create</property>
+
+		<!-- 声明映射文件 -->
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Topic.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Laud.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Question.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/QuestionSet.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Reply.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Studennt_Question_Status.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/TestAnswer.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/User.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Visitor.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/ScoringPoint.hbm.xml" />
+
+
+	</session-factory>
+
+</hibernate-configuration>

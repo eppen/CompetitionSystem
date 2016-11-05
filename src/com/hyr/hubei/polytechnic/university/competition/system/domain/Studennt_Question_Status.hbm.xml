@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="Studennt_Question_Status" table="db_cs_studennt_question_status">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 所属试题 -->
+		<many-to-one name="question" column="questionId" class="Question"></many-to-one>
+		<!-- 所属学生 -->
+		<many-to-one name="student" column="studentId" class="User"></many-to-one>
+		<!-- 状态 -->
+		<property name="status" column="status"></property>
+
+	</class>
+
+</hibernate-mapping>

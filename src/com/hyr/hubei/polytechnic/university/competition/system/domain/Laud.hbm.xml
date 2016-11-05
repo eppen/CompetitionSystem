@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="Laud" table="db_cs_laud">
+		<composite-id name="laudPK"
+			class="com.hyr.hubei.polytechnic.university.competition.system.domain.LaudPK">
+			<key-property name="userId"></key-property>
+			<key-property name="topicId"></key-property>
+		</composite-id>
+		<!-- 点赞时间 -->
+		<property name="laudTime" column="laudTime" type="timestamp"></property>
+		<!-- 点赞状态 -->
+		<property name="status" column="status"></property>
+
+	</class>
+
+</hibernate-mapping>

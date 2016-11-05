@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="TestAnswer" table="db_cs_testanswer">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 提交者:学生 多对一 -->
+		<many-to-one name="student" class="User" column="answers"></many-to-one>
+		<!-- 结果 -->
+		<property name="result" column="result"></property>
+		<!-- 得分 -->
+		<property name="scores" column="scores" type="double"></property>
+		<!-- 提交时间 -->
+		<property name="submitTime" column="submitTime" type="timestamp"></property>
+		<!-- 关联的评测点 一对多单向关联 -->
+		<list name="scoringPoints">
+			<key column="answerId"></key>
+			<index column="id" type="Long"></index>
+			<one-to-many class="ScoringPoint" />
+		</list>
+		<!-- CPU使用 -->
+		<property name="runtime" column="runtime"></property>
+		<!-- 内存使用 -->
+		<property name="memory" column="memory"></property>
+		<!-- 试题标题 -->
+		<property name="questionTitle" column="questionTitle"></property>
+		<!-- 编程语言 -->
+		<property name="language" column="language" length="10"></property>
+		<!-- 提交的文本答案 -->
+		<property name="answer" column="answer"></property>
+		<!-- 编译信息 -->
+		<property name="compileInfo" column="compileInfo"></property>
+		<!-- 代码长度 -->
+		<property name="codeLength" column="codeLength"></property>
+		<!-- 是否被删除 -->
+		<property name="isdel" column="isdel" length="2"></property>
+
+	</class>
+
+</hibernate-mapping>

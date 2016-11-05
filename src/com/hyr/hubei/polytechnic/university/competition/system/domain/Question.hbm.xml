@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="Question" table="db_cs_question">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 试题类型 -->
+		<property name="type" column="type" length="3"></property>
+		<!-- 语言 -->
+		<property name="language" column="language" length="10"></property>
+		<!-- 所属试题集 多对一 -->
+		<many-to-one name="scope" class="QuestionSet" column="questions"></many-to-one>
+
+		<!-- 试题标题 -->
+		<property name="title" column="title" length="30"></property>
+		<!-- 试题描述 -->
+		<property name="description" column="description"></property>
+		<!-- 输入格式 -->
+		<property name="inputFormat" column="inputFormat"></property>
+		<!-- 输出格式 -->
+		<property name="outputFormat" column="outputFormat"></property>
+		<!-- 样例输入 -->
+		<property name="sampleInput" column="sampleInput"></property>
+		<!-- 样例输出 -->
+		<property name="sampleOutput" column="sampleOutput"></property>
+		<!-- 注意 -->
+		<property name="careful" column="careful"></property>
+		<!-- 提示 -->
+		<property name="cue" column="cue"></property>
+		<!-- 耗时要求 -->
+		<property name="runtime" column="runtime" type="double"></property>
+		<!-- 内存要求 -->
+		<property name="memory" column="memory" type="double"></property>
+		<!-- 创建时间 -->
+		<property name="createTime" column="createTime" type="timestamp"></property>
+		<!-- 总分 -->
+		<property name="scores" column="scores" length="6"></property>
+		<!-- 样例答案 -->
+		<property name="testAnswers" column="testAnswers" type="binary"></property>
+		<!-- 图片 -->
+		<property name="images" column="images" type="blob"></property>
+		<!-- 是否删除 -->
+		<property name="isdel" column="isdel" length="2"></property>
+
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="QuestionSet" table="db_cs_questionset">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 试题集名称 -->
+		<property name="title" column="title"></property>
+		<!-- 试题集描述 -->
+		<property name="description" column="description"></property>
+		<!-- 关联的试题 一对多 -->
+		<list name="questions">
+			<key column="topicId"></key>
+			<index column="createTime" type="Date"></index>
+			<one-to-many class="Question" />
+		</list>
+		<!-- 总题数 -->
+		<property name="questionCount" column="questionCount"></property>
+		<!-- 更新时间 -->
+		<property name="updateTime" column="updateTime" type="timestamp"></property>
+		<!-- 是否被删除 -->
+		<property name="isdel" column="isdel" length="2"></property>
+
+	</class>
+
+</hibernate-mapping>

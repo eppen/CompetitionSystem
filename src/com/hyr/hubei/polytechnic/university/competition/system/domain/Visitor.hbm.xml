@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="Visitor" table="db_cs_visitor">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 用户自身 -->
+		<many-to-one name="userself" class="User" column="userself"></many-to-one>
+		<!-- 访问用户 -->
+		<many-to-one name="visitors" class="User" column="visitors"></many-to-one>
+		<!-- 访问时间 -->
+		<property name="visitorTime" column="visitorTime" type="timestamp"></property>
+
+	</class>
+
+</hibernate-mapping>

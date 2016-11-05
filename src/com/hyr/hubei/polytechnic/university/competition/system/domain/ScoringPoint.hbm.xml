@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="ScoringPoint" table="db_cs_scoringpoint">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 结果 -->
+		<property name="result" column="result"></property>
+		<!-- 得分 -->
+		<property name="score" column="score" type="double"></property>
+		<!-- CPU使用 -->
+		<property name="runtime" column="runtime" type="double"></property>
+		<!-- 内存使用 -->
+		<property name="memory" column="memory" type="double"></property>
+
+	</class>
+
+</hibernate-mapping> 

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="Topic" table="db_cs_topic">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- author属性，表示我与User的多对一关系 -->
+		<many-to-one name="author" class="User" column="authorId"></many-to-one>
+		<!-- 发表时间采用timestamp类型 -->
+		<property name="postTime" column="postTime" type="timestamp"></property>
+		<!-- ip地址 -->
+		<property name="ipAddr" column="ipAddr" length="25"></property>
+		<!-- 是否删除 -->
+		<property name="isdel" column="isdel" length="2"></property>
+
+		<!-- 主题标题 -->
+		<property name="title" column="title"></property>
+		<!-- 试题名称 -->
+		<property name="questionTitle" column="questionTitle"></property>
+		<!-- 主题类型 -->
+		<property name="type" column="type" length="3"></property>
+		<!-- 试题类型 -->
+		<property name="questionType" column="questionType" length="3"></property>
+		<!-- 主题内容 -->
+		<property name="content" column="content"></property>
+		<!-- 编程语言 -->
+		<property name="language" column="language" length="10"></property>
+		<!-- 试题集 -->
+		<many-to-one name="scope" class="QuestionSet" column="scopeId"></many-to-one>
+		<!-- 试题描述 -->
+		<property name="description" column="description"></property>
+		<!-- 输入格式 -->
+		<property name="inputFormat" column="inputFormat"></property>
+		<!-- 输出格式 -->
+		<property name="outputFormat" column="outputFormat"></property>
+		<!-- 样例输入 -->
+		<property name="sampleInput" column="sampleInput"></property>
+		<!-- 样例输出 -->
+		<property name="sampleOutput" column="sampleOutput"></property>
+		<!-- 注意 -->
+		<property name="careful" column="careful"></property>
+		<!-- 提示 -->
+		<property name="cue" column="cue"></property>
+		<!-- 图片 -->
+		<property name="images" column="images" type="blob"></property>
+		<!-- 耗时要求 -->
+		<property name="runtime" column="runtime" type="double"></property>
+		<!-- 内存要求 -->
+		<property name="memory" column="memory" type="double"></property>
+		<!-- 创建时间 -->
+		<property name="createTime" column="createTime" type="timestamp"></property>
+		<!-- 总分 -->
+		<property name="scores" column="scores" length="6"></property>
+		<!-- 样例答案 存放xml文件 -->
+		<property name="testAnswers" column="testAnswers" type="binary"></property>
+		<!-- 回复 一对多 -->
+		<list name="replies">
+			<key column="topicId"></key>
+			<index column="postTime" type="Date"></index>
+			<one-to-many class="Reply" />
+		</list>
+		<!-- 回复总数 -->
+		<property name="replyCount" column="replyCount"></property>
+		<!-- 最新回复 一对一 -->
+		<many-to-one name="lastReply" class="Reply" column="lastReplyId"
+			unique="true"></many-to-one>
+		<!-- 最近更新时间 -->
+		<property name="lastUpdateTime" column="lastUpdateTime" type="timestamp"></property>
+		<!-- 点赞数 -->
+		<property name="laudCount" column="laudCount"></property>
+
+
+	</class>
+
+</hibernate-mapping>
