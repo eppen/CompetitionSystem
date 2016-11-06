@@ -1,8 +1,7 @@
 package com.hyr.hubei.polytechnic.university.competition.system.domain;
 
-import java.sql.Blob;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,55 +12,48 @@ import java.util.Set;
  */
 public class BaseUser {
 	/** id主键 */
-	private Long id;
-
-	/** 用户类型 0普通用户 1顶级管理员 2次级管理员 */
-	private Integer isAdmin = 0;
+	protected Long id;
 
 	/** 用户姓名 */
-	private String name = "学生";
+	protected String name = "学生";
 
 	/** 用户登录名 */
-	private String username;
+	protected String username;
 
 	/** 用户密码 MD5加密 */
-	private String password;
+	protected String password;
 
-	/** 用户出生日期 */
-	private Date birthday;
-
-	/** 用户性别 0女 1男 */
-	private Integer sex = 0;
-
+	/** 用户性别 */
+	protected String gender; // 性别
 	/** 用户邮箱 */
-	private String email = "";
+	protected String email = "";
 
 	/** 用户QQ */
-	private String qq = "";
+	protected String qq = "";
 
 	/** 用户手机号 */
-	private String telephone = "";
+	protected String telephone = "";
 
 	/** 用户班级 */
-	private String classes = "";
+	protected String classes = "";
 
 	/** 用户头像 */
-	private byte[] pic;
+	protected byte[] pic;
 
 	/** 用户积分 */
-	private Integer score = 0;
+	protected Integer score = 0;
 
 	/** 用户最近消息数 */
-	private Integer replysCount = 0;
+	protected Integer replysCount = 0;
 
 	/** 用户最近访客数 */
-	private Integer visitorsCount = 0;
+	protected Integer visitorsCount = 0;
 
 	/** 用户提交的答案 */
-	private Set<TestAnswer> answers;
+	protected Set<TestAnswer> answers;
 
 	/** 是否被禁言 0未禁言 1已禁言 默认值0 */
-	private Integer isBan = 0;
+	protected Integer isBan = 0;
 
 	public Long getId() {
 		return id;
@@ -69,14 +61,6 @@ public class BaseUser {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Integer getIsAdmin() {
-		return isAdmin;
-	}
-
-	public void setIsAdmin(Integer isAdmin) {
-		this.isAdmin = isAdmin;
 	}
 
 	public String getName() {
@@ -103,20 +87,12 @@ public class BaseUser {
 		this.password = password;
 	}
 
-	public Date getBirthday() {
-		return birthday;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public Integer getSex() {
-		return sex;
-	}
-
-	public void setSex(Integer sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getEmail() {

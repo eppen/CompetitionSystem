@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!--   	底部开始    -->
+<div style="height: 50px;"></div>
+<footer
+	class="navbar-inverse navbar-fixed-bottom navbar-collapse collapse">
+	<!--采用container，使得页尾内容居中 -->
+	<div class="container" style="color: #FFFFFF; height: 70px;">
+		2017 &copy; 练习系统 <a href="http://user.qzone.qq.com/492736173/">技术支持:Hyr</a>
+	</div>
+</footer>
+<!-- 底部结束 -->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js">
+	
+</script>

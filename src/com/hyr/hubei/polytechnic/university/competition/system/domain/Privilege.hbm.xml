@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="Privilege" table="db_cs_privilege">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 权限路径 -->
+		<property name="url" column="url" not-null="true"></property>
+		<!-- 权限名称 -->
+		<property name="name" column="name" not-null="true"></property>
+
+	</class>
+
+</hibernate-mapping>

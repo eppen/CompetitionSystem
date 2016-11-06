@@ -27,7 +27,7 @@
 		<property name="format_sql">false</property>
 
 		<!-- Drop and re-create the database schema on startup -->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property> 
 
 		<!-- 声明映射文件 -->
 		<mapping
@@ -50,6 +50,10 @@
 			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Visitor.hbm.xml" />
 		<mapping
 			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/ScoringPoint.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Role.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Privilege.hbm.xml" />
 
 
 	</session-factory>

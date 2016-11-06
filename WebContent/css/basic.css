@@ -1,0 +1,35 @@
+		* {
+			margin: 0px;
+			padding: 0px;
+			font-family: Monaco, Menlo, Consolas, 'COURIER NEW', monospace;
+			font-size: 16px;
+		}
+		/* 禁用响应式布局 
+		.container {
+			width: 1170px;
+			max-width: none !important;
+		}*/
+		
+		body {
+			padding-top: 120px;
+			padding-bottom: 10px;
+		}
+		
+		.Author {
+			color: #669dc6;
+			font-size: 12px;
+		}
+		
+		.CreateTime {
+			color: #bbbbbb;
+			font-size: 12px;
+		}
+		
+		.CodeMirror {
+			/* Set height, width, borders, and global font properties here */
+			height: auto;
+			font-family: Monaco, Menlo, Consolas, 'COURIER NEW', monospace;
+			/*add by jackqqxu*/
+			font-size: 14px;
+			line-height: 16px;
+		}

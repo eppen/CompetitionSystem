@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
+
+	<class name="Role" table="db_cs_role">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<!-- 名称 -->
+		<property name="name" column="name" not-null="true"></property>
+		<!-- 描述 -->
+		<property name="description" column="description" not-null="true"></property>
+		<!-- 用户关联 一对多 -->
+		<set name="users">
+			<key column="roleId"></key>
+			<one-to-many class="User" />
+		</set>
+		<!-- 拥有权限 一对多 -->
+		<set name="privileges"  lazy="false">
+			<key column="roleId"></key>
+			<one-to-many class="Privilege"  />
+		</set>
+
+	</class>
+
+</hibernate-mapping>

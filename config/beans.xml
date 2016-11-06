@@ -13,9 +13,12 @@
 
 	<!-- 开启spring注解 -->
 	<context:annotation-config></context:annotation-config>
-
+	<!-- 开启spring关于事务的管理 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	
 	<!-- 开启sprin自动扫描包的组件 -->
-	<context:component-scan base-package="com.hyr"></context:component-scan>
+	<context:component-scan
+		base-package="com.hyr.hubei.polytechnic.university.competition.system"></context:component-scan>
 	<aop:config proxy-target-class="true"></aop:config>
 
 	<!-- 加载外部的properties配置文件 -->
@@ -61,5 +64,14 @@
 		</property>
 	</bean>
 
+	<!-- 配置事务管理 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 </beans>

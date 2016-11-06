@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<ul class="nav navbar-nav navbar-right">
+	<li class="dropdown navbar-btn"><a class="dropdown-toggle"
+		data-toggle="dropdown" role="button"> <span
+			class="glyphicon glyphicon-user"></span> ${user.username}<span
+			class="caret"></span>&nbsp;<span class="badge"
+			style="background-color: #FF5400;">12</span>
+	</a>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="userAction_toUserCenterUI">个人信息</a></li>
+			<li><a href="userAlerts.html">我的消息&nbsp;<span class="badge"
+					style="background-color: #FF5400;">12</span></a></li>
+			<li><a href="updatePassword.html">修改密码</a></li>
+			<li class="divider"></li>
+			<li><a href="loginoutAction_logout">退出登录</a></li>
+		</ul></li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+	<a href="login.html" class="btn btn-default navbar-btn">登录</a>
+</ul>
