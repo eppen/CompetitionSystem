@@ -1,7 +1,9 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -11,11 +13,18 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.opensymphony.xwork2.ActionContext;
 
+/**
+ * 
+ * @author huangyueran
+ * @category 用户Action
+ */
 @Controller
 @Scope("prototype")
 public class UserAction extends ModelDrivenBaseAction<User> {
 
-	private static final long serialVersionUID = 8096925977637826950L;
+	private String oldPassword; // 更改密码 输入的原始密码
+	private String password1;
+	private String password2;
 
 	public UserAction() throws AppException {
 		super();
@@ -72,7 +81,7 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		// 3. 更新到数据库
 		userService.update(user);
 
-		return "toList";
+		return "toShowUserUI";
 	}
 
 	/**
@@ -83,9 +92,40 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 */
 	public String toUpdateUserPasswordUI() throws AppException {
 
-		return "toUserCenterUI";
+		return "toUpdateUserPasswordUI";
 	}
 
+	/**
+	 * 修改密码
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String updateUserPassword() throws AppException {
+		User user = userService.getById(model.getId());
+		String oldpassword2 = DigestUtils.md5Hex(oldPassword);
+		System.out.println(password1 + "====" + password2);
+		if (oldPassword != null && user.getPassword().equals(oldpassword2)) {
+			System.out.println("===============1");
+			// 相等 原始密码输入成功
+			if (password1 != null && password2 != null && password1.equals(password2)) {
+				System.out.println("======================2");
+				user.setPassword(DigestUtils.md5Hex(password1));
+			}
+
+			ActionContext.getContext().getSession().put("user", user);
+			userService.update(user);
+
+			return "toShowUserUI";
+		} else {
+			// 输入失败 添加错误信息 返回原始页面
+			// 如果验证失败，就转回登录页面并提示错误消息
+			addFieldError("updatepassworderror", "密码出入错误!");
+			return "toUpdateUserPasswordUI";
+		}
+
+	}
+	
 	/**
 	 * 用户提醒页面
 	 * 
@@ -128,6 +168,30 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	public String toUservisitorListUI() throws AppException {
 
 		return "toUserCenterUI";
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getPassword1() {
+		return password1;
+	}
+
+	public void setPassword1(String password1) {
+		this.password1 = password1;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 
 	/** ========================管理员功能================================== */

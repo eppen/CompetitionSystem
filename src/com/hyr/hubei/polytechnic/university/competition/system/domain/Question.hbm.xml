@@ -18,7 +18,7 @@
 		<many-to-one name="scope" class="QuestionSet" column="questions"></many-to-one>
 
 		<!-- 试题标题 -->
-		<property name="title" column="title" length="50"></property>
+		<property name="title" column="title" length="50"  unique="true"></property>
 		<!-- 试题描述 -->
 		<property name="description" column="description"></property>
 		<!-- 输入格式 -->

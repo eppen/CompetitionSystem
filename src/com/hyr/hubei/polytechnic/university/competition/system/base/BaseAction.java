@@ -11,6 +11,8 @@ import org.apache.struts2.ServletActionContext;
 
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.service.PrivilegeService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionSetService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.RoleService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.UserService;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
@@ -27,6 +29,10 @@ public class BaseAction extends ActionSupport {
 	protected PrivilegeService privilegeService;
 	@Resource(name = "roleServiceImpl")
 	protected RoleService roleService;
+	@Resource(name = "questionSetServiceImpl")
+	protected QuestionSetService questionSetService;
+	@Resource(name = "questionServiceImpl")
+	protected QuestionService questionService;
 
 	// ========================== 工具方法 ==========================
 

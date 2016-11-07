@@ -54,27 +54,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<!-- 侧边栏 -->
-			<div class="col-sm-3 col-md-2 sidebar collapse"
-				style="position: absolute; top: 70px;">
-
-				<ul class="nav nav-sidebar">
-					<li><a href="userCenter.html">个人信息</a></li>
-					<li class="active"><a href="updateUser.html">用户信息修改</a></li>
-					<li><a href="updatePassword.html">修改密码</a></li>
-					<li><a href="userAlerts.html">我的提醒&nbsp;<span
-							class="badge" style="background-color: #FF5400;">12</span></a></li>
-					<li><a href="userTopic.html">我的主题</a></li>
-					<li><a href="userFavorite.html">我的收藏</a></li>
-					<li><a href="visitor.html">访客记录&nbsp;<span class="badge">25</span></a>
-					</li>
-					<li class="alert-warning"><a href="userManagerList.html">用户管理</a>
-					</li>
-					<li class="alert-warning"><a href="addUser.html">添加用户</a></li>
-					<li class="alert-warning"><a href="topicManagerList.html">主题管理</a>
-					</li>
-					<li class="alert-warning"><a href="#">暗箱操作</a></li>
-				</ul>
-			</div>
+			<%@ include file="/WEB-INF/jsp/public/leftMenu.jspf"%>
 
 			<!-- 内容 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

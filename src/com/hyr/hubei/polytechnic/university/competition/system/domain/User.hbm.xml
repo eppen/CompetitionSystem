@@ -11,7 +11,7 @@
 			<generator class="native" />
 		</id>
 		<!-- 用户角色 多对一 -->
-		<many-to-one name="role" class="Role" column="roleId"></many-to-one>
+		<many-to-one name="role" class="Role" column="roleId" lazy="false"></many-to-one>
 		<!-- 用户姓名 -->
 		<property name="name" column="name" not-null="true"></property>
 		<!-- 登录名 -->

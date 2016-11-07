@@ -1,6 +1,7 @@
 package com.hyr.hubei.polytechnic.university.competition.system.domain;
 
 import java.sql.Blob;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -218,6 +219,16 @@ public class Question {
 
 	public void setIsdel(Integer isdel) {
 		this.isdel = isdel;
+	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", type=" + type + ", language=" + language + ", scope=" + scope + ", title="
+				+ title + ", description=" + description + ", inputFormat=" + inputFormat + ", outputFormat="
+				+ outputFormat + ", sampleInput=" + sampleInput + ", sampleOutput=" + sampleOutput + ", careful="
+				+ careful + ", cue=" + cue + ", runtime=" + runtime + ", memory=" + memory + ", createTime="
+				+ createTime + ", scores=" + scores + ", testAnswers=" + Arrays.toString(testAnswers) + ", images="
+				+ images + ", isdel=" + isdel + "]";
 	}
 
 }

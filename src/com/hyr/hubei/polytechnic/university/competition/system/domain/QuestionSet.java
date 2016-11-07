@@ -19,17 +19,23 @@ public class QuestionSet {
 	/** 试题集描述 */
 	private String description;
 
+	/** 试题集的实体书 */
+	private Integer questionCount = 0;
+
 	/** 试题集关联的试题 */
 	private List<Question> questions;
-
-	/** 试题集中试题总数 */
-	private Integer questionCount = 0;
 
 	/** 更新时间 以最后添加的试题时间为准 */
 	private Date updateTime;
 
 	/** 是否被删除 0未删除 1已删除 默认值0。如果删除试题集，需要将一系列的试题和评测答案都删除. */
 	private Integer isdel = 0;
+
+	@Override
+	public String toString() {
+		return "QuestionSet [id=" + id + ", title=" + title + ", description=" + description + ", questionCount="
+				+ questionCount + ", questions=" + questions + ", updateTime=" + updateTime + ", isdel=" + isdel + "]";
+	}
 
 	public Long getId() {
 		return id;
@@ -63,20 +69,20 @@ public class QuestionSet {
 		this.questions = questions;
 	}
 
-	public Integer getQuestionCount() {
-		return questionCount;
-	}
-
-	public void setQuestionCount(Integer questionCount) {
-		this.questionCount = questionCount;
-	}
-
 	public Date getUpdateTime() {
 		return updateTime;
 	}
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public Integer getQuestionCount() {
+		return questionCount;
+	}
+
+	public void setQuestionCount(Integer questionCount) {
+		this.questionCount = questionCount;
 	}
 
 	public Integer getIsdel() {

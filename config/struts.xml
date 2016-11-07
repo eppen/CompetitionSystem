@@ -33,6 +33,7 @@
 		<global-results>
 			<result name="loginUI">/WEB-INF/jsp/loginoutAction/loginUI.jsp</result>
 			<result name="noPrivilegeUI">/noPrivilegeUI.jsp</result>
+			<result name="error">/success.jsp</result>
 		</global-results>
 
 		<!-- 样例 -->
@@ -73,10 +74,29 @@
 			method="{1}">
 			<result name="toUserCenterUI">/WEB-INF/jsp/userAction/userCenter.jsp</result>
 			<result name="editUI">/WEB-INF/jsp/userAction/updateUser.jsp</result>
-			<result name="addUI">/WEB-INF/jsp/userAction/addUI.jsp</result>
-			<result name="toList" type="redirectAction">userAction_toUserCenterUI</result>
+			<result name="toUpdateUserPasswordUI">/WEB-INF/jsp/userAction/updatePassword.jsp 
+			</result>
+			<result name="toShowUserUI" type="redirectAction">userAction_toUserCenterUI
+			</result>
 		</action>
 
+		<action name="questionSetAction_*"
+			class="com.hyr.hubei.polytechnic.university.competition.system.action.QuestionSetAction"
+			method="{1}">
+			<result name="toCreateQuestionSetUI">/WEB-INF/jsp/questionSetAction/createQuestionSet.jsp</result>
+			<result name="toQuestionSetList">/WEB-INF/jsp/questionSetAction/questionSetManageList.jsp</result>
+			<result name="toQuestionSetListUI" type="redirectAction">questionSetAction_toQuestionSetListUI</result>
+		</action>  
+		
+		<action name="questionAction_*"
+			class="com.hyr.hubei.polytechnic.university.competition.system.action.QuestionAction"
+			method="{1}">
+			<result name="toQuestionList">/WEB-INF/jsp/questionAction/questionManageList.jsp</result> 
+			<result name="toCreateQuestionUI">/WEB-INF/jsp/questionAction/createQuestion.jsp</result>
+			<result name="toCreateQuestionAnswerAUI">/WEB-INF/jsp/questionAction/createAnswer_type_a.jsp</result>
+			<result name="toCreateQuestionAnswerBUI">/WEB-INF/jsp/questionAction/createAnswer_type_b.jsp</result>
+			<result name="toCreateQuestionAnswerCUI">/WEB-INF/jsp/questionAction/createAnswer_type_c.jsp</result>
+		</action>
 	</package>
 
 </struts>

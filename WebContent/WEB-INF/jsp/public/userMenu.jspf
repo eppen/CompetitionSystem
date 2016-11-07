@@ -9,11 +9,11 @@
 			style="background-color: #FF5400;">12</span>
 	</a>
 		<ul class="dropdown-menu" role="menu">
-			<li><a href="userAction_toUserCenterUI">个人信息</a></li>
+			<li><a href="userAction_toUserCenterUI">个人信息</a></li> 
 			<li><a href="userAlerts.html">我的消息&nbsp;<span class="badge"
 					style="background-color: #FF5400;">12</span></a></li>
-			<li><a href="updatePassword.html">修改密码</a></li>
-			<li class="divider"></li>
+			<li><s:a href="userAction_toUpdateUserPasswordUI?id=%{#session.user.id}">修改密码</s:a></li> 
+			<li class="divider"></li> 
 			<li><a href="loginoutAction_logout">退出登录</a></li>
 		</ul></li>
 </ul>

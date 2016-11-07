@@ -6,6 +6,11 @@ import org.springframework.stereotype.Controller;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 
+ * @author huangyueran
+ * @category 首页Action
+ */
 @Controller
 @Scope("prototype")
 public class HomeAction extends ActionSupport {

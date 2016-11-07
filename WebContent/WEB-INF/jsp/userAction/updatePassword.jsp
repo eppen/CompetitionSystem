@@ -42,7 +42,6 @@
 				</ul>
 
 				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
-
 			</div>
 
 		</div>
@@ -52,55 +51,48 @@
 	<!-- 中间内容开始 -->
 	<div class="container-fluid">
 		<div class="row">
-		
 			<!-- 侧边栏 -->
 			<%@ include file="/WEB-INF/jsp/public/leftMenu.jspf"%>
-			
 
 			<!-- 内容 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h2 class="sub-header">个人信息</h2>
+
+				<h2 class="sub-header">修改密码</h2>
 				<div class="table-responsive">
-					<table class="table table-striped">
-						<tbody>
-							<tr>
-								<td><b>用户名</b></td>
-								<td>${user.username }</td>
-							</tr>
-							<tr>
-								<td><b>姓名</b></td>
-								<td>${user.name }</td>
-							</tr>
-							<tr>
-								<td><b>性别</b></td>
-								<td>${user.gender}</td>
-							</tr>
-							<tr>
-								<td><b>班级</b></td>
-								<td>${user.classes }</td>
-							</tr>
-							<tr>
-								<td><b>手机号码</b></td>
-								<td>${user.telephone }</td>
-							</tr>
-							<tr>
-								<td><b>电子邮箱</b></td>
-								<td>${user.email }</td>
-							</tr>
-							<tr>
-								<td><b>QQ</b></td>
-								<td>${user.qq }</td>
-							</tr>
-							<tr>
-								<td><b>积分</b></td>
-								<td>${user.score }</td>
-							</tr>
-							<tr>
-								<td><b>用户级别</b></td>
-								<td>${user.role.name}</td>
-							</tr>
-						</tbody>
-					</table>
+					<form action="userAction_updateUserPassword"
+						class="form-horizontal" role="form">
+						<s:hidden name="id"></s:hidden>
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td>请输入原始密码
+										<div style="color: red">
+											<s:fielderror cssStyle=" list-style:none;">
+												<s:param>updatepassworderror</s:param>
+											</s:fielderror>
+										</div>
+									</td>
+									<td><input type="password" name="oldPassword"
+										class="focus form-control" required="required" /></td>
+								</tr>
+								<tr>
+									<td>输入新密码</td>
+									<td><input type="password" name="password1" id="pw1"
+										class="focus form-control " required="required"
+										onkeyup="validate()" /></td>
+								</tr>
+								<tr>
+									<td>请重新输入密码</td>
+									<td><input type="password" name="password2" id="pw2"
+										class="focus form-control " required="required"
+										onkeyup="validate()" /><span id="tishi"></td>
+								</tr>
+
+							</tbody>
+						</table>
+						<button class="btn btn-lg btn-primary btn-block" id="submit"
+							type="submit">确认修改</button>
+					</form>
 				</div>
 			</div>
 
@@ -109,7 +101,20 @@
 	</div>
 	<!-- 中间内容结束 -->
 
-	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
+	<script>
+		function validate() {
+			var pw1 = document.getElementById("pw1").value;
+			var pw2 = document.getElementById("pw2").value;
+			if (pw1 == pw2) {
+				document.getElementById("tishi").innerHTML = "<font color='green'>两次密码相同</font>";
+				document.getElementById("submit").disabled = false;
+			} else {
+				document.getElementById("tishi").innerHTML = "<font color='red'>两次密码不相同</font>";
+				document.getElementById("submit").disabled = true;
+			}
+		}
+	</script>
 
+	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
 </body>
 </html>

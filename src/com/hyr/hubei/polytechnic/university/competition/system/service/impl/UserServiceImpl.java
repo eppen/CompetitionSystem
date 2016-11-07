@@ -34,8 +34,8 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 	 * @throws AppException
 	 */
 	public User findByLoginNameAndPassword(String loginName, String password) throws AppException {
-		// TODO MD5加密 String md5Password = DigestUtils.md5Hex(password);
-		String md5Password = password;
+		// MD5加密
+		String md5Password = DigestUtils.md5Hex(password);
 		return (User) getSession().createQuery("FROM User u WHERE u.username = ? AND u.password= ? ")
 				.setParameter(0, loginName).setParameter(1, md5Password).uniqueResult();
 	}
