@@ -17,10 +17,10 @@
 		<!-- 试题集描述 -->
 		<property name="description" column="description" not-null="true"></property>
 		<!-- 关联的试题 一对多 -->
-		<list name="questions" cascade="delete" lazy="true">
-			<key column="topicId"></key>
+		<list name="questions" cascade="delete" lazy="true">     
+			<key column="questions" ></key>   
 			<index column="createTime" type="Date"></index>
-			<one-to-many class="Question" />
+			<one-to-many class="Question"/> 
 		</list> 
 		<!-- 更新时间 -->
 		<property name="updateTime" column="updateTime" type="timestamp" not-null="true"></property>

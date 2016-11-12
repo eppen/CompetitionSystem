@@ -9,44 +9,13 @@
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
-<link href="css/dashboard.css" rel="stylesheet" />
+<link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
 <!-- 禁用响应式布局 -->
 </head>
 <body>
 
 	<!--   	导航条开始    -->
-	<nav class="nav navbar-inverse navbar-fixed-top">
-		<div class="container">
-
-			<div class="navbar-header">
-				<!-- 	描述：logo -->
-				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
-					style="width: 75px;" />
-				</a>
-			</div>
-
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-btn center-block text-center">
-					<li class="active navbar-btn"><a href="index.html">首页<span
-							class="sr-only"></span></a></li>
-					<li class="navbar-btn"><a href="help.html">帮助文档<span
-							class="sr-only"></span></a></li>
-					<li class="navbar-btn"><a href="#">系统公告<span
-							class="sr-only"></span></a></li>
-					<li class="navbar-btn"><a href="practiceHome.html">进入系统<span
-							class="sr-only"></span></a></li>
-					<li class="navbar-btn"><a href="topicHome.html">交流中心<span
-							class="sr-only"></span></a></li>
-					<li class="navbar-btn"><a href="#">联系方式<span
-							class="sr-only"></span></a></li>
-				</ul>
-
-				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
-
-			</div>
-
-		</div>
-	</nav>
+	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%> 
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->

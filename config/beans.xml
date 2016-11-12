@@ -15,7 +15,7 @@
 	<context:annotation-config></context:annotation-config>
 	<!-- 开启spring关于事务的管理 -->
 	<tx:annotation-driven transaction-manager="txManager" />
-	
+
 	<!-- 开启sprin自动扫描包的组件 -->
 	<context:component-scan
 		base-package="com.hyr.hubei.polytechnic.university.competition.system"></context:component-scan>
@@ -47,7 +47,7 @@
 			0 -->
 		<property name="maxStatementsPerConnection" value="10"></property>
 		<!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
-		<property name="maxIdleTime" value="1800"></property>
+		<property name="maxIdleTime" value="600"></property>
 	</bean>
 
 	<!-- 配置SessionFactory -->

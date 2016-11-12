@@ -9,10 +9,6 @@
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
-<script type="text/javascript"
-	src="<%=basePath%>script/jquery_validate/jquery.metadata.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/jquery_validate/jquery.validate.js"></script>
 
 </head>
 

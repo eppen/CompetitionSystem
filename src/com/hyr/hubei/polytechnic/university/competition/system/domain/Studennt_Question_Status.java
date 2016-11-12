@@ -3,10 +3,11 @@ package com.hyr.hubei.polytechnic.university.competition.system.domain;
 /**
  * 2016-11-4 21:25:37
  * 
- * @category 学生和试题的关系状态
+ * @category 学生和试题的关系状态 此功能已删除
  * @author 黄跃然 单独维护，每次做题、查看题目时，更新此表。
  *         用户进入系统，查看某一题，判断是否存在记录，如果存在直接修改。如果不存在，则创建一条记录. 状态为未打开。
  */
+@Deprecated
 public class Studennt_Question_Status {
 
 	/** id主键 */

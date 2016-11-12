@@ -10,12 +10,22 @@ public class Reply extends Article {
 	/** 回复所属主题 */
 	private Topic topic;
 
+	private String content;
+
 	public Topic getTopic() {
 		return topic;
 	}
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

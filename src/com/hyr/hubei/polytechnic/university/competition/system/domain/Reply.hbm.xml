@@ -13,12 +13,13 @@
 		<!-- author属性，表示我与User的多对一关系 -->
 		<many-to-one name="author" class="User" column="authorId"></many-to-one>
 		<!-- 发表时间采用timestamp类型 -->
-		<property name="postTime" column="postTime" type="timestamp" not-null="true"></property>
+		<property name="postTime" column="postTime" type="timestamp"
+			not-null="true"></property>
+		<property name="content" column="content" length="5000"></property>
 		<!-- ip地址 -->
 		<property name="ipAddr" column="ipAddr" length="25" not-null="true"></property>
 		<!-- 是否删除 -->
 		<property name="isdel" column="isdel" length="2" not-null="true"></property>
-
 		<!-- 所属主题 -->
 		<many-to-one name="topic" class="Topic" column="topicId"></many-to-one>
 

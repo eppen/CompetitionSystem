@@ -13,7 +13,9 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.service.PrivilegeService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionSetService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.ReplyService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.RoleService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.TopicService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.UserService;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.opensymphony.xwork2.ActionContext;
@@ -33,7 +35,10 @@ public class BaseAction extends ActionSupport {
 	protected QuestionSetService questionSetService;
 	@Resource(name = "questionServiceImpl")
 	protected QuestionService questionService;
-
+	@Resource(name = "topicServiceImpl")
+	protected TopicService topicService;
+	@Resource(name = "replyServiceImpl")
+	protected ReplyService replyService;
 	// ========================== 工具方法 ==========================
 
 	/**

@@ -15,7 +15,7 @@ public class Question {
 	/** 试题id主键 */
 	private Long id;
 
-	/** 试题类型 0无类型 1结果填空 2代码填空 3程序设定。 要和创建主题表中对应一致 */
+	/** 试题类型 0无类型 1结果填空 2程序设定 3代码填空。 要和创建主题表中对应一致 */
 	private Integer type = 0;
 
 	/** 语言 JAVA */
@@ -29,6 +29,9 @@ public class Question {
 
 	/** 试题描述 */
 	private String description;
+
+	/** 试题内容 */
+	private String content;
 
 	/** 输入格式 */
 	private String inputFormat;
@@ -61,7 +64,7 @@ public class Question {
 	private double scores;
 
 	/** 试题答案 存放xml格式文件 */
-	private byte[] testAnswers;
+	private String answersXml;
 
 	/** 试题图片信息 */
 	private Blob images;
@@ -197,12 +200,12 @@ public class Question {
 		this.scores = scores;
 	}
 
-	public byte[] getTestAnswers() {
-		return testAnswers;
+	public String getAnswersXml() {
+		return answersXml;
 	}
 
-	public void setTestAnswers(byte[] testAnswers) {
-		this.testAnswers = testAnswers;
+	public void setAnswersXml(String answersXml) {
+		this.answersXml = answersXml;
 	}
 
 	public Blob getImages() {
@@ -221,14 +224,12 @@ public class Question {
 		this.isdel = isdel;
 	}
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", type=" + type + ", language=" + language + ", scope=" + scope + ", title="
-				+ title + ", description=" + description + ", inputFormat=" + inputFormat + ", outputFormat="
-				+ outputFormat + ", sampleInput=" + sampleInput + ", sampleOutput=" + sampleOutput + ", careful="
-				+ careful + ", cue=" + cue + ", runtime=" + runtime + ", memory=" + memory + ", createTime="
-				+ createTime + ", scores=" + scores + ", testAnswers=" + Arrays.toString(testAnswers) + ", images="
-				+ images + ", isdel=" + isdel + "]";
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

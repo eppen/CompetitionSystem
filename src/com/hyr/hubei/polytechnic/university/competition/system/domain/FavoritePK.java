@@ -31,4 +31,22 @@ public class FavoritePK implements Serializable {
 		this.topicId = topicId;
 	}
 
+	@Override
+	public int hashCode() {
+		return topicId.hashCode() + userId.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof FavoritePK) {
+			FavoritePK favoritePK = (FavoritePK) obj;
+			if (favoritePK.getTopicId().equals(topicId) && favoritePK.getUserId().equals(userId)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
+
 }

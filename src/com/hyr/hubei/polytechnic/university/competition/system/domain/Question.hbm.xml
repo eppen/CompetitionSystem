@@ -16,11 +16,12 @@
 		<property name="language" column="language" length="10"></property>
 		<!-- 所属试题集 多对一 -->
 		<many-to-one name="scope" class="QuestionSet" column="questions"></many-to-one>
-
 		<!-- 试题标题 -->
-		<property name="title" column="title" length="50"  unique="true"></property>
+		<property name="title" column="title" length="50" not-null="true"></property>
 		<!-- 试题描述 -->
 		<property name="description" column="description"></property>
+		<!-- 试题内容 -->
+		<property name="content" column="content" length="2000"></property>
 		<!-- 输入格式 -->
 		<property name="inputFormat" column="inputFormat"></property>
 		<!-- 输出格式 -->
@@ -42,7 +43,7 @@
 		<!-- 总分 -->
 		<property name="scores" column="scores" length="6"></property>
 		<!-- 样例答案 -->
-		<property name="testAnswers" column="testAnswers" type="binary"></property>
+		<property name="answersXml" column="answersXml" length="5000"></property>
 		<!-- 图片 -->
 		<property name="images" column="images" type="blob"></property>
 		<!-- 是否删除 -->

@@ -11,17 +11,36 @@ import java.util.List;
  * @author 黄跃然
  */
 public class Topic extends Article {
+
+	/** 普通帖 */
+	public static final int TYPE_NORMAL = 0;
+
+	/** 精华帖 */
+	public static final int TYPE_BEST = 1;
+
+	/** 置顶帖 */
+	public static final int TYPE_TOP = 2;
+
 	/** 主题类型 0新增题目 1知识讨论 默认为1 */
 	private Integer type = 1;
+
+	/** 帖子类型 0普通 1精华 2置顶 */
+	private Integer classify = 0;
 
 	/** 试题标题 */
 	private String title;
 
-	/** 试题类型 0无类型 1结果填空 2代码设计 3程序设计。 要和试题表中对应一致。默认为0 */
+	/** 试题类型 0无类型 1结果填空 2程序设计 3代码填空。 要和试题表中对应一致。默认为0 */
 	private Integer questionType = 0;
 
-	/** 主题内容 */
+	/** 主题内容------作者想所的话 */
+	private String topicContent;
+
+	/** 试题内容 */
 	private String content;
+
+	/** 试题描述 */
+	private String description;
 
 	/** 试题名称 */
 	private String questionTitle;
@@ -31,9 +50,6 @@ public class Topic extends Article {
 
 	/** 属于试题集 */
 	private QuestionSet scope;
-
-	/** 试题描述 */
-	private String description;
 
 	/** 输入格式 */
 	private String inputFormat;
@@ -57,19 +73,16 @@ public class Topic extends Article {
 	private List<Blob> images;
 
 	/** 耗时要求 */
-	private Long runtime;
+	private double runtime;
 
 	/** 内存要求 */
 	private double memory;
-
-	/** 创建时间 */
-	private Date createTime;
 
 	/** 总分 */
 	private double scores;
 
 	/** 测试的答案样例，生成xml文件进行存储 */
-	private byte[] testAnswers;
+	private String answersXml;
 
 	/** 主题下的回复 */
 	private List<Reply> replies;
@@ -206,11 +219,11 @@ public class Topic extends Article {
 		this.images = images;
 	}
 
-	public Long getRuntime() {
+	public double getRuntime() {
 		return runtime;
 	}
 
-	public void setRuntime(Long runtime) {
+	public void setRuntime(double runtime) {
 		this.runtime = runtime;
 	}
 
@@ -222,14 +235,6 @@ public class Topic extends Article {
 		this.memory = memory;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
 	public double getScores() {
 		return scores;
 	}
@@ -238,12 +243,12 @@ public class Topic extends Article {
 		this.scores = scores;
 	}
 
-	public byte[] getTestAnswers() {
-		return testAnswers;
+	public String getAnswersXml() {
+		return answersXml;
 	}
 
-	public void setTestAnswers(byte[] testAnswers) {
-		this.testAnswers = testAnswers;
+	public void setAnswersXml(String answersXml) {
+		this.answersXml = answersXml;
 	}
 
 	public List<Reply> getReplies() {
@@ -285,5 +290,22 @@ public class Topic extends Article {
 	public void setLaudCount(Integer laudCount) {
 		this.laudCount = laudCount;
 	}
+
+	public String getTopicContent() {
+		return topicContent;
+	}
+
+	public void setTopicContent(String topicContent) {
+		this.topicContent = topicContent;
+	}
+
+	public Integer getClassify() {
+		return classify;
+	}
+
+	public void setClassify(Integer classify) {
+		this.classify = classify;
+	}
+
 
 }

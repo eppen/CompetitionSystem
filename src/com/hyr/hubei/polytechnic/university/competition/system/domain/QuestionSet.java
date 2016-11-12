@@ -31,11 +31,6 @@ public class QuestionSet {
 	/** 是否被删除 0未删除 1已删除 默认值0。如果删除试题集，需要将一系列的试题和评测答案都删除. */
 	private Integer isdel = 0;
 
-	@Override
-	public String toString() {
-		return "QuestionSet [id=" + id + ", title=" + title + ", description=" + description + ", questionCount="
-				+ questionCount + ", questions=" + questions + ", updateTime=" + updateTime + ", isdel=" + isdel + "]";
-	}
 
 	public Long getId() {
 		return id;

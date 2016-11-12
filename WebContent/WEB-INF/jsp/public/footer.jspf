@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!--   	底部开始    -->
 <div style="height: 50px;"></div>
 <footer
@@ -9,9 +10,9 @@
 		2017 &copy; 练习系统 <a href="http://user.qzone.qq.com/492736173/">技术支持:Hyr</a>
 	</div>
 </footer>
-<!-- 底部结束 -->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js">
+<script language="javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script src="<%=basePath%>js/bootstrap.min.js">
 	
 </script>
+<!-- 底部结束 --> 

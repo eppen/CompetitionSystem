@@ -10,10 +10,10 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
+<!-- 禁用响应式布局 -->
 <!-- 1，引入js文件 -->
 <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
 
-<!-- 禁用响应式布局 -->
 </head>
 <body>
 
@@ -30,92 +30,91 @@
 			<!-- 内容 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<h2 class="sub-header">添加试题</h2>
+				<h2 class="sub-header">修改试题</h2>
 				<div class="table-responsive">
-					<form action="questionAction_createQuestion"
+					<form action="questionAction_updateQuestion"
 						class="form-horizontal" role="form">
-
+						<s:hidden name="id"></s:hidden>
 						<table class="table table-striped">
 							<tr height="50" class="Tint">
 								<td width="50px" class="Deep"><b>试题名称</b></td>
-								<td class="no_color_bg"><input type="text"
-									style="font-size: 20px; font-family: '微软雅黑';" name="title"
-									class="InputStyle text-center form-control required"
-									value="关于算法题目" style="width:100%" /></td>
+								<td class="no_color_bg"><s:textfield type="text"
+										cssStyle="font-size: 20px; font-family: '微软雅黑';width:100%"
+										name="title" cssClass="text-center form-control required" /></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>题目类型</b></td>
-								<td><select name="type" class=" btn btn-default">
-										<option value="1">结果填空</option>
-										<option value="2">程序设计</option>
-										<option value="3">代码填空</option>
-								</select></td>
+								<td><s:select name="type" cssClass=" btn btn-default"
+										list="#{1:'结果填空',2:'程序设计',3:'代码填空'}">
+									</s:select></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>编程语言</b></td>
-								<td><select name=language class=" btn btn-default">
-										<option value="JAVA">JAVA</option>
-								</select></td>
+								<td><s:select name="language" cssClass=" btn btn-default"
+										list="#{'JAVA':'JAVA'} ">
+									</s:select></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>所属试题集</b></td>
-								<td><s:select name="scopeId"
+								<td><s:select name="scope.id"
 										cssClass="SelectStyle btn btn-default" list="questionSets"
 										listKey="id" listValue="title" headerKey="">
 									</s:select></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>问题描述</b></td>
-								<td><textarea name="description" class="form-control"
-										rows="3"></textarea></td>
+								<td><s:textarea name="description" cssClass="form-control"
+										rows="3"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>问题内容</b></td>
-								<td><textarea name="content" class="form-control required"
-										rows="6" style="width: 100%; height: 100px;"></textarea></td>
+								<td><s:textarea name="content"
+										cssClass="form-control required" rows="6"
+										cssStyle="width: 100%; height: 100px;"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>输入格式</b></td>
-								<td><textarea name="inputFormat" class="form-control"
-										rows="3"></textarea></td>
+								<td><s:textarea name="inputFormat" cssClass="form-control"
+										rows="3"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>输出格式</b></td>
-								<td><textarea name="outputFormat" class="form-control"
-										rows="3"></textarea></td>
+								<td><s:textarea name="outputFormat" cssClass="form-control"
+										rows="3"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>样例输入</b></td>
-								<td><textarea name="sampleInput" class="form-control"
-										rows="3"></textarea></td>
+								<td><s:textarea name="sampleInput" cssClass="form-control"
+										rows="3"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>样例输出</b></td>
-								<td><textarea name="sampleOutput" class="form-control"
-										rows="3"></textarea></td>
+								<td><s:textarea name="sampleOutput" cssClass="form-control"
+										rows="3"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>注意</b></td>
-								<td><textarea name="careful" class="form-control" rows="3"></textarea></td>
+								<td><s:textarea name="careful" cssClass="form-control"
+										rows="3"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>提示</b></td>
-								<td><textarea name="cue" class="form-control" rows="3"></textarea></td>
+								<td><s:textarea name="cue" cssClass="form-control" rows="3"></s:textarea></td>
 							</tr>
 							<tr>
 								<td width="100px"><b>耗时要求</b></td>
-								<td><input type="text"
-									style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-									name="runtime" class="form required" value="500" />ms</td>
+								<td><s:textfield type="text"
+										style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
+										name="runtime" cssClass="form required" />ms</td>
 							</tr>
 							<tr>
 								<td width="100px"><b>内存要求</b></td>
-								<td><input type="text"
-									style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-									name="memory" class="form required" value="5.545" />MB</td>
+								<td><s:textfield type="text"
+										style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
+										name="memory" cssClass="form required" />MB</td>
 							</tr>
 						</table>
-						<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">修改</button>
 					</form>
 				</div>
 			</div>

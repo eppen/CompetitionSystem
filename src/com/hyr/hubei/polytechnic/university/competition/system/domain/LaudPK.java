@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @category 点赞 关联主键
  * @author 黄跃然
  */
-public class LaudPK implements Serializable{
+public class LaudPK implements Serializable {
 	/** 点赞用户id */
 	private Long userId;
 
@@ -29,6 +29,24 @@ public class LaudPK implements Serializable{
 
 	public void setTopicId(Long topicId) {
 		this.topicId = topicId;
+	}
+
+	@Override
+	public int hashCode() {
+		return topicId.hashCode() + userId.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof LaudPK) {
+			LaudPK laudPK = (LaudPK) obj;
+			if (laudPK.getTopicId().equals(topicId) && laudPK.getUserId().equals(userId)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
 	}
 
 }

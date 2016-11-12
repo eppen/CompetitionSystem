@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,9 +10,6 @@
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
-<link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
-
-<!-- 禁用响应式布局 -->
 
 <!------------   计算总分 判断是否为100分 100分才可以提交  ------------>
 <script type="text/javascript">
@@ -58,7 +56,7 @@
 		/*  if (event.propertyName.toLowerCase () == "value") {
 		      alert ("The new content: " + event.srcElement.value);
 		  }*/
-		var array = document.getElementsByName("fractionlist"); 
+		var array = document.getElementsByName("fractionlist");
 		var sum = 0;
 		for (var i = 0; i < array.length; i++) {
 			sum = parseFloat(sum) + parseFloat(array[i].value);
@@ -96,43 +94,52 @@
 </script>
 
 </head>
+
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%> 
+	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
 	<div class="container-fluid">
 		<div class="row">
-			<!-- 侧边栏 -->
-			<%@ include file="/WEB-INF/jsp/public/leftMenu.jspf"%>
 
 			<!-- 内容 -->
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
 
-				<h2 class="sub-header">添加试题</h2>
-				<div class="table-responsive">
-					<form action="questionAction_createQuestionAnswer" class="form-horizontal"
-						role="form">
+				<!-- 路径 -->
+				<ol class="breadcrumb">
+					<li><a href="topicHome.html">交流中心 <span
+							class="glyphicon glyphicon-chevron-right"></span></a> <a
+						href="createTopic.html">发表新主题 <span
+							class="glyphicon glyphicon-chevron-right"></span></a>
+					<li class="active">添加问题答案<span
+						class="glyphicon glyphicon-chevron-right"></li>
+					</li>
+				</ol>
 
-						<table class="table table-responsive">
-							<thead>
-								<tr>
-									<td>
-										<button id="btnAdd" type="button" class="btn btn-danger">添加选项</button>
-									</td>
-									<td><b><div id="score_hint"
-												class="alert alert-warning">当前总分值:0分</div></b></td>
-								</tr>
-								<tr>
-									<th class="col-md-5 col-lg-5 col-sm-5">输入值</th>
-									<th class="col-md-5 col-lg-5 col-sm-5">输出答案</th>
-									<th class="col-md-2 col-lg-2 col-sm-2">此项分数</th>
-								</tr>
-							</thead>
+				<!--发表新主题开始-->
+				<div class="QuictReply">
+					<form action="topicAction_createTopicAnswer">
+						<div style="padding-left: 3px;">
+							<table class="table table-responsive">
+								<thead>
+									<tr>
+										<td>
+											<button id="btnAdd" type="button" class="btn btn-danger">添加选项</button>
+										</td>
+										<td><b><div id="score_hint"
+													class="alert alert-warning">当前总分值:0分</div></b></td>
+									</tr>
+									<tr>
+										<th class="col-md-5 col-lg-5 col-sm-5">输入值</th>
+										<th class="col-md-5 col-lg-5 col-sm-5">输出答案</th>
+										<th class="col-md-2 col-lg-2 col-sm-2">此项分数</th>
+									</tr>
+								</thead>
 
-							<tbody id="mybody">
+								<tbody id="mybody">
 								<tr class="alert alert-dismissable">
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
@@ -150,18 +157,25 @@
 										</button></td>
 								</tr>
 
-							</tbody>
-						</table>
-						<button disabled="false" id="btn_submit" type="submit" class="btn btn-lg btn-success btn-block">确认</button> 
+							</tbody> 
+								<tr height="30" class="Tint">
+									<td class="center" colspan="2" align="center">
+										<button disabled="false" id="btn_submit" type="submit"
+											class="btn btn-success">提交</button>
+									</td>
+								</tr>
+							</table>
+						</div>
 					</form>
+					<div style="height: 130px;"></div>
 				</div>
+				<!--发表新主题结束-->
+
+
 			</div>
-
 		</div>
-
 	</div>
 	<!-- 中间内容结束 -->
-
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
 
@@ -192,4 +206,5 @@
 		});
 	</script>
 </body>
+
 </html>
