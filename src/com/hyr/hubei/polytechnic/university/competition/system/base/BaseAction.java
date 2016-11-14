@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import org.apache.struts2.ServletActionContext;
 
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
+import com.hyr.hubei.polytechnic.university.competition.system.service.FavoriteService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.LaudService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.PrivilegeService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionSetService;
@@ -39,6 +41,10 @@ public class BaseAction extends ActionSupport {
 	protected TopicService topicService;
 	@Resource(name = "replyServiceImpl")
 	protected ReplyService replyService;
+	@Resource(name = "favoriteServiceImpl")
+	protected FavoriteService favoriteService;
+	@Resource(name = "laudServiceImpl")
+	protected LaudService laudService;
 	// ========================== 工具方法 ==========================
 
 	/**

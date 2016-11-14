@@ -4,14 +4,18 @@
 <ul class="nav navbar-nav navbar-right">
 	<li class="dropdown navbar-btn"><a class="dropdown-toggle"
 		data-toggle="dropdown" role="button"> <span
-			class="glyphicon glyphicon-user"></span> ${user.username}<span
-			class="caret"></span>&nbsp;<span class="badge"
-			style="background-color: #FF5400;">12</span>
+			class="glyphicon glyphicon-user"></span> ${user.name}<span
+			class="caret"></span>&nbsp;<s:if test='#session.userReplysCount != 0'>
+				<span class="badge" style="background-color: #FF5400;">${userReplysCount}</span>
+			</s:if>
 	</a>
 		<ul class="dropdown-menu" role="menu">
 			<li><a href="userAction_toUserCenterUI">个人信息</a></li>
-			<li><a href="userAlerts.html">我的消息&nbsp;<span class="badge"
-					style="background-color: #FF5400;">12</span></a></li>
+			<li><a href="userAction_toUserAlertsUI">我的消息&nbsp; <s:if
+						test='#session.userReplysCount != 0'>
+						<span class="badge" style="background-color: #FF5400;">${userReplysCount}</span>
+					</s:if>
+			</a></li>
 			<li><s:a
 					action="userAction_toUpdateUserPasswordUI?id=%{#session.user.id}">修改密码</s:a></li>
 			<li class="divider"></li>

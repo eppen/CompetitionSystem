@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Favorite;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.FavoritePK;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
@@ -61,29 +63,29 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		// 准备分页的数据 （最终版）
 		if (titleSearch == null || titleSearch.equals("")) {
 			new QueryHelper(Topic.class, "t")//
-					.addWhereCondition((viewType == 1), "t.classify=?", Topic.TYPE_BEST) // 1 
-					.addWhereCondition((viewType == 2), "t.classify=?", Topic.TYPE_TOP) // 2
+					.addWhereAndCondition((viewType == 1), "t.classify=?", Topic.TYPE_BEST) // 1
+					.addWhereAndCondition((viewType == 2), "t.classify=?", Topic.TYPE_TOP) // 2
 																						// 表示只看精华帖
 					.addOrderByProperty((orderBy == 1), "t.lastUpdateTime", asc) // 1
 																					// 表示只按最后更新时间排序
 					.addOrderByProperty((orderBy == 2), "t.postTime", asc) // 表示只按主题发表时间排序
 					.addOrderByProperty((orderBy == 3), "t.replyCount", asc) // 表示只按回复数量排序
 					.addOrderByProperty((orderBy == 0), "(CASE t.classify WHEN 2 THEN 2 ELSE 0 END)", false)//
-					.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false)// 
-					.preparePageBean(topicService, pageNum); 
+					.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false)//
+					.preparePageBean(topicService, pageNum);
 		} else {
 			System.out.println("内容" + titleSearch);
 			new QueryHelper(Topic.class, "t")//
-					.addWhereCondition((viewType == 1), "t.classify=?", Topic.TYPE_BEST) // 1
-					.addWhereCondition((viewType == 2), "t.classify=?", Topic.TYPE_TOP) // 2 
+					.addWhereAndCondition((viewType == 1), "t.classify=?", Topic.TYPE_BEST) // 1
+					.addWhereAndCondition((viewType == 2), "t.classify=?", Topic.TYPE_TOP) // 2
 																						// 表示只看精华帖
 					.addOrderByProperty((orderBy == 1), "t.lastUpdateTime", asc) // 1
 																					// 表示只按最后更新时间排序
 					.addOrderByProperty((orderBy == 2), "t.postTime", asc) // 表示只按主题发表时间排序
 					.addOrderByProperty((orderBy == 3), "t.replyCount", asc) // 表示只按回复数量排序
-					.addWhereCondition("t.title LIKE '%" + titleSearch + "%'")
+					.addWhereAndCondition("t.title LIKE '%" + titleSearch + "%'")
 					.addOrderByProperty((orderBy == 0), "(CASE t.classify WHEN 2 THEN 2 ELSE 0 END)", false)//
-					.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false)//   
+					.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false)//
 					.preparePageBean(topicService, pageNum);
 		}
 		return "toTopicListUI";
@@ -97,9 +99,39 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		Topic topic = topicService.getById(model.getId());
 		ActionContext.getContext().put("topic", topic);
 
+		// 收藏状态
+		boolean isFavorite = false;
+		Favorite favorite = favoriteService.getByTopicIdAndUserId(topic.getId(), getCurrentUser().getId());
+		// 判断是否为空
+		if (favorite == null) {
+			// 未收藏 创建收藏记录 并 设置isFavorite为false
+			Favorite createfavorite = new Favorite();
+			FavoritePK favoritePK = new FavoritePK();
+			favoritePK.setTopicId(topic.getId());
+			favoritePK.setUserId(getCurrentUser().getId());
+			createfavorite.setFavoritePK(favoritePK);
+			createfavorite.setFavoriteTime(new Date());
+			createfavorite.setStatus(0);
+
+			isFavorite = false;
+			favoriteService.save(createfavorite);
+		} else {
+			if (favorite.getStatus() == 1) {
+				// 如果为1 已收藏
+				isFavorite = true;
+			} else {
+				// 未收藏
+				isFavorite = false;
+			}
+		}
+		System.out.println("isFavorite====="+isFavorite);  
+		ActionContext.getContext().put("isFavorite", isFavorite);
+
+		// 点赞状态
+
 		// 准备分页的数据 （最终版）
 		new QueryHelper(Reply.class, "r")//
-				.addWhereCondition("r.topic=?", topic)//
+				.addWhereAndCondition("r.topic=?", topic)//
 				.addOrderByProperty("r.postTime", true)//
 				.preparePageBean(replyService, pageNum);
 
@@ -164,7 +196,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		topic.setTopicContent(model.getTopicContent());
 		topic.setType(model.getType());
 		topic.setClassify(0);
-		
+
 		// TODO 图片的上传 暂不处理
 
 		// 创建试题后 前往创建答案页面

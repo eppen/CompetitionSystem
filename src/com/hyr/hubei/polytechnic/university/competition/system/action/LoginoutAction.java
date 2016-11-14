@@ -18,7 +18,6 @@ import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Scope("prototype")
 public class LoginoutAction extends ModelDrivenBaseAction<User> {
-	private static final long serialVersionUID = -7711077086531863671L;
 
 	/**
 	 * 登录页面

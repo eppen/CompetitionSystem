@@ -43,12 +43,17 @@
 					cellspacing="0" cellpadding="0">
 					<tr valign="bottom">
 						<td width="3" class="ForumPageTableTitleLeft">&nbsp;</td>
-						<td class="ForumPageTableTitle" style="font-size: 16px;"><b>本帖主题：${topic.title }</b></td>
+						<td class="ForumPageTableTitle" style="font-size: 16px;"><b>本帖主题：</b></td> 
 						<td class="ForumPageTableTitle" align="right"  
 							style="padding-right: 12px;"><a class="detail" href="javascript:scroll(0,100000000000)"><img border="0"       
-								src="img/reply.gif" />回复</a>
-								 <a href="moveUI.html"><img border="0" src="img/collect.gif" />收藏</a> 
-								 <a href="moveUI.html"><img border="0" src="img/uncollect.gif" />取消收藏</a> 
+								src="img/reply.gif" />回复</a> 
+								<!-- 判断是否已经收藏 --> 
+									<s:if test="isFavorite"> 
+									<s:a action="favoriteAction_updateFavoriteStatus?status=0&topicId=%{#topic.id}"><img border="0" src="img/uncollect.gif" />取消收藏</s:a>
+									</s:if><s:else> 
+									<s:a action="favoriteAction_updateFavoriteStatus?status=1&topicId=%{#topic.id}"><img border="0" src="img/collect.gif" />收藏</s:a>
+									</s:else>  
+									
 								 <s:if test="currentUser.id==#topic.author.id"> 
 								  	<a href="moveUI.html"><img border="0" src="img/text.gif" />编辑</a> 
 								 </s:if>

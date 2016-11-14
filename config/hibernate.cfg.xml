@@ -12,7 +12,7 @@
 		</property>
 
 		<!-- JDBC connection pool (use the built-in) -->
-		<property name="connection.pool_size">5</property> 
+		<property name="connection.pool_size">5</property>
 
 		<!-- Disable the second-level cache -->
 		<property name="hibernate.cache.use_second_level_cache">true</property>
@@ -27,7 +27,7 @@
 		<property name="format_sql">false</property>
 
 		<!-- Drop and re-create the database schema on startup -->
-		<property name="hbm2ddl.auto">update</property>    
+		<property name="hbm2ddl.auto">update</property>
 
 		<!-- 声明映射文件 -->
 		<mapping
@@ -52,6 +52,8 @@
 			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Role.hbm.xml" />
 		<mapping
 			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Privilege.hbm.xml" />
+		<mapping
+			resource="com/hyr/hubei/polytechnic/university/competition/system/domain/Favorite.hbm.xml" />
 
 
 	</session-factory>

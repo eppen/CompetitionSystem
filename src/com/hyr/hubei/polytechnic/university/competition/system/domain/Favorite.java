@@ -15,6 +15,9 @@ public class Favorite {
 	/** 收藏时间 */
 	private Date favoriteTime;
 
+	/** 收藏状态 0用户未收藏 1用户已收藏 默认值0 */
+	private Integer status = 0;
+
 	public FavoritePK getFavoritePK() {
 		return favoritePK;
 	}
@@ -29,6 +32,14 @@ public class Favorite {
 
 	public void setFavoriteTime(Date favoriteTime) {
 		this.favoriteTime = favoriteTime;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }

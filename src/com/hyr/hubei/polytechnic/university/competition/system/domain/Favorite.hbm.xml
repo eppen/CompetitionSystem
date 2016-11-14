@@ -6,18 +6,17 @@
 <hibernate-mapping
 	package="com.hyr.hubei.polytechnic.university.competition.system.domain">
 
-	<class name="Laud" table="db_cs_laud" lazy="true">
-		<composite-id name="laudPK"
-			class="com.hyr.hubei.polytechnic.university.competition.system.domain.LaudPK">
+	<class name="Favorite" table="db_cs_favorite" lazy="true">
+		<composite-id name="favoritePK"
+			class="com.hyr.hubei.polytechnic.university.competition.system.domain.FavoritePK">
 			<key-property name="userId"></key-property>
 			<key-property name="topicId"></key-property>
 		</composite-id>
-		<!-- 点赞时间 -->
-		<property name="laudTime" column="laudTime" type="timestamp"
+		<!-- 收藏时间 -->
+		<property name="favoriteTime" column="favoriteTime" type="timestamp"
 			not-null="true"></property>
-		<!-- 点赞状态 -->
+		<!-- 收藏状态 -->
 		<property name="status" column="status" not-null="true"></property>
-
 	</class>
 
 </hibernate-mapping>

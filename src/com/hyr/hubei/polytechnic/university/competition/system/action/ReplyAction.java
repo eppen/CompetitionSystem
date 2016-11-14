@@ -42,10 +42,12 @@ public class ReplyAction extends ModelDrivenBaseAction<Reply> {
 		topic.setReplyCount(topic.getReplyCount() + 1);
 		// 更新主题最新评论
 		topic.setLastReply(reply);
-		topic.setLastUpdateTime(reply.getPostTime()); 
-		// 通知用户 更新用户消息字段 replysCount +1
-		topic.getAuthor().setReplysCount(topic.getAuthor().getReplysCount() + 1);
-		topicService.update(topic);
+		topic.setLastUpdateTime(reply.getPostTime());
+		// 如果不是本人回复本人 通知用户 更新用户消息字段 replysCount +1
+		if (topic.getAuthor().getId() != getCurrentUser().getId()) {
+			topic.getAuthor().setReplysCount(topic.getAuthor().getReplysCount() + 1);
+			topicService.update(topic);
+		}
 
 		return "toTopicShow";
 	}

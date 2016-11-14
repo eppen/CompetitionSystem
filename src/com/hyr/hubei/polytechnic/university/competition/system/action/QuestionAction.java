@@ -43,12 +43,12 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 		// 准备分页的数据 （最终版）
 		if (titleSearch == null || titleSearch.equals("")) {
 			new QueryHelper(Question.class, "q")//
-					.addWhereCondition("q.scope=?", questionSet)//
+					.addWhereAndCondition("q.scope=?", questionSet)//
 					.preparePageBean(questionService, pageNum);
 		} else {
 			new QueryHelper(Question.class, "q")//
-					.addWhereCondition("q.title LIKE '%" + titleSearch + "%'")
-					.addWhereCondition("q.scope=?", questionSet)//
+					.addWhereAndCondition("q.title LIKE '%" + titleSearch + "%'")
+					.addWhereAndCondition("q.scope=?", questionSet)//
 					.preparePageBean(questionService, pageNum);
 		}
 
@@ -80,12 +80,12 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 		// 准备分页的数据 （最终版）
 		if (titleSearch == null || titleSearch.equals("")) {
 			new QueryHelper(Question.class, "q")//
-					.addWhereCondition("q.scope=?", questionSet)//
+					.addWhereAndCondition("q.scope=?", questionSet)//
 					.preparePageBean(questionService, pageNum);
 		} else {
 			new QueryHelper(Question.class, "q")//
-					.addWhereCondition("q.title LIKE '%" + titleSearch + "%'")
-					.addWhereCondition("q.scope=?", questionSet)//
+					.addWhereAndCondition("q.title LIKE '%" + titleSearch + "%'")
+					.addWhereAndCondition("q.scope=?", questionSet)//
 					.preparePageBean(questionService, pageNum);
 		}
 

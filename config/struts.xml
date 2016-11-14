@@ -18,10 +18,13 @@
 			<!-- 声明拦截器 -->
 			<interceptor name="checkPrivilege"
 				class="com.hyr.hubei.polytechnic.university.competition.system.Interceptor.CheckPrivilegeInterceptor"></interceptor>
+			<interceptor name="checkUserReplyCount"
+				class="com.hyr.hubei.polytechnic.university.competition.system.Interceptor.CheckUserReplyCountInterceptor"></interceptor>
 
 			<!-- 配置我们自己的拦截器栈 -->
 			<interceptor-stack name="myDefaultStack">
 				<interceptor-ref name="checkPrivilege"></interceptor-ref>
+				<interceptor-ref name="checkUserReplyCount"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
@@ -35,18 +38,6 @@
 			<result name="noPrivilegeUI">/noPrivilegeUI.jsp</result>
 			<result name="error">/success.jsp</result>
 		</global-results>
-
-		<!-- 样例 -->
-		<action name="roleAction_*" class="com.hyr.oa.view.action.RoleAction"
-			method="{1}">
-			<result name="list">/WEB-INF/jsp/roleAction/list.jsp</result>
-			<result name="editUI">/WEB-INF/jsp/roleAction/editUI.jsp</result>
-			<result name="addUI">/WEB-INF/jsp/roleAction/addUI.jsp</result>
-			<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp
-			</result>
-			<result name="toList" type="redirectAction">roleAction_list</result>
-		</action>
-		<!-- 样例 -->
 
 		<!-- 登录登出 -->
 		<action name="loginoutAction_*"
@@ -72,6 +63,7 @@
 			<result name="toContactInfoUI">/WEB-INF/jsp/homeAction/index.jsp</result>
 		</action>
 
+		<!-- 用户模块 -->
 		<action name="userAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.UserAction"
 			method="{1}">
@@ -81,8 +73,15 @@
 			</result>
 			<result name="toShowUserUI" type="redirectAction">userAction_toUserCenterUI
 			</result>
+			<result name="toUserAlertsUI">/WEB-INF/jsp/userAction/userAlerts.jsp
+			</result>
+			<result name="toUserTopicListUI">/WEB-INF/jsp/userAction/userTopicList.jsp
+			</result>
+			<result name="toUserFavoriteUI">/WEB-INF/jsp/userAction/userFavoriteTopicList.jsp
+			</result>
 		</action>
 
+		<!-- 试题集模块 -->
 		<action name="questionSetAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.QuestionSetAction"
 			method="{1}">
@@ -100,6 +99,7 @@
 			</result>
 		</action>
 
+		<!-- 试题模块 -->
 		<action name="questionAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.QuestionAction"
 			method="{1}">
@@ -123,6 +123,7 @@
 			</result>
 		</action>
 
+		<!-- 提交答案模块 -->
 		<action name="testAnswerAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.TestAnswerAction"
 			method="{1}">
@@ -130,6 +131,7 @@
 			</result>
 		</action>
 
+		<!-- 主题模块 -->
 		<action name="topicAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.TopicAction"
 			method="{1}">
@@ -157,8 +159,16 @@
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.ReplyAction"
 			method="{1}">
 			<result name="addUI">/WEB-INF/jsp/replyAction/addUI.jsp</result>
-			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId} 
-			</result> 
+			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId}
+			</result>
+		</action>
+
+		<!-- 收藏模块 -->
+		<action name="favoriteAction_*"
+			class="com.hyr.hubei.polytechnic.university.competition.system.action.FavoriteAction"
+			method="{1}">
+			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId}
+			</result>
 		</action>
 
 	</package>

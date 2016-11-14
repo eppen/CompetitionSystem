@@ -33,17 +33,39 @@ public class QueryHelper {
 	}
 
 	/**
-	 * 拼接Where子句
+	 * 拼接Where子句 AND
 	 * 
 	 * @param condition
 	 * @param args
 	 */
-	public QueryHelper addWhereCondition(String condition, Object... args) throws AppException {
+	public QueryHelper addWhereAndCondition(String condition, Object... args) throws AppException {
 		// 拼接
 		if (whereClause.length() == 0) {
 			whereClause = " WHERE " + condition;
 		} else {
 			whereClause += " AND " + condition;
+		}
+		// 处理参数
+		if (args != null && args.length > 0) {
+			for (Object arg : args) {
+				parameters.add(arg);
+			}
+		}
+		return this;
+	}
+
+	/**
+	 * 拼接Where子句 OR
+	 * 
+	 * @param condition
+	 * @param args
+	 */
+	public QueryHelper addWhereORCondition(String condition, Object... args) throws AppException {
+		// 拼接
+		if (whereClause.length() == 0) {
+			whereClause = " WHERE " + condition;
+		} else {
+			whereClause += " OR " + condition;
 		}
 		// 处理参数
 		if (args != null && args.length > 0) {
@@ -61,9 +83,9 @@ public class QueryHelper {
 	 * @param condition
 	 * @param args
 	 */
-	public QueryHelper addWhereCondition(boolean append, String condition, Object... args) throws AppException {
+	public QueryHelper addWhereAndCondition(boolean append, String condition, Object... args) throws AppException {
 		if (append) {
-			addWhereCondition(condition, args);
+			addWhereAndCondition(condition, args);
 		}
 		return this;
 	}

@@ -1,5 +1,6 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Favorite;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Role;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
+import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
@@ -125,7 +130,7 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		}
 
 	}
-	
+
 	/**
 	 * 用户提醒页面
 	 * 
@@ -133,8 +138,19 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 * @throws AppException
 	 */
 	public String toUserAlertsUI() throws AppException {
+		// 展示用户评论 按照评论时间
+		new QueryHelper(Reply.class, "r")//
+				.addWhereAndCondition("r.topic.author.id=?", getCurrentUser().getId())//
+				.addOrderByProperty("r.postTime", false)//
+				.preparePageBean(replyService, pageNum);
 
-		return "toUserCenterUI";
+		// 将用户replysCount字段清0
+		User user = userService.getById(getCurrentUser().getId());
+		user.setReplysCount(0);
+		userService.update(user);
+		ActionContext.getContext().getSession().put("userReplysCount", user.getReplysCount());
+		// 跳转到用户提醒展示页面
+		return "toUserAlertsUI";
 	}
 
 	/**
@@ -144,8 +160,12 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 * @throws AppException
 	 */
 	public String toUserTopicListUI() throws AppException {
+		// 展示用户主题
+		new QueryHelper(Topic.class, "t")//
+				.addWhereAndCondition("t.author.id=?", getCurrentUser().getId())//
+				.preparePageBean(topicService, pageNum);
 
-		return "toUserCenterUI";
+		return "toUserTopicListUI";
 	}
 
 	/**
@@ -155,8 +175,18 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 * @throws AppException
 	 */
 	public String toUserFavoriteUI() throws AppException {
+		// 展示用户收藏的主题
 
-		return "toUserCenterUI";
+		// 获取用户已收藏的主题
+		List<Favorite> favorites = favoriteService.getByUserId(getCurrentUser().getId());
+
+		QueryHelper queryHelper = new QueryHelper(Topic.class, "t");//
+		for (Favorite f : favorites) {
+			queryHelper.addWhereORCondition("t.id = ?", f.getFavoritePK().getTopicId());//
+		}
+		// .addWhereCondition("t.id IN ?",array)//
+		queryHelper.preparePageBean(topicService, pageNum);
+		return "toUserFavoriteUI";
 	}
 
 	/**
