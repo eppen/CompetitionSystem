@@ -7,7 +7,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.Privilege;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 
 /**
- * @author Administrator
+ * @author huangyueran
  * @category 权限Service接口
  */
 public interface PrivilegeService extends DaoSupport<Privilege> {

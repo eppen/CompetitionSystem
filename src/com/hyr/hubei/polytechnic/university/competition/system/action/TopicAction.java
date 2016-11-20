@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Favorite;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.FavoritePK;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Laud;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.LaudPK;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
@@ -65,7 +67,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 			new QueryHelper(Topic.class, "t")//
 					.addWhereAndCondition((viewType == 1), "t.classify=?", Topic.TYPE_BEST) // 1
 					.addWhereAndCondition((viewType == 2), "t.classify=?", Topic.TYPE_TOP) // 2
-																						// 表示只看精华帖
+																							// 表示只看精华帖
 					.addOrderByProperty((orderBy == 1), "t.lastUpdateTime", asc) // 1
 																					// 表示只按最后更新时间排序
 					.addOrderByProperty((orderBy == 2), "t.postTime", asc) // 表示只按主题发表时间排序
@@ -78,7 +80,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 			new QueryHelper(Topic.class, "t")//
 					.addWhereAndCondition((viewType == 1), "t.classify=?", Topic.TYPE_BEST) // 1
 					.addWhereAndCondition((viewType == 2), "t.classify=?", Topic.TYPE_TOP) // 2
-																						// 表示只看精华帖
+																							// 表示只看精华帖
 					.addOrderByProperty((orderBy == 1), "t.lastUpdateTime", asc) // 1
 																					// 表示只按最后更新时间排序
 					.addOrderByProperty((orderBy == 2), "t.postTime", asc) // 表示只按主题发表时间排序
@@ -124,10 +126,38 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 				isFavorite = false;
 			}
 		}
-		System.out.println("isFavorite====="+isFavorite);  
 		ActionContext.getContext().put("isFavorite", isFavorite);
 
 		// 点赞状态
+		boolean isLaud = false;
+		Laud laud = laudService.getByTopicIdAndUserId(topic.getId(), getCurrentUser().getId());
+		
+		System.out.println(topicId+"======="+getCurrentUser().getId()); 
+		System.out.println(laud+"======");
+		
+		// 判断是否为空
+		if (laud == null) {
+			// 未点赞 创建点赞记录 并设置isLaud为false
+			Laud createLaud = new Laud();
+			LaudPK laudPK = new LaudPK();
+			laudPK.setTopicId(topic.getId());
+			laudPK.setUserId(getCurrentUser().getId());
+			createLaud.setLaudPK(laudPK);
+			createLaud.setLaudTime(new Date());
+			createLaud.setStatus(0);
+
+			isLaud = false;
+			laudService.save(createLaud);
+		} else {
+			if (laud.getStatus() == 1) {
+				// 如果为1 已收藏
+				isLaud = true;
+			} else {
+				// 未收藏
+				isLaud = false; 
+			}
+		}
+		ActionContext.getContext().put("isLaud", isLaud);
 
 		// 准备分页的数据 （最终版）
 		new QueryHelper(Reply.class, "r")//
@@ -286,6 +316,15 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		topicService.update(topic);
 
 		return "toTopicShow";
+	}
+
+	/** 删除主题 */
+	public String deleteTopic() throws AppException {
+		// 根据id删除主题
+		topicService.delete(model.getId());
+
+		// 跳转到主题展示列表页面
+		return "toTopicList";
 	}
 
 	public String[] getInputlist() {

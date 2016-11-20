@@ -22,6 +22,9 @@ public class ScoringPoint {
 	/** 内存使用 */
 	private double memory;
 
+	/** 所属提交答案 */
+	private TestAnswer testAnswer;
+
 	public Long getId() {
 		return id;
 	}
@@ -60,6 +63,14 @@ public class ScoringPoint {
 
 	public void setMemory(double memory) {
 		this.memory = memory;
+	}
+
+	public TestAnswer getTestAnswer() {
+		return testAnswer;
+	}
+
+	public void setTestAnswer(TestAnswer testAnswer) {
+		this.testAnswer = testAnswer;
 	}
 
 }

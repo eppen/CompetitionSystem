@@ -21,8 +21,4 @@
 			<li class="divider"></li>
 			<li><a href="loginoutAction_logout">退出登录</a></li>
 		</ul></li>
-</ul>
-
-<ul class="nav navbar-nav navbar-right">
-	<a href="login.html" class="btn btn-default navbar-btn">登录</a>
-</ul>
+</ul> 

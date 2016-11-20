@@ -8,6 +8,7 @@ import java.util.Properties;
  * 管理配置信息的（读取配置文件）
  * 
  * @author tyg
+ * @category 配置信息 
  * 
  */
 public class Configuration

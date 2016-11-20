@@ -1,5 +1,7 @@
 package com.hyr.hubei.polytechnic.university.competition.system.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -38,6 +40,12 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
 		String md5Password = DigestUtils.md5Hex(password);
 		return (User) getSession().createQuery("FROM User u WHERE u.username = ? AND u.password= ? ")
 				.setParameter(0, loginName).setParameter(1, md5Password).uniqueResult();
+	}
+
+	@Override
+	public List<User> findAllActivityUser() throws AppException {
+		// 注意空格！
+		return getSession().createQuery("FROM " + clazz.getSimpleName() + " u AND u.isDelete = 0").list();
 	}
 
 }

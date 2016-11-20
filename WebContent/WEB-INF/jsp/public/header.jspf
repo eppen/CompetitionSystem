@@ -7,7 +7,7 @@
 %>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script language="javascript" src="<%=basePath%>js/jquery.js"></script> 
+<script language="javascript" src="<%=basePath%>js/jquery.js"></script>
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
 <link href="<%=basePath%>css/signin.css" rel="stylesheet">
 <link href="<%=basePath%>css/basic.css" rel="stylesheet" />
@@ -17,7 +17,7 @@
 	src="<%=basePath%>script/jquery_validate/jquery.metadata.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/jquery_validate/jquery.validate.js"></script>
-  
+
 <!-- 指定表单是否要进行验证，如果验证通过才提交，否则不提交 -->
 <script type="text/javascript">
 	jQuery.extend(jQuery.validator.messages, {

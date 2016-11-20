@@ -6,7 +6,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.base.DaoSupport;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Role;
 
 /**
- * @author Administrator
+ * @author huangyueran
  * @category 岗位Service接口
  */
 @Transactional

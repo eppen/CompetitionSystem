@@ -30,7 +30,32 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>codemirror/duotone-light.css" type="text/css"
 	rel="stylesheet" />
+<!------------------------- 代码编辑器 ------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>codemirror/codemirror.min.js"></script>
+<script src="<%=basePath%>codemirror/clike.js"></script>
+<script src="<%=basePath%>codemirror/active-line.js"></script>
+<script src="<%=basePath%>codemirror/matchbrackets.js"></script>
+<script type="text/javascript">
+	function createCodeMirrorEditor() {
+		cm = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+			lineNumbers : true,
+			matchBrackets : true,
+			mode : "text/x-c++src",
+			theme : "duotone-light",
+			indentWithTabs : true,
+			styleActiveLine : true,
+			indentUnit : 2,
+			tabSize : 2,
+			readOnly : false
+		});
+		cm.setValue("");
+	};
 
+	$(document).ready(function() {
+		createCodeMirrorEditor();
+	});
+</script>
 </head>
 
 <body>
@@ -50,26 +75,30 @@
 				<ol class="breadcrumb">
 					<li><a href="homeAction_toCompetitionSystemUI">试题集 <span
 							class="glyphicon glyphicon-chevron-right"></span></a> <s:a
-						action="questionAction_toQuestionListUI?questionSetId=%{scope.id}">${scope.title } <span 
-							class="glyphicon glyphicon-chevron-right"></span></s:a> <s:a
-						action="questionAction_toQuestionShowUI?questionSetId=%{questionSetId}&id=%{id}">${title }<span  
-							class="glyphicon glyphicon-chevron-right"></span></s:a> 
+							action="questionAction_toQuestionListUI?questionSetId=%{scope.id}">${scope.title } <span
+								class="glyphicon glyphicon-chevron-right"></span>
+						</s:a> <s:a
+							action="questionAction_toQuestionShowUI?questionSetId=%{questionSetId}&id=%{id}">${title }<span
+								class="glyphicon glyphicon-chevron-right"></span>
+						</s:a>
 					<li class="active">提交答案 <span
 						class="glyphicon glyphicon-chevron-right"></li>
 					</li>
 				</ol>
 
 				<div class="table-responsive jumbotron">
-					<s:form action="questionAction_submitAnswer" cssClass="form-signin" role="form">
+					<s:form action="scoringPointAction_submitAnswer"
+						cssClass="form-signin" role="form">
+						<s:hidden name="questionId" value="%{id}"></s:hidden>
 						<table class="table table-condensed">
 							<tbody style="font-size: 16px; font-family: '微软雅黑';">
-								<th style="font-size: 25px;">${title }</th>  
+								<th style="font-size: 25px;">${title }</th>
 								<tr>
 									<td><b>输入答案：</b></td>
 								</tr>
 								<tr>
-									<td><s:textarea id="code-editor" cssClass="form-control" name="answer"
-											rows="30"></s:textarea></td> 
+									<td><s:textarea id="code-editor" cssClass="form-control"
+											name="answer" rows="30"></s:textarea></td>
 								</tr>
 								<tr>
 									<td><center>
@@ -89,33 +118,6 @@
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
 
-	<!------------------------- 代码编辑器 ------------------------->
-	<script type="text/javascript"
-		src="<%=basePath%>codemirror/codemirror.min.js"></script>
-	<script src="<%=basePath%>codemirror/clike.js"></script>
-	<script src="<%=basePath%>codemirror/active-line.js"></script>
-	<script src="<%=basePath%>codemirror/matchbrackets.js"></script>
-	<script type="text/javascript">
-		function createCodeMirrorEditor() {
-			cm = CodeMirror.fromTextArea(
-					document.getElementById("code-editor"), {
-						lineNumbers : true,
-						matchBrackets : true,
-						mode : "text/x-c++src",
-						theme : "duotone-light",
-						indentWithTabs : true,
-						styleActiveLine : true,
-						indentUnit : 2,
-						tabSize : 2,
-						readOnly : false
-					});
-			cm.setValue("");
-		};
-
-		$(document).ready(function() {
-			createCodeMirrorEditor();
-		});
-	</script>
 </body>
 
 </html>

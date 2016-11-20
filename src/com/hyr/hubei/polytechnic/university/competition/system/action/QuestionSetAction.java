@@ -76,7 +76,7 @@ public class QuestionSetAction extends ModelDrivenBaseAction<QuestionSet> {
 
 		questionSetService.save(questionSet);
 
-		return "toQuestionSetManageListUI";
+		return "toQuestionSetManageList";
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class QuestionSetAction extends ModelDrivenBaseAction<QuestionSet> {
 
 		questionSetService.update(questionSet);
 
-		return "toQuestionSetManageList"; 
+		return "toQuestionSetManageList";  
 	}
 
 }

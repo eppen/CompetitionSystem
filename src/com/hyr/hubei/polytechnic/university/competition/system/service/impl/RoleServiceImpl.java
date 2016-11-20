@@ -9,7 +9,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.Role;
 import com.hyr.hubei.polytechnic.university.competition.system.service.RoleService;
 
 /**
- * @author Administrator
+ * @author huangyueran
  * @category 岗位Service实现
  */
 @Service("roleServiceImpl")

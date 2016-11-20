@@ -30,8 +30,8 @@
 				<h2 class="sub-header">试题管理</h2>
 				<div class="table-responsive">
 					<div class="container">
-						<a href="questionAction_toCreateQuestionUI"
-							class="btn btn-success">创建试题</a>
+						<s:a action="questionAction_toCreateQuestionUI?scopeId=%{questionSetId}"  
+							cssClass="btn btn-success">创建试题</s:a>
 					</div>
 					<!------- 搜索框 ------->
 					<s:form id="pageForm"

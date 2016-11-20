@@ -18,13 +18,13 @@
 			<!-- 声明拦截器 -->
 			<interceptor name="checkPrivilege"
 				class="com.hyr.hubei.polytechnic.university.competition.system.Interceptor.CheckPrivilegeInterceptor"></interceptor>
-			<interceptor name="checkUserReplyCount"
-				class="com.hyr.hubei.polytechnic.university.competition.system.Interceptor.CheckUserReplyCountInterceptor"></interceptor>
+			<interceptor name="checkObserverInterceptor"
+				class="com.hyr.hubei.polytechnic.university.competition.system.Interceptor.CheckObserverInterceptor"></interceptor>
 
 			<!-- 配置我们自己的拦截器栈 -->
 			<interceptor-stack name="myDefaultStack">
 				<interceptor-ref name="checkPrivilege"></interceptor-ref>
-				<interceptor-ref name="checkUserReplyCount"></interceptor-ref>
+				<interceptor-ref name="checkObserverInterceptor"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
@@ -79,6 +79,14 @@
 			</result>
 			<result name="toUserFavoriteUI">/WEB-INF/jsp/userAction/userFavoriteTopicList.jsp
 			</result>
+			<result name="toUserManageListUI">/WEB-INF/jsp/userAction/userManagerList.jsp
+			</result>
+			<result name="toUserManageList" type="redirectAction">userAction_toUserManageListUI
+			</result>
+			<result name="toCreateUserUI">/WEB-INF/jsp/userAction/crearteUser.jsp
+			</result>
+			<result name="toUserInfoUI">/WEB-INF/jsp/userAction/userInfo.jsp
+			</result>
 		</action>
 
 		<!-- 试题集模块 -->
@@ -131,6 +139,19 @@
 			</result>
 		</action>
 
+		<!-- 检测答案模块 -->
+		<action name="scoringPointAction_*"
+			class="com.hyr.hubei.polytechnic.university.competition.system.action.ScoringPointAction"
+			method="{1}">
+			<interceptor-ref name="myDefaultStack"></interceptor-ref>
+			<interceptor-ref name="execAndWait">
+				<param name="includeMethods">submitAnswer</param>
+				<!-- 等待时间,执行时间没有超过此值,将不显示等待画面 (毫秒) -->
+				<param name="delay">1</param>
+			</interceptor-ref>
+			<result name="wait">/wait.jsp</result>
+		</action>
+
 		<!-- 主题模块 -->
 		<action name="topicAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.TopicAction"
@@ -168,6 +189,22 @@
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.FavoriteAction"
 			method="{1}">
 			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId}
+			</result>
+		</action>
+
+		<!-- 点赞模块 -->
+		<action name="laudAction_*"
+			class="com.hyr.hubei.polytechnic.university.competition.system.action.LaudAction"
+			method="{1}">
+			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId}
+			</result>
+		</action>
+
+		<!-- 访客模块 -->
+		<action name="visitorAction_*"
+			class="com.hyr.hubei.polytechnic.university.competition.system.action.VisitorAction"
+			method="{1}">
+			<result name="toUserVisitorUI">/WEB-INF/jsp/visitorAction/visitor.jsp
 			</result>
 		</action>
 

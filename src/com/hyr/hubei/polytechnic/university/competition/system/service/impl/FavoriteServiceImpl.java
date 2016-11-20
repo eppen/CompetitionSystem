@@ -12,7 +12,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.service.FavoriteS
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 
 /**
- * @author Administrator
+ * @author huangyueran
  * @category 收藏Service实现
  */
 @Service("favoriteServiceImpl")

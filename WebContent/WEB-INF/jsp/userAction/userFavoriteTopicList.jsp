@@ -57,10 +57,8 @@
 											target="_blank">${title }</s:a></td>
 									<td><a href="#" target="_blank">${author.name }</td>
 									<td><s:date name="postTime" format="yyyy-MM-dd" /></td>
-									<td><s:if test="type==1">
-											<span class="btn btn-warning">知识讨论</span>
-										</s:if> <s:elseif test="type==0">
-											<span class="btn btn-warning">新增题目</span>
+									<td><s:if test="type==1">知识讨论								</s:if> <s:elseif
+											test="type==0">新增题目 
 										</s:elseif></td>
 									<td>${replyCount }</td>
 									<td>${laudCount }</td>
@@ -75,7 +73,7 @@
 					<!--  其他功能  已删除-->
 
 					<s:form id="pageForm" action="userAction_toUserTopicListUI"
-						role="search"> 
+						role="search">
 					</s:form>
 					<!-- 分页开始 -->
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>

@@ -101,7 +101,7 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 	public String toCreateQuestionUI() throws AppException {
 		// 准备试题集数据
 		List<QuestionSet> questionSets = questionSetService.findAll();
-		ActionContext.getContext().put("questionSets", questionSets);
+		ActionContext.getContext().put("questionSets", questionSets); 
 
 		return "toCreateQuestionUI";
 	}
@@ -115,7 +115,6 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 	public String createQuestion() throws AppException {
 		// 准备试题所属试题集数据
 		QuestionSet questionSet = questionSetService.getById(scopeId);
-
 		// 设置属性
 		Question question = new Question();
 		question.setCareful(model.getCareful());

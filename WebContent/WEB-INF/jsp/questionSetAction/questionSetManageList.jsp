@@ -49,8 +49,8 @@
 							<s:iterator value="recordList">
 								<tr>
 									<td><s:a
-											href="questionAction_toQuestionManageListUI?questionSetId=%{id}">${title}</s:a></td>
-									<td>${description}</td>
+											action="questionAction_toQuestionManageListUI?questionSetId=%{id}">${title}</s:a></td> 
+									<td>${description}</td>  
 									<td>${questionCount}</td>
 									<td><s:date name="updateTime" format="yyyy年MM月dd日" /></td>
 									<td><s:a

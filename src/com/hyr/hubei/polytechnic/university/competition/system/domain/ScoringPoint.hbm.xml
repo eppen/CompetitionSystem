@@ -18,6 +18,8 @@
 		<property name="runtime" column="runtime" type="double"></property>
 		<!-- 内存使用 -->
 		<property name="memory" column="memory" type="double"></property>
+		<!-- 所属提交答案 -->
+		<many-to-one name="testAnswer" class="TestAnswer" column="answerId"></many-to-one>
 
 	</class>
 

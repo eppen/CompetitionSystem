@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  * @author huangyueran
  *
  */
-public class CheckUserReplyCountInterceptor extends AbstractInterceptor {
+public class CheckObserverInterceptor extends AbstractInterceptor {
 	@Resource(name = "userServiceImpl")
 	protected UserService userService;
 
@@ -23,12 +23,17 @@ public class CheckUserReplyCountInterceptor extends AbstractInterceptor {
 		// System.out.println("============> 拦截器（后） <============");
 		// return result;
 
-		// a, 当前登录的用户
+		// 当前登录的用户
 		User user = (User) ActionContext.getContext().getSession().get("user");
+
 		if (user != null) {
+			// 用户消息数监听
 			User user2 = userService.getById(user.getId());
 			// 将用户消息记录数存入
 			ActionContext.getContext().getSession().put("userReplysCount", user2.getReplysCount());
+
+			// 用户访客数监听
+			ActionContext.getContext().getSession().put("userVisitorsCount", user2.getVisitorsCount());
 		}
 
 		return invocation.invoke();

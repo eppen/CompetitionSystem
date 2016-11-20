@@ -55,6 +55,12 @@ public class BaseUser {
 	/** 是否被禁言 0未禁言 1已禁言 默认值0 */
 	protected Integer isBan = 0;
 
+	/** 是否被删除 0未删除 1已杀出 默认值0 */
+	protected Integer isDelete = 0;
+
+	/** 创建日期 */
+	protected Date createTime;
+
 	public Long getId() {
 		return id;
 	}
@@ -173,6 +179,22 @@ public class BaseUser {
 
 	public void setIsBan(Integer isBan) {
 		this.isBan = isBan;
+	}
+
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 }

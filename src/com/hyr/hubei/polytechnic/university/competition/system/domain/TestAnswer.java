@@ -20,10 +20,10 @@ public class TestAnswer {
 	private Question question;
 
 	/** 结果:等待评测 正确 错误 运行超时 编译错误 运行错误 */
-	private String result;
+	private String result = "等待评测";
 
 	/** 得分 */
-	private double scores;
+	private double scores = 0;
 
 	/** 提交时间 */
 	private Date submitTime;
@@ -32,28 +32,28 @@ public class TestAnswer {
 	private List<ScoringPoint> scoringPoints;
 
 	/** CPU使用 */
-	private double runtime;
+	private double runtime = -1;
 
 	/** 内存使用 */
-	private double memory;
+	private double memory = -1;
 
 	/** 试题标题 用于展示，避免查询浪费内存 */
-	private String questionTitle;
+	private String questionTitle = "等待评测";
 
 	/** 编程语言 */
-	private String language;
+	private String language = "JAVA";
 
 	/** 提交的文本答案 */
-	private String answer;
+	private String answer = "";
 
 	/** 编译信息 */
-	private String compileInfo;
+	private String compileInfo = "等待评测";
 
 	/** 代码长度 */
-	private Integer codeLength;
+	private long codeLength;
 
 	/** 是否删除。用户自身无法删除，如果管理员删除了试题或者试题集，才进行删除。 0未删除 1已删除 默认值0 */
-	private Integer isdel;
+	private Integer isdel = 0;
 
 	public Long getId() {
 		return id;
@@ -159,11 +159,11 @@ public class TestAnswer {
 		this.compileInfo = compileInfo;
 	}
 
-	public Integer getCodeLength() {
+	public long getCodeLength() {
 		return codeLength;
 	}
 
-	public void setCodeLength(Integer codeLength) {
+	public void setCodeLength(long codeLength) {
 		this.codeLength = codeLength;
 	}
 

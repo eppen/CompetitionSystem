@@ -13,7 +13,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.service.Privilege
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 
 /**
- * @author Administrator
+ * @author huangyueran
  * @category 权限Service实现
  */
 @Service("privilegeServiceImpl")

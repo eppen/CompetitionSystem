@@ -11,7 +11,7 @@
 			<generator class="native" />
 		</id>
 		<!-- 提交者:学生 多对一 -->
-		<many-to-one name="student" class="User" column="answers"></many-to-one>
+		<many-to-one name="student" class="User" column="studentId"></many-to-one>
 		<!-- 结果 -->
 		<property name="result" column="result" length="20"></property>
 		<!-- 得分 -->
@@ -33,7 +33,7 @@
 		<!-- 编程语言 -->
 		<property name="language" column="language" length="10"></property>
 		<!-- 提交的文本答案 -->
-		<property name="answer" column="answer"></property>
+		<property name="answer" column="answer" length="5000"></property> 
 		<!-- 编译信息 -->
 		<property name="compileInfo" column="compileInfo"></property>
 		<!-- 代码长度 -->

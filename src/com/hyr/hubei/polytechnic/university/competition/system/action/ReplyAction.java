@@ -28,15 +28,11 @@ public class ReplyAction extends ModelDrivenBaseAction<Reply> {
 		// 封装对象
 		Reply reply = new Reply();
 		Topic topic = topicService.getById(topicId);
-		// a, 表单中的参数
 		reply.setContent(model.getContent());
 		reply.setTopic(topic);
-		// b, 在显示层才能获得的数据
 		reply.setAuthor(getCurrentUser()); // 当前登录的用户
 		reply.setIpAddr(getRequestIP()); // 客户端的IP地址
 		reply.setPostTime(new Date());
-		// 调用业务方法
-		replyService.save(reply);
 
 		// 更新相关主题字段 replyCount+1
 		topic.setReplyCount(topic.getReplyCount() + 1);
@@ -46,9 +42,36 @@ public class ReplyAction extends ModelDrivenBaseAction<Reply> {
 		// 如果不是本人回复本人 通知用户 更新用户消息字段 replysCount +1
 		if (topic.getAuthor().getId() != getCurrentUser().getId()) {
 			topic.getAuthor().setReplysCount(topic.getAuthor().getReplysCount() + 1);
-			topicService.update(topic);
-		}
 
+		}
+		
+		// 调用业务方法
+		replyService.save(reply);
+
+		topicService.update(topic);
+		return "toTopicShow";
+	}
+
+	/** 删除评论 */
+	/**
+	 * @return
+	 * @throws AppException
+	 */
+	public String deleteReply() throws AppException {
+		// 根据id删除评论
+
+		Reply reply = replyService.getById(model.getId());
+		Topic topic = reply.getTopic();
+
+		// 主题评论数-1
+		topic.setReplyCount(topic.getReplyCount() - 1);
+		topic.setLastReply(null);
+
+		topicService.update(topic);
+
+		replyService.delete(model.getId());
+
+		// 跳转到主题详情页面
 		return "toTopicShow";
 	}
 

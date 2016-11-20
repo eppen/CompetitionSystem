@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.hyr.hubei.polytechnic.university.competition.system.domain.ScoringPoint;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.service.FavoriteService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.LaudService;
@@ -17,8 +18,11 @@ import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionS
 import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionSetService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.ReplyService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.RoleService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.ScoringPointService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.TestAnswerService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.TopicService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.UserService;
+import com.hyr.hubei.polytechnic.university.competition.system.service.VisitorService;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -45,6 +49,12 @@ public class BaseAction extends ActionSupport {
 	protected FavoriteService favoriteService;
 	@Resource(name = "laudServiceImpl")
 	protected LaudService laudService;
+	@Resource(name = "visitorServiceImpl")
+	protected VisitorService visitorService;
+	@Resource(name = "testAnswerServiceImpl")
+	protected TestAnswerService testAnswerService;
+	@Resource(name = "scoringPointServiceImpl")
+	protected ScoringPointService scoringPointService;
 	// ========================== 工具方法 ==========================
 
 	/**

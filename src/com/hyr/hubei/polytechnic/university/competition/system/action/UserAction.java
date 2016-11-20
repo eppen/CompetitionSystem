@@ -1,6 +1,7 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,10 +11,12 @@ import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Favorite;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Role;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Visitor;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
@@ -30,6 +33,8 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	private String oldPassword; // 更改密码 输入的原始密码
 	private String password1;
 	private String password2;
+	private Long roleId; // 修改用户权限(角色)传入的id
+	private String usernameSearch; // 根据用户名搜索用户 传入的参数
 
 	public UserAction() throws AppException {
 		super();
@@ -79,9 +84,6 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		user.setGender(model.getGender());
 		user.setName(model.getName());
 		user.setQq(model.getQq());
-
-		Role role = roleService.getById(model.getRole().getId());
-		user.setRole(role);
 
 		// 3. 更新到数据库
 		userService.update(user);
@@ -190,14 +192,165 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	}
 
 	/**
-	 * 用户访客记录
+	 * 访问用户信息
 	 * 
 	 * @return
 	 * @throws AppException
 	 */
-	public String toUservisitorListUI() throws AppException {
+	public String toUserInfoUI() throws AppException {
+		// 准备数据
+		User user = userService.getById(model.getId()); // 要访问用户的ID
+		User A = userService.getById(getCurrentUser().getId()); // 当前登录用户
 
-		return "toUserCenterUI";
+		ActionContext.getContext().getValueStack().push(user); // 页面展示的用户数据
+
+		if (user.getId() == A.getId()) {
+			// 自己访问自己 不需要增加记录
+			return "toUserInfoUI";
+		}
+		// 根据访客id和被访客id查询给被访问的用户增加访客记录
+		Visitor visitor = visitorService.getByUserIdAndVisitorId(model.getId(), getCurrentUser().getId());
+		System.out.println("visitor========" + visitor);
+		if (visitor != null) {
+			// 如果不为Null 修改访问时间。 访客页面根据访问时间排序
+			visitor.setVisitorTime(new Date());
+			visitorService.update(visitor);
+		} else {
+			// 先判断是否为Null 为Null进行创建
+			Visitor newVisitor = new Visitor();
+			newVisitor.setUserself(user); // 被访问的用户
+			newVisitor.setVisitors(A); // 当前登录的用户
+			newVisitor.setVisitorTime(new Date());
+			visitorService.save(newVisitor);
+		}
+
+		// 用户访客记录+1
+		user.setVisitorsCount(A.getVisitorsCount() + 1);
+		userService.update(user);
+
+		return "toUserInfoUI";
+	}
+
+	/** ========================管理员功能================================== */
+
+	/**
+	 * 用户管理页面
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String toUserManageListUI() throws AppException {
+		// 准备用户列表数据 查询所有未删除的用户
+		if (usernameSearch == null || usernameSearch.equals("")) {
+			new QueryHelper(User.class, "u")//
+					.addWhereAndCondition("u.isDelete = ?", 0)//
+					.preparePageBean(userService, pageNum);
+		} else {
+			new QueryHelper(User.class, "u")//
+					.addWhereAndCondition("u.username LIKE '%" + usernameSearch + "%'")
+					.addWhereAndCondition("u.isDelete = ?", 0)//
+					.preparePageBean(userService, pageNum);
+		}
+
+		return "toUserManageListUI";
+	}
+
+	/**
+	 * 用户禁言和解封
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String updateUserIsBan() throws AppException {
+		// 根据传入的id修改指定用户isBan属性
+		User user = userService.getById(model.getId());
+		user.setIsBan(model.getIsBan());
+
+		userService.update(user);
+		return "toUserManageList";
+	}
+
+	/**
+	 * 用户重置密码
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String resetUserPassword() throws AppException {
+		// 根据传入的id修改用户密码
+		User user = userService.getById(model.getId());
+
+		// MD5加密 默认密码为666666
+		String md5Password = DigestUtils.md5Hex("666666");
+		user.setPassword(md5Password);
+
+		userService.update(user);
+		return "toUserManageList";
+	}
+
+	/**
+	 * 用户角色设置 设置次级管理员/普通用户
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String updateUserRole() throws AppException {
+		// 根据传入的id修改用户权限(角色)
+		User user = userService.getById(model.getId());
+		// 1超级管理员 2管理员 3普通用户
+		Role role = roleService.getById(roleId);
+		user.setRole(role);
+
+		userService.update(user);
+		return "toUserManageList";
+	}
+
+	/**
+	 * 添加用户页面
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String toCreateUserUI() throws AppException {
+		// 显示回显数据
+
+		// 只显示非超级管理员的角色
+		Long[] ids = { (long) 2, (long) 3 };
+		List<Role> roles = roleService.getByIds(ids);
+		System.out.println("=========" + roles.size());
+		ActionContext.getContext().put("roles", roles);
+
+		return "toCreateUserUI";
+	}
+
+	/**
+	 * 添加用户
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String createUser() throws AppException {
+		// 创建用户
+		User user = new User();
+		user.setUsername(model.getUsername());
+		user.setCreateTime(new Date());
+		user.setGender("男");
+		if (model.getName() != null || !model.getName().equals("")) {
+			user.setName(model.getName());
+		} else {
+			user.setName("学生");
+		}
+
+		// 用户权限
+		Role role = roleService.getById(roleId);
+		user.setRole(role);
+
+		// MD5加密 默认密码为666666
+		String md5Password = DigestUtils.md5Hex("666666");
+		user.setPassword(md5Password);
+
+		userService.save(user);
+		return "toUserManageList";
 	}
 
 	public String getOldPassword() {
@@ -224,6 +377,20 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		this.password2 = password2;
 	}
 
-	/** ========================管理员功能================================== */
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getUsernameSearch() {
+		return usernameSearch;
+	}
+
+	public void setUsernameSearch(String usernameSearch) {
+		this.usernameSearch = usernameSearch;
+	}
 
 }

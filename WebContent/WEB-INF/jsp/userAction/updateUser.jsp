@@ -69,14 +69,7 @@
 									<td>QQ</td>
 									<td><s:textfield type="text" cssClass="focus form-control"
 											name="qq"></s:textfield></td>
-								</tr>
-								<tr>
-									<td>用户级别</td>
-									<td><s:select name="role.id"
-											cssClass="SelectStyle required" list="roleList" listKey="id"
-											listValue="name" headerKey="" headerValue="==请选择级别==">
-										</s:select></td>
-								</tr>
+								</tr> 
 							</tbody>
 						</table>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">保存</button>

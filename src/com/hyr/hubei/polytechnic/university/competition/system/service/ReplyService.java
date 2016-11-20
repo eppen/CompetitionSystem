@@ -10,7 +10,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 
 /**
- * @author Administrator
+ * @author huangyueran
  * @category 回复Service接口
  */
 public interface ReplyService extends DaoSupport<Reply> {

@@ -11,11 +11,12 @@
 			<generator class="native" />
 		</id>
 		<!-- 用户角色 多对一 -->
-		<many-to-one name="role" class="Role" column="roleId" lazy="false"></many-to-one>
+		<many-to-one name="role" class="Role" column="roleId"
+			lazy="false"></many-to-one>
 		<!-- 用户姓名 -->
 		<property name="name" column="name" not-null="true"></property>
 		<!-- 登录名 -->
-		<property name="username" column="username" not-null="true"></property>
+		<property name="username" column="username" not-null="true" unique="true"></property> 
 		<!-- 密码 MD5加密 -->
 		<property name="password" column="password" not-null="true"></property>
 		<!-- 性别 -->
@@ -29,13 +30,14 @@
 		<!-- 班级 -->
 		<property name="classes" column="classes"></property>
 		<!-- 头像 -->
-		<property name="pic" column="pic" type="binary" ></property>
+		<property name="pic" column="pic" type="binary"></property>
 		<!-- 积分 -->
 		<property name="score" column="score" not-null="true"></property>
 		<!-- 最近消息数 -->
 		<property name="replysCount" column="replysCount" not-null="true"></property>
 		<!-- 最近访客数 -->
-		<property name="visitorsCount" column="visitorsCount" not-null="true"></property>
+		<property name="visitorsCount" column="visitorsCount"
+			not-null="true"></property>
 		<!-- 最近提交的答案 一对多 -->
 		<set name="answers" cascade="delete">
 			<key column="user"></key>
@@ -43,10 +45,15 @@
 		</set>
 		<!-- 是否被禁言 -->
 		<property name="isBan" column="isBan" not-null="true"></property>
+		<!-- 是否被删除 默认0 未删除 -->
+		<property name="isDelete" column="isDelete" not-null="true"></property>
+
+		<!-- 创建时间 -->
+		<property name="createTime" column="createTime" type="timestamp"></property>
 
 		<!-- 访客记录 多对一双向关联 -->
 		<list name="visitors" cascade="delete">
-			<key column="userId"></key>
+			<key column="userself"></key> 
 			<index column="visitorTime" type="Date"></index>
 			<one-to-many class="Visitor" />
 		</list>

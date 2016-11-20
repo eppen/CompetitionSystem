@@ -7,9 +7,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenB
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.TestAnswer;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
-import com.hyr.hubei.polytechnic.university.competition.system.utils.XMLUtils;
 import com.opensymphony.xwork2.ActionContext;
-import com.sun.xml.internal.ws.util.xml.XmlUtil;
 
 /**
  * 
@@ -30,15 +28,6 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 		Question question = questionService.getById(questionId);
 		ActionContext.getContext().getValueStack().push(question);
 
-		return "toSubmitAnswerUI";
-	}
-
-	/**
-	 * 提交答案
-	 */
-	public String submitAnswer() throws AppException {
-		// TODO 提交答案 进入评测
-		// TODO 返回到评测列表
 		return "toSubmitAnswerUI";
 	}
 
