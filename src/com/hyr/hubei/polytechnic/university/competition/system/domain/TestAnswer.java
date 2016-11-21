@@ -2,6 +2,7 @@ package com.hyr.hubei.polytechnic.university.competition.system.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 2016-11-4 21:25:37
@@ -23,13 +24,13 @@ public class TestAnswer {
 	private String result = "等待评测";
 
 	/** 得分 */
-	private double scores = 0;
+	private int scores = 0;
 
 	/** 提交时间 */
 	private Date submitTime;
 
 	/** 关联的评测点 */
-	private List<ScoringPoint> scoringPoints;
+	private Set<ScoringPoint> scoringPoints;
 
 	/** CPU使用 */
 	private double runtime = -1;
@@ -38,7 +39,7 @@ public class TestAnswer {
 	private double memory = -1;
 
 	/** 试题标题 用于展示，避免查询浪费内存 */
-	private String questionTitle = "等待评测";
+	private String questionTitle;
 
 	/** 编程语言 */
 	private String language = "JAVA";
@@ -47,7 +48,7 @@ public class TestAnswer {
 	private String answer = "";
 
 	/** 编译信息 */
-	private String compileInfo = "等待评测";
+	private String compileInfo;
 
 	/** 代码长度 */
 	private long codeLength;
@@ -87,11 +88,11 @@ public class TestAnswer {
 		this.result = result;
 	}
 
-	public double getScores() {
+	public int getScores() {
 		return scores;
 	}
 
-	public void setScores(double scores) {
+	public void setScores(int scores) {
 		this.scores = scores;
 	}
 
@@ -103,11 +104,11 @@ public class TestAnswer {
 		this.submitTime = submitTime;
 	}
 
-	public List<ScoringPoint> getScoringPoints() {
+	public Set<ScoringPoint> getScoringPoints() {
 		return scoringPoints;
 	}
 
-	public void setScoringPoints(List<ScoringPoint> scoringPoints) {
+	public void setScoringPoints(Set<ScoringPoint> scoringPoints) {
 		this.scoringPoints = scoringPoints;
 	}
 

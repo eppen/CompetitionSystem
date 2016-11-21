@@ -73,4 +73,10 @@ public class ScoringPoint {
 		this.testAnswer = testAnswer;
 	}
 
+	@Override
+	public String toString() {
+		return "ScoringPoint [id=" + id + ", result=" + result + ", score=" + score + ", runtime=" + runtime
+				+ ", memory=" + memory + ", testAnswer=" + testAnswer + "]";
+	}
+
 }

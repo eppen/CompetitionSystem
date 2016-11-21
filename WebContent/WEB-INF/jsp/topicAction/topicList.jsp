@@ -41,7 +41,7 @@
 				<div class="table-responsive">
 
 					<!------- 搜索框 ------->
-					<s:form id="pageForm" action="topicAction_toTopicListUI"
+					<s:form id="pageForm" action="topicAction_toAnswerListUI"
 						role="search">
 						<div class="form-group navbar-form navbar-left">
 							<s:textfield type="text" name="titleSearch"

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.AnswerResultInfo;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.CompileInfo;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.ResultB;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.ScoringPoint;
@@ -37,10 +38,10 @@ import com.opensymphony.xwork2.ActionContext;
 public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implements SessionAware, RequestAware {
 
 	private Long questionId; // 提交答案所属试题的ID
-	
+
 	protected Map<String, Object> session;
 	protected Map<String, Object> request;
-	
+
 	@Resource(name = "userServiceImpl")
 	protected UserService userService;
 	@Resource(name = "questionSetServiceImpl")
@@ -63,7 +64,6 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 		answer.setQuestionTitle(question.getTitle());
 		answer.setStudent(userService.getById(getCurrentUser().getId()));
 		answer.setSubmitTime(new Date());
-		answer.setCompileInfo("等待评测");
 		answer.setResult("等待评测");
 		testAnswerService.save(answer);
 
@@ -122,9 +122,7 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 
 		competeMainClassUtils.writeFileContent(mainJAVAFile.getPath(), answer.getAnswer());
 
-		int v = -1;
-
-		v = competeMainClassUtils.compileProgram(file2.getPath() + "\\", "Main");
+		CompileInfo compileInfo = competeMainClassUtils.compileProgram(file2.getPath() + "\\", "Main"); // 编译结果信息
 
 		// 测试答案
 		// 获取type 根据type进行不同的xml解析
@@ -147,22 +145,23 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 					if (resultInfo.getExecTime() <= question.getRuntime() && resultInfo.getAnswerOutput() == r.getO()) {
 						// 答案正确
 						scoringPoint.setScore(r.getS());
-						testAnswer.setScores(testAnswer.getScores() + scoringPoint.getScore());
+						testAnswer.setScores(testAnswer.getScores() + (int) scoringPoint.getScore());
 					} else {
+						// TODO 内存是否超限的判断
+						// ...
+
 						if (resultInfo.getExecTime() > question.getRuntime()) {
 							// 超时
 							testAnswer.setResult("运行超时");
-							testAnswer.setCompileInfo("运行超时");
 							scoringPoint.setResult("运行超时");
 						} else if (!resultInfo.getAnswerOutput().equals(r.getO())) {
 							// 结果错误
 							testAnswer.setResult("错误");
-							testAnswer.setCompileInfo("错误");
 							scoringPoint.setResult("错误");
 						}
 						// 答案不正确
 						scoringPoint.setScore(0);
-						testAnswer.setScores(testAnswer.getScores() + scoringPoint.getScore());
+						testAnswer.setScores(testAnswer.getScores() + (int) scoringPoint.getScore());
 					}
 					// TODO 内存是否超出的判断
 
@@ -172,22 +171,22 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 					if (!fileFlag.exists()) {
 						// 编译异常
 						scoringPoint.setResult("编译异常");
-						testAnswer.setCompileInfo("编译异常");
+						testAnswer.setCompileInfo(compileInfo.getCompileInfo()); // 如果编译出错
+																					// 保存编译出错信息
 						testAnswer.setResult("编译异常");
 					} else {
 						// 执行异常
 						scoringPoint.setResult("运行错误");
-						testAnswer.setCompileInfo("运行错误");
 						testAnswer.setResult("运行错误");
 					}
 					scoringPoint.setScore(0);
-					testAnswer.setScores(testAnswer.getScores() + scoringPoint.getScore());
+					testAnswer.setScores(testAnswer.getScores() + (int) scoringPoint.getScore());
 				}
-				
+
 				scoringPoint.setMemory(resultInfo.getExecMemo());
 				scoringPoint.setRuntime(resultInfo.getExecTime());
 				scoringPoint.setTestAnswer(testAnswer);
-				
+
 				// 填入最大的CPU时间
 				if (resultInfo.getExecTime() > testAnswer.getRuntime()) {
 					testAnswer.setRuntime(resultInfo.getExecTime());
@@ -202,12 +201,18 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 				testAnswer.setScores(0);
 				testAnswer.setCompileInfo("运行错误");
 				testAnswer.setResult("运行错误");
+
+				// 删除文件
+				competeMainClassUtils.deleteFile(file2);
+
+				testAnswerService.update(testAnswer);
+				System.out.println(e);
 				e.printStackTrace();
 			}
 
 		} // for循环结束
-		testAnswer.setCodeLength(mainJAVAFile.length());
 
+		testAnswer.setCodeLength(mainJAVAFile.length());
 		testAnswerService.update(testAnswer);
 
 		// 删除文件
@@ -220,9 +225,9 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 
 	@Override
 	public User getCurrentUser() throws AppException {
-		return (User) session.get("user"); 
+		return (User) session.get("user");
 	}
-	
+
 	public Long getQuestionId() {
 		return questionId;
 	}

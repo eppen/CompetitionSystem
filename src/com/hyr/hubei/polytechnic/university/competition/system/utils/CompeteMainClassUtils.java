@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import com.hyr.hubei.polytechnic.university.competition.system.domain.AnswerResultInfo;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.CompileInfo;
 
 /**
  * @category JAVA文件编译工具类 根据JAVA文件进行编译>>生成class文件>>运行
@@ -53,21 +54,45 @@ public class CompeteMainClassUtils {
 	// 执行输入输出
 	// execProgram("T1", filepath, 555+"");
 
-	public int compileProgram(String pathString, String fileName) throws IOException, InterruptedException {
+	public CompileInfo compileProgram(String pathString, String fileName) throws IOException, InterruptedException {
+		CompileInfo compileInfo = new CompileInfo();
 		File file = new File(fileName + ".class");
 		if (file.exists()) {
 			file.delete();
 		}
 
-		String execFileString = "javac " + pathString + fileName + ".java";
+		String execFileString = "javac -encoding UTF-8 " + pathString + fileName + ".java"; // javac
+																							// 不指定编码
+																							// 会使用系统默认的编码进行编译
+																							// 会编译报错
 		System.out.println("cmd:" + execFileString);
 		Process compileProcess = Runtime.getRuntime().exec(execFileString);
+		InputStream inputStream = compileProcess.getErrorStream();
+
+		InputStreamReader isr = new InputStreamReader(inputStream, "gbk");
+		BufferedReader br = new BufferedReader(isr);
+		StringBuilder sb = new StringBuilder();
+		String competeInfo = null;
+		while ((competeInfo = br.readLine()) != null)
+			sb.append(competeInfo);
 		Thread killChildProcess = new KillProcessThread(30000, null, compileProcess);
 		killChildProcess.start();
 
 		int exitVal = compileProcess.waitFor();
 		killChildProcess.interrupt();
-		return exitVal;
+
+		// 截取编译信息字符串
+		String cStr = sb.toString();
+		String jieguo;
+		if (cStr.indexOf("Main") != -1) {
+			jieguo = cStr.substring(cStr.indexOf("Main"));
+		} else {
+			jieguo = cStr;
+		}
+
+		compileInfo.setCompileInfo(jieguo); // 设置编译信息
+		compileInfo.setExitVal(exitVal);// 设置编译结果状态
+		return compileInfo;
 	}
 
 	public Process execProgramAndReturnProcess(String programName, String classPath) throws IOException {
@@ -87,6 +112,7 @@ public class CompeteMainClassUtils {
 	public AnswerResultInfo execProgram(String programName, String classPath, String inputDataToProcessString)
 			throws IOException, InterruptedException, NoSuchFieldException, SecurityException, IllegalArgumentException,
 			IllegalAccessException {
+		AnswerResultInfo answerResultInfo = new AnswerResultInfo();
 		final TestMemory testMemory = new TestMemory();
 		testMemory.start();
 
@@ -120,6 +146,10 @@ public class CompeteMainClassUtils {
 		killChildProcess.interrupt();
 
 		long execTime = timeAfer - timeFore;
+
+		/** ================== 减去业务层和逻辑层的消耗时间 假设为20ms ================== */
+		execTime = execTime - 20;  // 这个要根据具体的测试计算 得出 目前还没有经过测试计算 
+
 		// System.out.println("執行時間：" + execTime + "ms");
 
 		long execMemo = testMemory.getRemSize();
@@ -128,7 +158,7 @@ public class CompeteMainClassUtils {
 		outputStream.close();
 
 		// 得到学生程序的输出数据。
-		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+		InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
 		BufferedReader reader = new BufferedReader(inputStreamReader);
 
 		String s;
@@ -142,12 +172,12 @@ public class CompeteMainClassUtils {
 		inputStream.close();
 		inputStreamReader.close();
 
-		AnswerResultInfo answerResultInfo = new AnswerResultInfo();
 		answerResultInfo.setExitVal(exitVal);
 		answerResultInfo.setAnswerOutput(studentProgramOutput.toString());
 		answerResultInfo.setExecTime(execTime);
 		answerResultInfo.setExecMemo(execMemo);
 
+		System.out.println(answerResultInfo);
 		return answerResultInfo;
 
 		// 编译异常和运行异常的处理

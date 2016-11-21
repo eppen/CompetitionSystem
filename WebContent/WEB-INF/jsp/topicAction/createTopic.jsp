@@ -75,13 +75,7 @@
 											cssClass="InputStyle text-center form-control required"
 											placeholder="请填写试题名称" /></td>
 								</tr>
-								<tr>
-									<td width="100px"><b>题目类型</b></td>
-									<td><s:select name="questionType"
-											cssClass=" btn btn-default required"
-											list="#{1:'结果填空',2:'程序设计',3:'代码填空'}">
-										</s:select></td>
-								</tr>
+								<s:hidden name="questionType" value="2"></s:hidden>
 								<tr>
 									<td width="100px"><b>编程语言</b></td>
 									<td><s:select name="language"
@@ -155,7 +149,7 @@
 									</td>
 								</tr>
 							</table>
-						</div> 
+						</div>
 					</form>
 					<div style="height: 130px;"></div>
 				</div>
@@ -166,7 +160,7 @@
 		</div>
 	</div>
 	<!-- 中间内容结束 -->
-	
+
 	<script type="text/javascript">
 		var editor = new FCKeditor('content');
 		editor.BasePath = "fckeditor/";

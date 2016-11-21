@@ -137,6 +137,10 @@
 			method="{1}">
 			<result name="toSubmitAnswerUI">/WEB-INF/jsp/testAnswerAction/submitAnswer.jsp
 			</result>
+			<result name="toAnswerListUI">/WEB-INF/jsp/testAnswerAction/evaluatingStatus.jsp
+			</result>
+			<result name="toAnswerInfoUI">/WEB-INF/jsp/testAnswerAction/evaluatingStatusInfo.jsp
+			</result>
 		</action>
 
 		<!-- 检测答案模块 -->

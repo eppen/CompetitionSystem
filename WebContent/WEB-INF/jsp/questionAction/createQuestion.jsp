@@ -40,16 +40,10 @@
 								<td width="50px" class="Deep"><b>试题名称</b></td>
 								<td class="no_color_bg"><input type="text"
 									style="font-size: 20px; font-family: '微软雅黑';" name="title"
-									class="InputStyle text-center form-control required" placeholder="请输入试题名称" style="width:100%" /></td> 
+									class="InputStyle text-center form-control required"
+									placeholder="请输入试题名称" style="width:100%" /></td>
 							</tr>
-							<tr>
-								<td width="100px"><b>题目类型</b></td>
-								<td><select name="type" class=" btn btn-default">
-										<option value="1">结果填空</option>
-										<option value="2">程序设计</option>
-										<option value="3">代码填空</option>
-								</select></td>
-							</tr>
+							<s:hidden name="type" value="2"></s:hidden>
 							<tr>
 								<td width="100px"><b>编程语言</b></td>
 								<td><select name=language class=" btn btn-default">
@@ -57,8 +51,8 @@
 								</select></td>
 							</tr>
 							<tr>
-								<td width="100px"><b>所属试题集</b></td> 
-								<td><s:select name="scopeId"   
+								<td width="100px"><b>所属试题集</b></td>
+								<td><s:select name="scopeId"
 										cssClass="SelectStyle btn btn-default" list="questionSets"
 										listKey="id" listValue="title" headerKey="">
 									</s:select></td>

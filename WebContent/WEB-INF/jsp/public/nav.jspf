@@ -22,6 +22,9 @@
 				<li class="navbar-btn"><a
 					href="homeAction_toCompetitionSystemUI">进入系统<span
 						class="sr-only"></span></a></li>
+				<li class="navbar-btn"><a
+					href="testAnswerAction_toAnswerListUI">评测状态<span
+						class="sr-only"></span></a></li> 
 				<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
 						class="sr-only"></span></a></li>
 				<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span

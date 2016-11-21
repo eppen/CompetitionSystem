@@ -7,6 +7,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenB
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.TestAnswer;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
+import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
@@ -19,6 +20,8 @@ import com.opensymphony.xwork2.ActionContext;
 public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 
 	private Long questionId; // 提交答案所属试题的ID
+	private String titleNameSearch; // 根据试题名 搜索字段
+	private String resultSearch="评测结果"; // 根据结果 搜索字段
 
 	/**
 	 * 提交答案页面
@@ -31,12 +34,85 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 		return "toSubmitAnswerUI";
 	}
 
+	/**
+	 * 评测装填
+	 */
+	public String toAnswerListUI() throws AppException {
+
+		ActionContext.getContext().getValueStack().push(resultSearch);
+		System.out.println(resultSearch);
+		 
+		// 准备回显数据 返回当前登录用户的答案信息分页数据
+		if (titleNameSearch == null || titleNameSearch.equals("")) {
+			if (resultSearch.equals("评测结果")) {
+				// 默认搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			} else {
+				// 条件搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addWhereAndCondition("t.result=?", resultSearch)//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			}
+		} else {
+			if (resultSearch.equals("评测结果")) {
+				// 默认搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addWhereAndCondition("t.question.title LIKE '%" + titleNameSearch + "%'")//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			} else {
+				// 条件搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addWhereAndCondition("t.result=?", resultSearch)//
+						.addWhereAndCondition("t.question.title LIKE '%" + titleNameSearch + "%'")//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			}
+
+		}
+		return "toAnswerListUI";
+	}
+
+	/**
+	 * 评测详情
+	 */
+	public String toAnswerInfoUI() throws AppException {
+		// 准备数据 准备详情信息 以及评测点数据
+		TestAnswer testAnswer = testAnswerService.getById(model.getId());
+		ActionContext.getContext().getValueStack().push(testAnswer);
+		System.out.println(testAnswer.getScoringPoints());
+		return "toAnswerInfoUI";
+	}
+
 	public Long getQuestionId() {
 		return questionId;
 	}
 
 	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
+	}
+
+	public String getTitleNameSearch() {
+		return titleNameSearch;
+	}
+
+	public void setTitleNameSearch(String titleNameSearch) {
+		this.titleNameSearch = titleNameSearch;
+	}
+
+	public String getResultSearch() {
+		return resultSearch;
+	}
+
+	public void setResultSearch(String resultSearch) {
+		this.resultSearch = resultSearch;
 	}
 
 }
