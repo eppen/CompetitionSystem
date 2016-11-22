@@ -33,7 +33,7 @@
 				<h2 class="sub-header">添加试题</h2>
 				<div class="table-responsive">
 					<form action="questionAction_createQuestion"
-						class="form-horizontal" role="form">
+						class="form-horizontal" role="form" method="post">
 
 						<table class="table table-striped">
 							<tr height="50" class="Tint">
@@ -46,7 +46,7 @@
 							<s:hidden name="type" value="2"></s:hidden>
 							<tr>
 								<td width="100px"><b>编程语言</b></td>
-								<td><select name=language class=" btn btn-default">
+								<td><select name=language class=" btn btn-default required">
 										<option value="JAVA">JAVA</option>
 								</select></td>
 							</tr>
@@ -106,7 +106,7 @@
 								<td><input type="text"
 									style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
 									name="memory" class="form required" value="5.545" />MB</td>
-							</tr>
+							</tr> 
 						</table>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>
 					</form>

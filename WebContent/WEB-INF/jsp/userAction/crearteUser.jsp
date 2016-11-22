@@ -30,24 +30,24 @@
 				<h2 class="sub-header">添加用户</h2>
 				<div class="table-responsive">
 					<form action="userAction_createUser" class="form-horizontal"
-						role="form">
+						role="form" method="post">
 
 						<table class="table table-striped">
 							<tbody>
 								<tr>
 									<td>请输入用户名</td>
 									<td><input type="text" id="username1"
-										class="focus form-control " /></td>
+										class="form-control required" /></td>
 								</tr>
 								<tr>
 									<td>重新输入用户名</td>
 									<td><input type="text" name="username" id="username2"
-										class="focus form-control " /></td>
+										class="form-control required" /></td>
 								</tr>
 								<tr>
 									<td>重新输入姓名</td>
 									<td><input type="text" name="name"
-										class="focus form-control " value="学生"/></td>  
+										class="form-control required" value="学生"/></td>  
 								</tr> 
 								<tr>
 									<td>用户级别</td>
@@ -56,12 +56,12 @@
 											list="roles" listKey="id" listValue="name" 
 											headerKey=""> 
 										</s:select>   
-									</td> 
+									</td>  
 								</tr>
 								<tr>
 									<td>初始密码</td>
 									<td><input disabled="true"  type="text"
-										class="focus form-control" value="666666" /></td>
+										class="form-control" value="666666" /></td>
 								</tr>
 
 							</tbody>

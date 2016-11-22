@@ -114,7 +114,7 @@
 				<h2 class="sub-header">添加试题</h2>
 				<div class="table-responsive">
 					<form action="questionAction_createQuestionAnswer" class="form-horizontal"
-						role="form">
+						role="form" method="post">
 
 						<table class="table table-responsive">
 							<thead>
@@ -136,13 +136,13 @@
 								<tr class="alert alert-dismissable">
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="inputlist" class="form" value="5.545" /></td>
+										name="inputlist" class="form required" value="5.545" /></td>
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="answerlist" class="form" value="5.545" /></td>
+										name="answerlist" class="form required" value="5.545" /></td>
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="fractionlist" class="form" oninput="OnInput (event)"
+										name="fractionlist" class="form required digits" oninput="OnInput (event)"
 										onpropertychange="OnPropChanged (event)" value="0" /></td>
 									<td><button type="button" class="close"
 											data-dismiss="alert" aria-label="Close">
@@ -175,13 +175,13 @@
 								//构建新行
 								var newRow = "<tr class=\"alert alert-dismissable\">"
 										+ "<td>"
-										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"inputlist\" class=\"form\" value=\"5.545\"/>"
+										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"inputlist\" class=\"form required\" value=\"5.545\"/>"
 										+ "</td>"
 										+ "<td>"
-										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"answerlist\" class=\"form\" value=\"5.545\"/>"
+										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"answerlist\" class=\"form required\" value=\"5.545\"/>"
 										+ "</td>"
 										+ "<td>"
-										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"fractionlist\" class=\"form\" oninput=\"OnInput (event)\" onpropertychange=\"OnPropChanged (event)\" value=\"0\"/>"
+										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"fractionlist\" class=\"form required digits\" oninput=\"OnInput (event)\" onpropertychange=\"OnPropChanged (event)\" value=\"0\"/>"
 										+ "</td>"
 										+ "<td><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">"
 										+ "<span aria-hidden=\"true\">&times;</span>"

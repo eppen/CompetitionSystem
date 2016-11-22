@@ -50,14 +50,15 @@
 
 		<!-- 创建时间 -->
 		<property name="createTime" column="createTime" type="timestamp"></property>
+		
+		<!-- 出生日期 -->
+		<property name="birthday" column="birthday" type="timestamp"></property> 
 
 		<!-- 访客记录 多对一双向关联 -->
-		<list name="visitors" cascade="delete">
-			<key column="userself"></key> 
-			<index column="visitorTime" type="Date"></index>
+		<set name="visitors" cascade="delete">
+			<key column="userself"></key>
 			<one-to-many class="Visitor" />
-		</list>
-
+		</set>
 
 	</class>
 

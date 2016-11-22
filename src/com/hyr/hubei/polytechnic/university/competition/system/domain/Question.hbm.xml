@@ -35,15 +35,15 @@
 		<!-- 提示 -->
 		<property name="cue" column="cue"></property>
 		<!-- 耗时要求 -->
-		<property name="runtime" column="runtime" type="double"></property>
+		<property name="runtime" column="runtime" type="double" not-null="true"></property>
 		<!-- 内存要求 -->
-		<property name="memory" column="memory" type="double"></property>
+		<property name="memory" column="memory" type="double" not-null="true"></property>
 		<!-- 创建时间 -->
 		<property name="createTime" column="createTime" type="timestamp"></property>
 		<!-- 总分 -->
-		<property name="scores" column="scores" length="6"></property>
+		<property name="scores" column="scores" length="6" not-null="true"></property> 
 		<!-- 样例答案 -->
-		<property name="answersXml" column="answersXml" length="5000"></property>
+		<property name="answersXml" column="answersXml" length="5000" not-null="true"></property> 
 		<!-- 图片 -->
 		<property name="images" column="images" type="blob"></property>
 		<!-- 是否删除 -->

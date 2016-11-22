@@ -12,6 +12,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.Favorite;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.FavoritePK;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Laud;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.LaudPK;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
@@ -100,7 +101,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		// 准备回显的数据
 		Topic topic = topicService.getById(model.getId());
 		ActionContext.getContext().put("topic", topic);
-
+ 
 		// 收藏状态
 		boolean isFavorite = false;
 		Favorite favorite = favoriteService.getByTopicIdAndUserId(topic.getId(), getCurrentUser().getId());
@@ -131,10 +132,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		// 点赞状态
 		boolean isLaud = false;
 		Laud laud = laudService.getByTopicIdAndUserId(topic.getId(), getCurrentUser().getId());
-		
-		System.out.println(topicId+"======="+getCurrentUser().getId()); 
-		System.out.println(laud+"======");
-		
+
 		// 判断是否为空
 		if (laud == null) {
 			// 未点赞 创建点赞记录 并设置isLaud为false
@@ -154,7 +152,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 				isLaud = true;
 			} else {
 				// 未收藏
-				isLaud = false; 
+				isLaud = false;
 			}
 		}
 		ActionContext.getContext().put("isLaud", isLaud);
@@ -308,6 +306,128 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		return "toTopicList";
 	}
 
+	/**
+	 * 编辑主题页面
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String toUpdateTopicUI() throws AppException {
+		// 准备回显的数据
+		List<QuestionSet> questionSets = questionSetService.findAll();
+		ActionContext.getContext().put("questionSets", questionSets); // 试题集
+
+		Topic topic = topicService.getById(model.getId());
+		ActionContext.getContext().getValueStack().push(topic); // 试题
+
+		// TODO 统一异常处理
+		// 新增题目0 知识讨论1
+		if (topic.getType() == 0) {
+			return "toUpdateTopicAUI";
+		} else { 
+			return "error";
+		}
+	}
+
+	/**
+	 * 编辑主题
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String updateTopic() throws AppException {
+		Topic topic = topicService.getById(model.getId());
+		topic.setCareful(model.getCareful());
+		topic.setContent(model.getContent());
+		topic.setCue(model.getCue());
+		topic.setDescription(model.getDescription());
+		topic.setInputFormat(model.getInputFormat());
+		topic.setIpAddr(getRequestIP()); // 得到用户IP地址
+		topic.setLanguage(model.getLanguage());
+		topic.setMemory(model.getMemory());
+		topic.setOutputFormat(model.getOutputFormat());
+		topic.setQuestionTitle(model.getQuestionTitle());
+		topic.setQuestionType(model.getQuestionType());
+		topic.setRuntime(model.getRuntime());
+		topic.setSampleInput(model.getSampleInput());
+		topic.setSampleOutput(model.getSampleOutput());
+		topic.setTopicContent(model.getTopicContent());
+
+		// TODO 图片的上传 暂不处理
+
+		// 创建试题后 前往创建答案页面
+		if (topic.getType() == 0) {
+			topic.setScope(questionSetService.getById(model.getScope().getId()));
+			// 如果主题是新增题目 还需要创建答案
+
+			// 将创建好的数据进行保存
+			ActionContext.getContext().getSession().put("newtopic1", topic);
+
+			// 修改为 只有程序设计类型的题目 type=2
+			if (topic.getQuestionType() == 2) {
+				return "toUpdateTopicAnswerBUI";
+			} else {
+				return "error";
+			}
+		} else {
+			return "error";
+		}
+
+	}
+
+	/**
+	 * 编辑主题答案 重新创建答案
+	 * 
+	 * @return
+	 * @throws AppException
+	 */
+	public String updateTopicAnswer() throws AppException {
+		// 取出上个页面设置的topic数据
+		Topic topic = (Topic) ActionContext.getContext().getSession().get("newtopic1");
+		// 总分
+		int totalScore = 0;
+		if (fractionlist != null) {
+			for (Integer i : fractionlist) {
+				totalScore += i;
+			}
+		}
+
+		// 判断是否满分是100分
+		if (totalScore == 100) {
+			// TODO 生成xml答案
+			String xml = null;
+			if (topic.getQuestionType() == 1) {
+				xml = XMLUtils.createTypeA(inputlist, fractionlist);
+			} else if (topic.getQuestionType() == 2) {
+				xml = XMLUtils.createTypeB(inputlist, answerlist, fractionlist);
+			} else if (topic.getQuestionType() == 3) {
+				xml = XMLUtils.createTypeC(answerlist, fractionlist);
+			}
+
+			if (xml != null || !xml.equals("")) {
+				topic.setAnswersXml(xml);
+				topic.setScores(totalScore);
+
+				// 修改 无需修改时间 会导致逻辑错误
+				// topic.setPostTime(new Date());
+				// topic.setLastUpdateTime(topic.getPostTime());
+			} else {
+				return "error";
+			}
+
+		} else {
+			// 否则跳转到错误页面
+			return "error";
+		}
+
+		// 更新修改后的主题 到数据库
+		topicService.update(topic);
+
+		// 跳转到主题展示页面
+		ActionContext.getContext().put("topicId", topic.getId());
+		return "toTopicShow"; 
+	}
+
 	/** 更新主题类型 0普通 1精华 2置顶 */
 	public String updateTopicType() throws AppException {
 		Topic topic = topicService.getById(topicId);
@@ -325,6 +445,40 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 
 		// 跳转到主题展示列表页面
 		return "toTopicList";
+	}
+
+	/** 加入题库 */
+	public String addTiQuestion() throws AppException {
+		Topic topic = topicService.getById(model.getId());
+		Question question = new Question(); // 创建的题目
+
+		question.setAnswersXml(topic.getAnswersXml());
+		question.setCareful(topic.getCareful());
+		question.setContent(topic.getContent());
+		question.setCreateTime(new Date());
+		question.setCue(topic.getCue());
+		question.setDescription(topic.getDescription());
+		question.setImages(topic.getImages());
+		question.setInputFormat(topic.getInputFormat());
+		question.setLanguage(topic.getLanguage());
+		question.setMemory(topic.getMemory());
+		question.setOutputFormat(topic.getOutputFormat());
+		question.setRuntime(topic.getRuntime());
+		question.setSampleInput(topic.getSampleInput());
+		question.setSampleOutput(topic.getSampleOutput());
+		question.setScope(topic.getScope());
+		question.setTitle(topic.getQuestionTitle());
+		question.setType(topic.getQuestionType());
+
+		// 添加题目到数据库
+		questionService.save(question);
+
+		// questionSetId topicId
+		ActionContext.getContext().put("questionSetId", question.getScope().getId());
+		ActionContext.getContext().put("questionId", question.getId());
+
+		// 跳转到创建的题目页面
+		return "toQuestionShow";
 	}
 
 	public String[] getInputlist() {

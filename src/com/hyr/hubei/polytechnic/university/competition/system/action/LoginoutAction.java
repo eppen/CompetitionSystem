@@ -39,7 +39,6 @@ public class LoginoutAction extends ModelDrivenBaseAction<User> {
 		User user = userService.findByLoginNameAndPassword(model.getUsername(), model.getPassword());
 
 		if (user == null) {
-			System.out.println("loginerror" + "登录名或密码不正确!");
 			// 如果验证失败，就转回登录页面并提示错误消息
 			addFieldError("loginerror", "登录名或密码不正确!");
 
@@ -62,6 +61,7 @@ public class LoginoutAction extends ModelDrivenBaseAction<User> {
 	 */
 	public String logout() throws AppException {
 		ActionContext.getContext().getSession().remove("user");
+		ActionContext.getContext().getSession().clear(); 
 		return "logout";
 	}
 

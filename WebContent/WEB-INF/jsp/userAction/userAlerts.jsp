@@ -56,7 +56,7 @@
 						</tbody>
 					</table>
 					<s:form id="pageForm" action="userAction_toUserAlertsUI"
-						role="search"> 
+						role="search" method="post"> 
 					</s:form>
 					<!-- 分页开始 -->
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>

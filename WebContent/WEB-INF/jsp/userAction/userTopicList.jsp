@@ -75,7 +75,7 @@
 					<!--  其他功能  已删除-->
 
 					<s:form id="pageForm" action="userAction_toUserTopicListUI"
-						role="search"> 
+						role="search" method="post"> 
 					</s:form>
 					<!-- 分页开始 -->
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>

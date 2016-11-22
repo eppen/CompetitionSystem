@@ -59,8 +59,6 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 	 * 竞赛系统 试题详情展示页面
 	 */
 	public String toQuestionShowUI() throws AppException {
-		// 试题集
-
 		// 准备试题详细信息数据
 		Question question = questionService.getById(model.getId());
 		ActionContext.getContext().getValueStack().push(question);

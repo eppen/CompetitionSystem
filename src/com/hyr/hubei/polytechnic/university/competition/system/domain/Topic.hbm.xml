@@ -22,10 +22,11 @@
 		<property name="isdel" column="isdel" length="2" not-null="true"></property>
 		<!-- 作者想说的话 主题内容 -->
 		<property name="topicContent" column="topicContent" length="5000"></property>
-		<!-- 主题标题 --> 
-		<property name="title" column="title"></property>
+		<!-- 主题标题 -->
+		<property name="title" column="title" not-null="true"></property>
 		<!-- 试题名称 -->
-		<property name="questionTitle" column="questionTitle"></property>
+		<property name="questionTitle" column="questionTitle"
+			not-null="true"></property>
 		<!-- 主题类型 -->
 		<property name="type" column="type" length="3"></property>
 		<!-- 试题类型 -->
@@ -35,7 +36,8 @@
 		<!-- 编程语言 -->
 		<property name="language" column="language" length="10"></property>
 		<!-- 试题集 -->
-		<many-to-one name="scope" class="QuestionSet" column="scopeId" lazy="false"></many-to-one> 
+		<many-to-one name="scope" class="QuestionSet" column="scopeId"
+			lazy="false"></many-to-one>
 		<!-- 试题描述 -->
 		<property name="description" column="description"></property>
 		<!-- 输入格式 -->
@@ -53,24 +55,25 @@
 		<!-- 图片 -->
 		<property name="images" column="images" type="blob"></property>
 		<!-- 耗时要求 -->
-		<property name="runtime" column="runtime" type="double"></property>
+		<property name="runtime" column="runtime" type="double"
+			not-null="true"></property>
 		<!-- 内存要求 -->
-		<property name="memory" column="memory" type="double"></property>
+		<property name="memory" column="memory" type="double"
+			not-null="true"></property>
 		<!-- 总分 -->
-		<property name="scores" column="scores" length="6"></property>
+		<property name="scores" column="scores" length="6" not-null="true"></property>
 		<!-- 样例答案 存放xml文件 -->
 		<property name="answersXml" column="answersXml" length="5000"></property>
 		<!-- 回复 一对多 -->
-		<list name="replies" cascade="delete">
+		<set name="replies" cascade="delete">
 			<key column="topicId"></key>
-			<index column="postTime" type="Date"></index>
-			<one-to-many class="Reply"/>
-		</list>
+			<one-to-many class="Reply" />
+		</set> 
 		<!-- 回复总数 -->
 		<property name="replyCount" column="replyCount"></property>
 		<!-- 最新回复 一对一 -->
-		<many-to-one name="lastReply" class="Reply" column="lastReplyId" cascade="delete"
-			unique="true"></many-to-one> 
+		<many-to-one name="lastReply" class="Reply" column="lastReplyId"
+			cascade="delete" unique="true"></many-to-one>
 		<!-- 最近更新时间 -->
 		<property name="lastUpdateTime" column="lastUpdateTime" type="timestamp"></property>
 		<!-- 点赞数 -->

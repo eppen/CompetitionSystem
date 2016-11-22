@@ -10,29 +10,29 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
-
-
+<link href="<%=basePath%>css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" media="screen"> 
 <!-- 禁用响应式布局 -->
 </head>
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%> 
+	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
 	<!--   	导航条结束    -->
-
+	
 	<!-- 中间内容开始 -->
-	<div class="container-fluid">
+	<div class="container-fluid"> 
 		<div class="row">
 			<!-- 侧边栏 -->
 			<%@ include file="/WEB-INF/jsp/public/leftMenu.jspf"%>
-
+			
 			<!-- 内容 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 				<h2 class="sub-header">用户信息修改</h2>
 				<div class="table-responsive">
 					<form action="userAction_updateUser" class="form-horizontal"
-						role="form">
+						role="form" method="post">
 						<s:hidden name="id"></s:hidden>
 						<table class="table table-striped">
 							<tbody>
@@ -51,25 +51,40 @@
 											cssClass="required"></s:radio></td>
 								</tr>
 								<tr>
-									<td>班级</td>
-									<td><s:textfield type="text"
-											cssClass="focus form-control required" name="classes"></s:textfield></td>
+									<td>出生日期</td>
+									<td>
+											<div class="input-group date form_datetime col-md-5"
+												data-date="1979-09-16"  
+												data-date-format="yyyy-MM-dd"  
+												data-link-field="dtp_input1">
+												<s:textfield cssClass="form-control"  name="birthdayStr"   />         
+													<span class="input-group-addon"><span
+													class="glyphicon glyphicon-remove"></span></span> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-th"></span></span>
+											</div><br />   
+									</td> 
 								</tr>
 								<tr>
-									<td>手机号码</td>
-									<td><s:textfield type="text" cssClass="focus form-control"
+									<td>班级</td>
+									<td><s:textfield type="text"
+											cssClass="focus form-control" name="classes"></s:textfield></td>
+								</tr>
+								<tr>
+									<td>手机号码</td> 
+									<td><s:textfield type="text" cssClass="form-control number"
 											name="telephone"></s:textfield></td>
 								</tr>
 								<tr>
 									<td>电子邮箱</td>
-									<td><s:textfield type="text" cssClass="focus form-control"
+									<td><s:textfield type="text" cssClass="form-control email"   
 											name="email"></s:textfield></td>
 								</tr>
 								<tr>
 									<td>QQ</td>
-									<td><s:textfield type="text" cssClass="focus form-control"
+									<td><s:textfield type="text" cssClass="form-control number"
 											name="qq"></s:textfield></td>
-								</tr> 
+								</tr>
 							</tbody>
 						</table>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">保存</button>
@@ -81,7 +96,29 @@
 
 	</div>
 	<!-- 中间内容结束 -->
+	
+	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%> 
+		 
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js" 
+		charset="UTF-8"></script> 
+	<script type="text/javascript"
+		src="<%=basePath%>js/locales/bootstrap-datetimepicker.zh-CN.js"
+		charset="UTF-8"></script> 
+	<script type="text/javascript">
+		$('.form_datetime').datetimepicker({ 
+			format: 'yyyy-MM-dd',
+			language : 'zh-CN',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			forceParse : 0,
+			minView: "month", 
+			showMeridian : 1
+		});
+	</script> 
 
-	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
+	
 </body>
 </html>

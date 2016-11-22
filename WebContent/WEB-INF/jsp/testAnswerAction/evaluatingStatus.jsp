@@ -36,7 +36,7 @@
 				<!-- 搜索 -->
 				<div class="panel-body table-responsive">
 					<s:form id="pageForm" action="testAnswerAction_toAnswerListUI"
-						role="search">
+						role="search" method="post">
 						<div class="form-group navbar-form navbar-left">
 							<s:textfield type="text" name="titleNameSearch"
 								cssClass="form-control" placeholder="请输入试题名称" />

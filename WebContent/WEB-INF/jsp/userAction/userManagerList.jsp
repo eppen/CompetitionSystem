@@ -33,7 +33,7 @@
 
 					<!------- 搜索框 ------->
 					<form id="pageForm" action="userAction_toUserManageListUI" class="navbar-form navbar-left"
-						role="search">
+						role="search" method="post">
 						<div class="form-group navbar-form navbar-left">
 							<s:textfield type="text" name="usernameSearch"
 								cssClass="form-control" placeholder="请输入用户名" /> 

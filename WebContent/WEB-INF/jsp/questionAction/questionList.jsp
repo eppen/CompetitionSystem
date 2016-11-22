@@ -37,7 +37,7 @@
 				</ol>
 				<s:form id="pageForm"
 					action="questionAction_toQuestionListUI?questionSetId=%{id}"
-					cssClass="navbar-form navbar-left" role="search">
+					cssClass="navbar-form navbar-left" role="search" method="post">
 				</s:form>
 
 				<table class="table table-hover">

@@ -88,7 +88,7 @@
 
 				<div class="table-responsive jumbotron">
 					<s:form action="scoringPointAction_submitAnswer"
-						cssClass="form-signin" role="form">
+						cssClass="form-signin" role="form" method="post">
 						<s:hidden name="questionId" value="%{id}"></s:hidden>
 						<table class="table table-condensed">
 							<tbody style="font-size: 16px; font-family: '微软雅黑';">
@@ -97,7 +97,7 @@
 									<td><b>输入答案：</b></td>
 								</tr>
 								<tr>
-									<td><s:textarea id="code-editor" cssClass="form-control"
+									<td><s:textarea id="code-editor" cssClass="form-control required"
 											name="answer" rows="30"></s:textarea></td>
 								</tr>
 								<tr>

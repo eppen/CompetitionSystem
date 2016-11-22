@@ -1,6 +1,7 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Favorite;
-import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Role;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
@@ -35,6 +35,7 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	private String password2;
 	private Long roleId; // 修改用户权限(角色)传入的id
 	private String usernameSearch; // 根据用户名搜索用户 传入的参数
+	private String birthdayStr; // 传入出生日期的参数
 
 	public UserAction() throws AppException {
 		super();
@@ -66,6 +67,13 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		List<Role> roleList = roleService.findAll();
 		ActionContext.getContext().put("roleList", roleList);
 
+		// 格式化出生日期 返回指定格式的字符串
+		if (user.getBirthday() != null && !user.getBirthday().equals("")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
+			birthdayStr = sdf.format(user.getBirthday());
+		}
+		ActionContext.getContext().put("birthdayStr", birthdayStr);
+
 		return "editUI";
 	}
 
@@ -74,8 +82,9 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 * 
 	 * @return
 	 * @throws AppException
+	 * @throws ParseException
 	 */
-	public String updateUser() throws AppException {
+	public String updateUser() throws AppException, ParseException {
 		// 1.从数据库中取出原对象
 		User user = userService.getById(model.getId());
 		// 2.设置要修改的属性
@@ -85,8 +94,16 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		user.setName(model.getName());
 		user.setQq(model.getQq());
 
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date birthday = format.parse(birthdayStr);
+		user.setBirthday(birthday);
+
 		// 3. 更新到数据库
 		userService.update(user);
+
+		// 更新后 更新session中登录用户数据
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		session.put("user", user); 
 
 		return "toShowUserUI";
 	}
@@ -111,12 +128,9 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	public String updateUserPassword() throws AppException {
 		User user = userService.getById(model.getId());
 		String oldpassword2 = DigestUtils.md5Hex(oldPassword);
-		System.out.println(password1 + "====" + password2);
 		if (oldPassword != null && user.getPassword().equals(oldpassword2)) {
-			System.out.println("===============1");
 			// 相等 原始密码输入成功
 			if (password1 != null && password2 != null && password1.equals(password2)) {
-				System.out.println("======================2");
 				user.setPassword(DigestUtils.md5Hex(password1));
 			}
 
@@ -210,7 +224,6 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		}
 		// 根据访客id和被访客id查询给被访问的用户增加访客记录
 		Visitor visitor = visitorService.getByUserIdAndVisitorId(model.getId(), getCurrentUser().getId());
-		System.out.println("visitor========" + visitor);
 		if (visitor != null) {
 			// 如果不为Null 修改访问时间。 访客页面根据访问时间排序
 			visitor.setVisitorTime(new Date());
@@ -317,7 +330,6 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		// 只显示非超级管理员的角色
 		Long[] ids = { (long) 2, (long) 3 };
 		List<Role> roles = roleService.getByIds(ids);
-		System.out.println("=========" + roles.size());
 		ActionContext.getContext().put("roles", roles);
 
 		return "toCreateUserUI";
@@ -391,6 +403,14 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 
 	public void setUsernameSearch(String usernameSearch) {
 		this.usernameSearch = usernameSearch;
+	}
+
+	public String getBirthdayStr() {
+		return birthdayStr;
+	}
+
+	public void setBirthdayStr(String birthdayStr) {
+		this.birthdayStr = birthdayStr;
 	}
 
 }

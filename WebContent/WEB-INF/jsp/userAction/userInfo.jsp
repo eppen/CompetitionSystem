@@ -25,7 +25,7 @@
 
 			<h2 class="sub-header">${name }的个人主页</h2> 
 			<div class="table-responsive">
-				<table class="table table-striped">
+				<table class="table table-striped"> 
 					<tbody>
 						<tr>
 							<td>姓名</td>
@@ -35,6 +35,10 @@
 							<td>性别</td>
 							<td>${gender }</td>
 						</tr>
+						<tr>
+								<td>出生日期</td>
+								<td><s:date name="birthday" format="yyyy年MM月dd日" /></td>
+							</tr> 
 						<tr>
 							<td>班级</td>
 							<td>${classes }</td>

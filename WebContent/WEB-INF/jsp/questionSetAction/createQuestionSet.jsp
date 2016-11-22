@@ -30,17 +30,17 @@
 				<h2 class="sub-header">创建试题集</h2>
 				<div class="table-responsive">
 					<form action="questionSetAction_createQuestionSet"
-						class="form-horizontal" role="form">
+						class="form-horizontal" role="form" method="post">
 						<table class="table table-striped">
 							<tr height="50" class="Tint">
 								<td class="no_color_bg"><input type="text"
 									style="font-size: 20px; font-family: '微软雅黑';" name="title"
-									class="InputStyle text-center form-control" placeholder="试题集名称"
+									class="InputStyle text-center form-control required" placeholder="试题集名称" 
 									style="width:100%" /></td>
 							</tr>
 							<tr>
 								<td><textarea style="font-size: 20px; font-family: '微软雅黑';"
-										name="description" class="form-control" rows="6"
+										name="description" class="form-control required" rows="6"
 										placeholder="试题集描述"></textarea></td>
 							</tr>
 						</table>

@@ -114,14 +114,14 @@
 							class="glyphicon glyphicon-chevron-right"></span></a> <a
 						href="createTopic.html">发表新主题 <span
 							class="glyphicon glyphicon-chevron-right"></span></a>
-					<li class="active">添加问题答案<span
+					<li class="active">修改问题答案<span
 						class="glyphicon glyphicon-chevron-right"></li>
 					</li>
 				</ol>
 
 				<!--发表新主题开始-->
 				<div class="QuictReply">
-					<form action="topicAction_createTopicAnswer" method="post">
+					<form action="topicAction_updateTopicAnswer" method="post">
 						<div style="padding-left: 3px;">
 							<table class="table table-responsive">
 								<thead>

@@ -40,7 +40,7 @@
 
 				<!--发表新主题开始-->
 				<div class="QuictReply"> 
-					<form action="topicAction_createTopic"> 
+					<form action="topicAction_createTopic" method="post"> 
 						<s:hidden name="type" value="1"></s:hidden>
 						<div style="padding-left: 3px;">
 							<table class="table table-striped">
@@ -50,7 +50,7 @@
 										onchange="window.location=this.value;">
 											<option value="topicAction_toCreateNormalTopicUI">知识讨论</option>
 											<option value="topicAction_toCreateTopicUI">新增题目</option>
-									</select><input type="hidden" name="主题类型" value="0" /></td>
+									</select></td>
 								</tr>
 								<tr height="50" class="Tint">
 									<td width="50px" class="Deep"><b>标题</b></td>

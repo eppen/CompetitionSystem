@@ -30,7 +30,7 @@
 
 				<div class="table-responsive">
 					<form action="questionAction_createQuestionAnswer"
-						class="form-horizontal" role="form">
+						class="form-horizontal" role="form" method="post">
 
 						<table class="table table-responsive">
 							<thead>
@@ -43,10 +43,10 @@
 								<tr class="alert alert-dismissable">
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="answerlist" class="form" value="5050" /></td>
+										name="answerlist" class="form required" value="5050" /></td>
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="fractionlist" class="form" readonly="true" value="100" /></td>    
+										name="fractionlist" class="form required" readonly="true" value="100" /></td>    
 										   
 							</tbody> 
 						</table>

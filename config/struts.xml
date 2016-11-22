@@ -153,8 +153,9 @@
 				<!-- 等待时间,执行时间没有超过此值,将不显示等待画面 (毫秒) -->
 				<param name="delay">1</param>
 			</interceptor-ref>
-			<result name="wait">/wait.jsp</result>
-		</action>
+			<result name="wait" type="redirectAction">testAnswerAction_toAnswerListUI</result>
+			<result name="toAnswerList" type="redirectAction">testAnswerAction_toAnswerListUI</result>
+		</action> 
 
 		<!-- 主题模块 -->
 		<action name="topicAction_*"
@@ -177,7 +178,13 @@
 			</result>
 			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId}
 			</result>
-		</action>
+			<result name="toQuestionShow" type="redirectAction">questionAction_toQuestionShowUI?questionSetId=${questionSetId}&amp;id=${questionId}</result>
+			<result name="toUpdateTopicAUI">/WEB-INF/jsp/topicAction/updateTopic.jsp
+			</result>
+			<result name="toUpdateTopicAnswerBUI">/WEB-INF/jsp/topicAction/updateAnswer_b.jsp
+			</result> 
+			
+		</action>  
 
 		<!-- 论坛：回复相关功能 -->
 		<action name="replyAction_*"

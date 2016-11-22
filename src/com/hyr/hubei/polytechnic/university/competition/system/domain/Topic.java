@@ -3,6 +3,7 @@ package com.hyr.hubei.polytechnic.university.competition.system.domain;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 2016-11-4 21:25:37
@@ -70,7 +71,7 @@ public class Topic extends Article {
 	private String cue;
 
 	/** 试题图片信息 */
-	private List<Blob> images;
+	private Blob images;
 
 	/** 耗时要求 */
 	private double runtime;
@@ -85,7 +86,7 @@ public class Topic extends Article {
 	private String answersXml;
 
 	/** 主题下的回复 */
-	private List<Reply> replies;
+	private Set<Reply> replies;
 
 	/** 主题的总回复数 默认为0 */
 	private int replyCount = 0;
@@ -211,11 +212,11 @@ public class Topic extends Article {
 		this.cue = cue;
 	}
 
-	public List<Blob> getImages() {
+	public Blob getImages() {
 		return images;
 	}
 
-	public void setImages(List<Blob> images) {
+	public void setImages(Blob images) {
 		this.images = images;
 	}
 
@@ -251,11 +252,11 @@ public class Topic extends Article {
 		this.answersXml = answersXml;
 	}
 
-	public List<Reply> getReplies() {
+	public Set<Reply> getReplies() {
 		return replies;
 	}
 
-	public void setReplies(List<Reply> replies) {
+	public void setReplies(Set<Reply> replies) {
 		this.replies = replies;
 	}
 
@@ -306,6 +307,5 @@ public class Topic extends Article {
 	public void setClassify(Integer classify) {
 		this.classify = classify;
 	}
-
 
 }

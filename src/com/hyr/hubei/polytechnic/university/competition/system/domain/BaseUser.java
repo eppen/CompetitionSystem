@@ -61,6 +61,9 @@ public class BaseUser {
 	/** 创建日期 */
 	protected Date createTime;
 
+	/** 出生日期 */
+	protected Date birthday;
+
 	public Long getId() {
 		return id;
 	}
@@ -195,6 +198,14 @@ public class BaseUser {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 }

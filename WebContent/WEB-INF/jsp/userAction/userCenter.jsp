@@ -15,16 +15,16 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%> 
+	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
 	<div class="container-fluid">
 		<div class="row">
-		
+
 			<!-- 侧边栏 -->
 			<%@ include file="/WEB-INF/jsp/public/leftMenu.jspf"%>
-			
+
 
 			<!-- 内容 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -44,6 +44,10 @@
 								<td><b>性别</b></td>
 								<td>${user.gender}</td>
 							</tr>
+							<tr>
+								<td><b>出生日期</b></td>
+								<td><s:date name="#session.user.birthday" format="yyyy年MM月dd日" /></td>
+							</tr> 
 							<tr>
 								<td><b>班级</b></td>
 								<td>${user.classes }</td>

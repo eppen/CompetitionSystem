@@ -35,31 +35,26 @@
 				<ol class="breadcrumb">
 					<li><a href="topicHome.html">交流中心 <span
 							class="glyphicon glyphicon-chevron-right"></span></a>
-					<li class="active">发表新主题<span
+					<li class="active">编辑主题<span
 						class="glyphicon glyphicon-chevron-right"></li>
 					</li>
 				</ol>
 
 				<!--发表新主题开始-->
 				<div class="QuictReply">
-					<form action="topicAction_createTopic" method="post">
-						<s:hidden name="type" value="0"></s:hidden>
+					<form action="topicAction_updateTopic" method="post">
+						<s:hidden name="id"></s:hidden>
+						<s:hidden name="type"></s:hidden>
 						<div style="padding-left: 3px;">
 							<table class="table table-striped">
 								<tr>
 									<td width="100px"><b>主题类型</b></td>
-									<td><select class=" btn btn-default"
-										onchange="window.location=this.value;">
-											<option value="topicAction_toCreateTopicUI">新增题目</option>
-											<option value="topicAction_toCreateNormalTopicUI">知识讨论</option>
-									</select></td>
+									<td><s:if test="type==0">新增题目</s:if> <s:elseif
+											test="type==1">知识讨论</s:elseif></td>
 								</tr>
 								<tr height="50" class="Tint">
 									<td width="50px" class="Deep"><b>标题</b></td>
-									<td class="no_color_bg"><s:textfield type="text"
-											cssStyle="font-size: 20px; font-family: '微软雅黑';" name="title"
-											cssClass="InputStyle text-center form-control required"
-											placeholder="请填写标题" style="width:100%" /></td> 
+									<td class="no_color_bg">${title}</td> 
 								</tr>
 								<tr class="Tint" height="200">
 									<td valign="top" class="Deep"><b>内容</b></td>
@@ -72,15 +67,15 @@
 									<td><s:textfield type="text"
 											cssStyle="font-size: 20px; font-family: '微软雅黑';width:100%"
 											name="questionTitle"
-											cssClass="InputStyle text-center form-control required"
-											placeholder="请填写试题名称" /></td>
+											cssClass="text-center form-control required"
+											placeholder="请填写试题名称" /></td> 
 								</tr>
 								<s:hidden name="questionType" value="2"></s:hidden>
 								<tr>
 									<td width="100px"><b>编程语言</b></td>
 									<td><s:select name="language"
 											cssClass=" btn btn-default required" list="#{'JAVA':'JAVA'} ">
-										</s:select></td>
+										</s:select></td> 
 								</tr>
 								<tr>
 									<td width="100px"><b>所属试题集</b></td>
@@ -145,7 +140,7 @@
 								</tr>
 								<tr height="30" class="Tint">
 									<td class="center" colspan="2" align="center">
-										<button type="submit" class="btn btn-success">确认</button>
+										<button type="submit" class="btn btn-success">确认修改</button>
 									</td>
 								</tr>
 							</table>

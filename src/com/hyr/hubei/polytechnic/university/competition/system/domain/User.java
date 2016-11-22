@@ -1,7 +1,7 @@
 package com.hyr.hubei.polytechnic.university.competition.system.domain;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -14,16 +14,16 @@ import com.opensymphony.xwork2.ActionContext;
 public class User extends BaseUser {
 
 	/** 用户访客记录 */
-	private List<Visitor> visitors;
+	private Set<Visitor> visitors;
 
 	/** 角色 普通用户 顶级管理员 次级管理员 */
 	private Role role;
 
-	public List<Visitor> getVisitors() {
+	public Set<Visitor> getVisitors() {
 		return visitors;
 	}
 
-	public void setVisitors(List<Visitor> visitors) {
+	public void setVisitors(Set<Visitor> visitors) {
 		this.visitors = visitors;
 	}
 

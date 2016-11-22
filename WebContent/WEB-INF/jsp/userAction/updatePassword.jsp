@@ -30,7 +30,7 @@
 				<h2 class="sub-header">修改密码</h2>
 				<div class="table-responsive">
 					<form action="userAction_updateUserPassword"
-						class="form-horizontal" role="form">
+						class="form-horizontal" role="form" method="post">
 						<s:hidden name="id"></s:hidden>
 						<table class="table table-striped">
 							<tbody>

@@ -28,8 +28,7 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<h2 class="sub-header">访客信息</h2>  
 				<div class="row">
-					<div class="row"> 
-
+					<div class="row">  
 						<!-- 游客内容开始	-->
 						<s:iterator value="visitors">
 							<div class="col-md-2" style="margin-top: 20px">  

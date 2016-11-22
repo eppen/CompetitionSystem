@@ -36,7 +36,7 @@
 					<!------- 搜索框 ------->
 					<s:form id="pageForm"
 						action="questionAction_toQuestionManageListUI?questionSetId=%{questionSetId}"
-						cssClass="navbar-form navbar-left" role="search">
+						cssClass="navbar-form navbar-left" role="search" method="post">
 						<div class="form-group">
 							<s:textfield type="text" name="titleSearch"
 								cssClass="form-control" placeholder="请输入试题名称" />

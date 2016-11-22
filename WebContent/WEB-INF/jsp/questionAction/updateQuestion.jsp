@@ -33,7 +33,7 @@
 				<h2 class="sub-header">修改试题</h2>
 				<div class="table-responsive">
 					<form action="questionAction_updateQuestion"
-						class="form-horizontal" role="form">
+						class="form-horizontal" role="form" method="post">
 						<s:hidden name="id"></s:hidden>
 						<table class="table table-striped">
 							<tr height="50" class="Tint">
@@ -42,15 +42,10 @@
 										cssStyle="font-size: 20px; font-family: '微软雅黑';width:100%"
 										name="title" cssClass="text-center form-control required" /></td>
 							</tr>
-							<tr>
-								<td width="100px"><b>题目类型</b></td>
-								<td><s:select name="type" cssClass=" btn btn-default"
-										list="#{1:'结果填空',2:'程序设计',3:'代码填空'}">
-									</s:select></td>
-							</tr>
+							<s:hidden name="type" value="2"></s:hidden> 
 							<tr>
 								<td width="100px"><b>编程语言</b></td>
-								<td><s:select name="language" cssClass=" btn btn-default"
+								<td><s:select name="language" cssClass=" btn btn-default required"
 										list="#{'JAVA':'JAVA'} ">
 									</s:select></td>
 							</tr>

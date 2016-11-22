@@ -58,7 +58,8 @@
 									action="favoriteAction_updateFavoriteStatus?status=1&topicId=%{#topic.id}">
 									<img border="0" src="img/collect.gif" />收藏</s:a>
 							</s:else> <s:if test="currentUser.id==#topic.author.id">
-								<a href="moveUI.html"><img border="0" src="img/text.gif" />编辑</a>
+								<s:a action="topicAction_toUpdateTopicUI?id=%{id}">
+									<img border="0" src="img/text.gif" />编辑</s:a>
 							</s:if> <s:if
 								test="currentUser.role.name=='管理员'  || currentUser.role.name=='超级管理员' ">
 								<s:a
@@ -73,7 +74,8 @@
 									action="topicAction_updateTopicType?typeId=0&topicId=%{#topic.id}"
 									onClick="return confirm('要把本主题设为普通吗？')">
 									<img border="0" src="img/topicType_0.gif" />普通</s:a>
-								<s:a action="moveUI.html">
+								<s:a action="topicAction_addTiQuestion?id=%{id}"
+									onClick="return confirm('确认要把本贴中的试题加入题库吗？')">
 									<img border="0" src="img/sendDoc.gif" />加入题库</s:a>
 							</s:if></td>
 						<td width="3" class="ForumPageTableTitleRight">&nbsp;</td>
@@ -96,8 +98,9 @@
 											onerror="this.onerror=null; this.src=''img/userpic.jpg;" />
 									</div> <!--作者名称-->
 									<div class="AuthorName">
-										<s:a action="userAction_toUserInfoUI?id=%{#topic.author.id}" target="_blank">${topic.author.name }</s:a>  
-									</div> 
+										<s:a action="userAction_toUserInfoUI?id=%{#topic.author.id}"
+											target="_blank">${topic.author.name }</s:a>
+									</div>
 								</td>
 
 							</tr>
@@ -107,7 +110,7 @@
 									<div class="Content">
 										<!--主题开始-->
 										<div class="QuictReply">
-											<form action="createAnswer_b.html">
+											<form action="createAnswer_b.html" method="post">
 												<div style="padding-left: 3px;">
 													<table class="table table-striped">
 														<thead>
@@ -129,11 +132,11 @@
 														</tr>
 														<tr>
 															<td width="100px"><b>题目类型</b></td>
-															<td><s:if test="topic.questionType==1">
+															<td><s:if test="#topic.questionType==1">
 																	<span class="btn btn-success">结果填空</span>
-																</s:if> <s:elseif test="topic.questionType==2">
+																</s:if> <s:elseif test="#topic.questionType==2">
 																	<span class="btn btn-success">程序设计</span>
-																</s:elseif> <s:elseif test="topic.questionType==3">
+																</s:elseif> <s:elseif test="#topic.questionType==3">
 																	<span class="btn btn-success">代码填空</span>
 																</s:elseif> <s:else>
 																	<span class="btn btn-success">无类型</span>
@@ -191,134 +194,140 @@
 												</div>
 											</form>
 										</div>
-				</s:if>
-				<!--新主题结束-->
+										</s:if>
+										<!--新主题结束-->
 
 
 
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<!--显示楼层等信息-->
+								<td class="Footer" height="28" align="center" valign="bottom">
+									<ul class="list-unstyled" style="margin: 0px; width: 98%;">
+										<li class="TopicFuncLi">
+											<!-- 判断是否已经收藏 --> <s:if test="isLaud">
+												<s:a cssClass="detail"
+													action="laudAction_updateFavoriteStatus?status=0&topicId=%{#topic.id}">
+													<img border="0" src="img/laud.gif" />取消赞(${topic.laudCount })</s:a>
+											</s:if> <s:else>
+												<s:a cssClass="detail"
+													action="laudAction_updateFavoriteStatus?status=1&topicId=%{#topic.id}">
+													<img border="0" src="img/laud.gif" />赞(${topic.laudCount })</s:a>
+											</s:else> <s:if test="currentUser.id==#topic.author.id">
+												<s:a action="topicAction_toUpdateTopicUI?id=%{id}">
+													<img border="0" src="img/text.gif" />编辑</s:a>
+											</s:if> <s:if 
+												test="currentUser.id == #topic.author.id || currentUser.role.name== '管理员' || currentUser.role.name== '超级管理员' ">
+												<s:a cssClass="detail"
+													action="topicAction_deleteTopic?id=%{id}"
+													onClick="return confirm('确定要删除本帖吗？')">
+													<img border="0" src="img/delete.gif" />删除</s:a>
+											</s:if>
+										</li>
+										<li style="float: left; line-height: 18px; color: black;"><font
+											color=#C30000>[楼主]</font> <s:date name="#topic.postTime"
+												format="yyyy-MM-dd HH:mm:ss" /></li>
+										<li class="list-un" style="float: right;"><a
+											href="javascript:scroll(0,0)"> <img border="0"
+												src="img/top.gif" /></a></li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- ~~~~~~~~~~~~~~~ 显示主帖结束 ~~~~~~~~~~~~~~~ -->
+
+					<!-- ~~~~~~~~~~~~~~~ 显示回复列表 ~~~~~~~~~~~~~~~ -->
+					<s:iterator value="recordList" status="status">
+						<div class="ListArea template">
+							<table border="0" cellpadding="0" cellspacing="1" width="100%">
+								<tr>
+									<td rowspan="3" width="130" class="PhotoArea" align="center"
+										valign="top">
+										<!--作者头像-->
+										<div class="AuthorPhoto">
+											<img border="0" width="110" height="110"
+												src="img/userpic.jpg"
+												onerror="this.onerror=null; this.src='img/userpic.jpg';" />
+										</div> <!--作者名称-->
+										<div class="AuthorName">
+											<s:a action="userAction_toUserInfoUI?id=%{author.id}"
+												target="_blank">${author.name }</s:a>
+										</div>
+									</td>
+									<td align="center">
+										<ul class="TopicFunc list-unstyled">
+											<!-- 文章表情与标题 -->
+											<li class="TopicSubject"></li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<!-- 文章内容 -->
+									<td valign="top" align="center">
+										<div class="Content">${content}</div>
+									</td>
+								</tr>
+								<tr>
+									<!--显示楼层等信息-->
+									<td class="Footer" height="28" align="center" valign="bottom">
+										<ul class="list-unstyled" style="margin: 0px; width: 98%;">
+											<li class="TopicFuncLi"><s:if
+													test="currentUser.id == #topic.author.id || currentUser.role.name== '管理员' || currentUser.role.name== '超级管理员' ">
+													<s:a cssClass="detail"
+														action="replyAction_deleteReply?id=%{id}&topicId=%{topic.id}">
+														<img border="0" src="img/delete.gif" />删除</s:a>
+												</s:if></li>
+											<li style="float: left; line-height: 18px; color: black;"><font
+												color=#C30000>[${(currentPage-1)*pageSize+status.count}楼]</font>
+												<s:date name="postTime" format="yyyy-MM-dd HH:mm:ss" /></li>
+											<li style="float: right;"><a
+												href="javascript:scroll(0,0)"> <img border="0"
+													src="<%=basePath%>img/top.gif" />
+											</a></li>
+										</ul>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</s:iterator>
+					<!-- ~~~~~~~~~~~~~~~ 显示回复列表结束 ~~~~~~~~~~~~~~~ -->
+
+					<!-- 分页开始 -->
+					<!--分页信息-->
+					<s:form id="pageForm" action="topicAction_toTopicShowUI?id=%{id}"
+						method="post">
+					</s:form>
+
+					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
+					<!-- 分页结束 -->
+
+
+					<!--快速回复-->
+					<div class="QuictReply" id="quictReply">
+						<s:form action="replyAction_add?topicId=%{#topic.id}"
+							method="post">
+							<div style="padding-left: 3px;">
+								<table class="table table-striped">
+									<tr class="Tint" height="200">
+										<td valign="top" class="no_color_bg"><textarea
+												class="form-control" name="content"
+												style="width: 100%; height: 100px"></textarea></td>
+									</tr>
+									<tr height="30" class="Tint">
+										<td class="center" colspan="2" align="center">
+											<button type="submit" class="btn btn-success">回复</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</s:form>
+						<div style="height: 130px;"></div>
+					</div>
 			</div>
-			</td>
-			</tr>
-			<tr>
-				<!--显示楼层等信息-->
-				<td class="Footer" height="28" align="center" valign="bottom">
-					<ul class="list-unstyled" style="margin: 0px; width: 98%;">
-						<li class="TopicFuncLi">
-						
-						
-						    
-						
-						<!-- 判断是否已经收藏 --> <s:if
-								test="isLaud">
-								<s:a cssClass="detail"	action="laudAction_updateFavoriteStatus?status=0&topicId=%{#topic.id}"><img border="0"	src="img/laud.gif" />取消赞(${topic.laudCount })</s:a> 
-							</s:if> <s:else>
-								<s:a cssClass="detail"	action="laudAction_updateFavoriteStatus?status=1&topicId=%{#topic.id}"><img border="0"	src="img/laud.gif" />赞(${topic.laudCount })</s:a>
-							</s:else>  
-						
-						
-						 <a class="detail" 	href="../BBS_Topic/saveUI.html"><img border="0"src="img/edit.gif" />编辑</a>
-						  <s:if test="currentUser.id == #topic.author.id || currentUser.role.name== '管理员' || currentUser.role.name== '超级管理员' ">
-								<s:a cssClass="detail" action="topicAction_deleteTopic?id=%{id}"
-									onClick="return confirm('确定要删除本帖吗？')">
-									<img border="0" src="img/delete.gif" />删除</s:a>
-							</s:if></li>
-						<li style="float: left; line-height: 18px; color: black;"><font 
-							color=#C30000>[楼主]</font> <s:date name="#topic.postTime"
-								format="yyyy-MM-dd HH:mm:ss" /></li>
-						<li class="list-un" style="float: right;"><a
-							href="javascript:scroll(0,0)"> <img border="0"
-								src="img/top.gif" /></a></li>
-					</ul>
-				</td>
-			</tr>
-			</table>
 		</div>
-		<!-- ~~~~~~~~~~~~~~~ 显示主帖结束 ~~~~~~~~~~~~~~~ -->
-
-		<!-- ~~~~~~~~~~~~~~~ 显示回复列表 ~~~~~~~~~~~~~~~ -->
-		<s:iterator value="recordList" status="status">
-			<div class="ListArea template">
-				<table border="0" cellpadding="0" cellspacing="1" width="100%">
-					<tr>
-						<td rowspan="3" width="130" class="PhotoArea" align="center"
-							valign="top">
-							<!--作者头像-->
-							<div class="AuthorPhoto">
-								<img border="0" width="110" height="110" src="img/userpic.jpg"
-									onerror="this.onerror=null; this.src='img/userpic.jpg';" />
-							</div> <!--作者名称-->
-							<div class="AuthorName">
-								<s:a action="userAction_toUserInfoUI?id=%{author.id}" target="_blank">${author.name }</s:a>
-							</div> 
-						</td>
-						<td align="center">
-							<ul class="TopicFunc list-unstyled">
-								<!-- 文章表情与标题 -->
-								<li class="TopicSubject"></li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<!-- 文章内容 -->
-						<td valign="top" align="center">
-							<div class="Content">${content}</div>
-						</td>
-					</tr>
-					<tr>
-						<!--显示楼层等信息-->
-						<td class="Footer" height="28" align="center" valign="bottom">
-							<ul class="list-unstyled" style="margin: 0px; width: 98%;">
-								<li class="TopicFuncLi"><s:if
-										test="currentUser.id == #topic.author.id || currentUser.role.name== '管理员' || currentUser.role.name== '超级管理员' ">
-										<s:a cssClass="detail"
-											action="replyAction_deleteReply?id=%{id}&topicId=%{topic.id}">
-											<img border="0" src="img/delete.gif" />删除</s:a>
-									</s:if></li>
-								<li style="float: left; line-height: 18px;color: black;"><font 
-									color=#C30000>[${(currentPage-1)*pageSize+status.count}楼]</font>
-									<s:date name="postTime" format="yyyy-MM-dd HH:mm:ss" /></li> 
-								<li style="float: right;"><a href="javascript:scroll(0,0)">
-										<img border="0" src="<%=basePath%>img/top.gif" />
-								</a></li>
-							</ul>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</s:iterator>
-		<!-- ~~~~~~~~~~~~~~~ 显示回复列表结束 ~~~~~~~~~~~~~~~ -->
-
-		<!-- 分页开始 -->
-		<!--分页信息-->
-		<s:form id="pageForm" action="topicAction_toTopicShowUI?id=%{id}">
-		</s:form>
-
-		<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
-		<!-- 分页结束 -->
-
-
-		<!--快速回复-->
-		<div class="QuictReply" id="quictReply">
-			<s:form action="replyAction_add?topicId=%{#topic.id}">
-				<div style="padding-left: 3px;">
-					<table class="table table-striped">
-						<tr class="Tint" height="200">
-							<td valign="top" class="no_color_bg"><textarea
-									class="form-control" name="content"
-									style="width: 100%; height: 100px"></textarea></td>
-						</tr>
-						<tr height="30" class="Tint">
-							<td class="center" colspan="2" align="center">
-								<button type="submit" class="btn btn-success">回复</button>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</s:form>
-			<div style="height: 130px;"></div>
-		</div>
-	</div>
-	</div>
 	</div>
 	<!-- 中间内容结束 -->
 

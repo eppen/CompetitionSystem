@@ -230,6 +230,16 @@ public class Question {
 
 	public void setContent(String content) {
 		this.content = content;
+	} 
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", type=" + type + ", language=" + language + ", scope=" + scope + ", title="
+				+ title + ", description=" + description + ", content=" + content + ", inputFormat=" + inputFormat
+				+ ", outputFormat=" + outputFormat + ", sampleInput=" + sampleInput + ", sampleOutput=" + sampleOutput
+				+ ", careful=" + careful + ", cue=" + cue + ", runtime=" + runtime + ", memory=" + memory
+				+ ", createTime=" + createTime + ", scores=" + scores + ", answersXml=" + answersXml + ", images="
+				+ images + ", isdel=" + isdel + "]";
 	}
 
 }

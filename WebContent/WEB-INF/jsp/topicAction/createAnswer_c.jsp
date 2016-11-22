@@ -40,7 +40,7 @@
 
 				<!--发表新主题开始-->
 				<div class="QuictReply">
-					<form action="topicAction_createTopicAnswer">
+					<form action="topicAction_createTopicAnswer" method="post">
 						<div style="padding-left: 3px;">
 							<table class="table table-responsive">
 								<thead>
@@ -58,7 +58,7 @@
 									<tr class="alert alert-dismissable">
 										<td><input type="text"
 											style="font-size: 18px; font-family: '微软雅黑'; 
-											name="answerlist" class="form-control" value="int a=b;" /></td>
+											name="answerlist" class="form-control required" value="int a=b;" /></td>
 										<s:hidden name="fractionlist" value="100"></s:hidden>
 										<td><button type="button" class="close"
 												data-dismiss="alert" aria-label="Close">
@@ -97,7 +97,7 @@
 								//接收用户输入的列数据
 
 								//构建新行
-								var newRow = "<tr class='alert alert-dismissable'><td><input type='text' style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name='answerlist' class='form-control' value='int a=b;'/></td><td><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></td></tr>";
+								var newRow = "<tr class='alert alert-dismissable'><td><input type='text' style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name='answerlist' class='form-control required' value='int a=b;'/></td><td><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></td></tr>";
 								//为表格追加新行 
 								$("#mybody").append(newRow); 
 							});

@@ -17,7 +17,7 @@
 	<div class="container">
 
 		<s:form action="loginoutAction_login" cssClass="form-signin"
-			role="form">
+			role="form" method="post">
 			<h2 class="form-signin-heading">请登录</h2>
 			<h3  style="color: red"><s:fielderror cssStyle=" list-style:none;"><s:param>loginerror</s:param></s:fielderror></h3>    
 			<s:textfield cssClass="form-control required" name="username"

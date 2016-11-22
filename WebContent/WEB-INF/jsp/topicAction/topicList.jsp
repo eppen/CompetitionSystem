@@ -42,7 +42,7 @@
 
 					<!------- 搜索框 ------->
 					<s:form id="pageForm" action="topicAction_toAnswerListUI"
-						role="search">
+						role="search" method="post">
 						<div class="form-group navbar-form navbar-left">
 							<s:textfield type="text" name="titleSearch"
 								cssClass="form-control" placeholder="请输入主题名称" />

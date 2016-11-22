@@ -220,7 +220,7 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 
 		// =========================================================
 		// TODO 返回到评测列表
-		return "error";
+		return "toAnswerList";
 	}
 
 	@Override

@@ -32,7 +32,6 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
 		String url = namespace + actionName;
 		System.out.println(url);
 		// 一，如果用户未登录，就转到登录页面
-		System.out.println("USER:" + user);
 		if (user == null) {
 			System.out.println("==========没有登录权限!==========");
 			if (url.startsWith("/loginoutAction_login")) { // 包含
