@@ -29,10 +29,11 @@
 
 				<!-- 路径 -->
 				<ol class="breadcrumb">
-					<li><a href="topicHome.html">交流中心 <span
-							class="glyphicon glyphicon-chevron-right"></span></a> <a
-						href="createTopic.html">发表新主题 <span
+					<li><a href="topicAction_toTopicListUI">交流中心 <span
 							class="glyphicon glyphicon-chevron-right"></span></a>
+					<li class="active">发表新主题<span
+						class="glyphicon glyphicon-chevron-right"></li>
+					</li>
 					<li class="active">添加问题答案<span
 						class="glyphicon glyphicon-chevron-right"></li>
 					</li>
@@ -57,8 +58,8 @@
 								<tbody id="mybody">
 									<tr class="alert alert-dismissable">
 										<td><input type="text"
-											style="font-size: 18px; font-family: '微软雅黑'; 
-											name="answerlist" class="form-control required" value="int a=b;" /></td>
+											style="font-size: 18px; font-family: '微软雅黑';"
+											answerlist" class="form-control required" value="int a=b;" /></td>
 										<s:hidden name="fractionlist" value="100"></s:hidden>
 										<td><button type="button" class="close"
 												data-dismiss="alert" aria-label="Close">
@@ -68,8 +69,7 @@
 								</tbody>
 								<tr height="30" class="Tint">
 									<td class="center" colspan="2" align="center">
-										<button id="btn_submit" type="submit"
-											class="btn btn-success">提交</button>
+										<button id="btn_submit" type="submit" class="btn btn-success">提交</button>
 									</td>
 								</tr>
 							</table>
@@ -99,7 +99,7 @@
 								//构建新行
 								var newRow = "<tr class='alert alert-dismissable'><td><input type='text' style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name='answerlist' class='form-control required' value='int a=b;'/></td><td><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></td></tr>";
 								//为表格追加新行 
-								$("#mybody").append(newRow); 
+								$("#mybody").append(newRow);
 							});
 		});
 	</script>

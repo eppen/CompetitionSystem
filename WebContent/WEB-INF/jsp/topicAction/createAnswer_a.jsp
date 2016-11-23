@@ -29,10 +29,11 @@
 
 				<!-- 路径 -->
 				<ol class="breadcrumb">
-					<li><a href="topicHome.html">交流中心 <span
-							class="glyphicon glyphicon-chevron-right"></span></a> <a
-						href="createTopic.html">发表新主题 <span
+					<li><a href="topicAction_toTopicListUI">交流中心 <span
 							class="glyphicon glyphicon-chevron-right"></span></a>
+					<li class="active">发表新主题<span
+						class="glyphicon glyphicon-chevron-right"></li>
+					</li>
 					<li class="active">添加问题答案<span
 						class="glyphicon glyphicon-chevron-right"></li>
 					</li>
@@ -56,12 +57,12 @@
 											name="answerlist" class="form required" value="5050" /></td>
 										<td><input type="text"
 											style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-											name="fractionlist" class="form required" readonly="true" value="100" /></td>
+											name="fractionlist" class="form required" readonly="true"
+											value="100" /></td>
 								</tbody>
 								<tr height="30" class="Tint">
 									<td class="center" colspan="2" align="center">
-										<button id="btn_submit" type="submit" 
-											class="btn btn-success">提交</button>
+										<button id="btn_submit" type="submit" class="btn btn-success">提交</button>
 									</td>
 								</tr>
 							</table>

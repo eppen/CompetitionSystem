@@ -37,11 +37,12 @@
 				<div class="panel-body table-responsive">
 					<s:form id="pageForm" action="testAnswerAction_toAnswerListUI"
 						role="search" method="post">
-						<div class="form-group navbar-form navbar-left">
+						<div class="input-group" style="width: 50%">
 							<s:textfield type="text" name="titleNameSearch"
-								cssClass="form-control" placeholder="请输入试题名称" />
-							<button type="submit" class="btn btn-danger">搜索</button>
-						</div>
+								cssClass="form-control input-md" placeholder="请输入试题名称" />
+							<span onclick="javascript: gotoPage(1)"
+								class="input-group-addon btn btn-primary">搜索</span>
+						</div> 
 				</div>
 
 				<table cellpadding="0px" cellspacing="0px"
@@ -57,7 +58,7 @@
 									cssStyle="border: 0px; padding: 8px; font-weight: bold;"
 									onchange="gotoPage(1)"
 									list="%{  #{'评测结果':'评测结果','正确':'正确','错误':'错误','编译异常':'编译异常','运行错误':'运行错误','运行超时':'运行超时'}  }">
-								</s:select></th> 
+								</s:select></th>
 							<th>得分</th>
 							<th>CPU使用</th>
 							<th>内存使用</th>

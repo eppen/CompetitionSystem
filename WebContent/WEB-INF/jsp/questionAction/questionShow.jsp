@@ -1,10 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%> 
 <!DOCTYPE html>
 <html>
 
@@ -15,11 +10,7 @@
 <meta name="description" content="题库">
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
-<base href="<%=basePath%>">
-<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" />
-<link href="<%=basePath%>css/bootstrap-theme.min.css" rel="stylesheet" />
-<link href="<%=basePath%>css/sticky-footer.css" rel="stylesheet" />
-<link href="<%=basePath%>css/basic.css" rel="stylesheet" /> 
+<%@ include file="/WEB-INF/jsp/public/header.jspf"%>  
 <!-- 禁用响应式布局 -->
 </head>
 

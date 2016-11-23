@@ -31,7 +31,7 @@
 
 				<!-- 路径 -->
 				<ol class="breadcrumb">
-					<li><a href="topicHome.html">交流中心 <span
+					<li><a href="topicAction_toTopicListUI">交流中心 <span
 							class="glyphicon glyphicon-chevron-right"></span></a>
 					<li class="active">发表新主题<span
 						class="glyphicon glyphicon-chevron-right"></li>

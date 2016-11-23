@@ -36,12 +36,12 @@
 					<!------- 搜索框 ------->
 					<s:form id="pageForm"
 						action="questionAction_toQuestionManageListUI?questionSetId=%{questionSetId}"
-						cssClass="navbar-form navbar-left" role="search" method="post">
-						<div class="form-group">
+						cssClass="navbar-form navbar-left" role="search" method="post"> 					
+						<div class="input-group" style="width: 50%"> 
 							<s:textfield type="text" name="titleSearch"
-								cssClass="form-control" placeholder="请输入试题名称" />
-						</div>
-						<button type="submit" class="btn btn-danger">搜索</button>
+								cssClass="form-control input-md" placeholder="请输入试题名称" />     
+							<span onclick="javascript: gotoPage(1)" class="input-group-addon btn btn-primary">搜索</span>  
+						</div> 
 					</s:form>
 					<table class="table table-hover">
 						<thead>

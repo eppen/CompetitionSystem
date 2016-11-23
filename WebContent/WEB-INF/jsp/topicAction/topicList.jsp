@@ -37,17 +37,18 @@
 				<div class="container">
 					<a href="topicAction_toCreateTopicUI" class="btn btn-success">发表新主题</a>
 				</div>
+				<p></p> 
 
 				<div class="table-responsive">
 
 					<!------- 搜索框 ------->
-					<s:form id="pageForm" action="topicAction_toAnswerListUI"
+					<s:form id="pageForm" action="topicAction_toTopicListUI" 
 						role="search" method="post">
-						<div class="form-group navbar-form navbar-left">
+						<div class="input-group" style="width: 50%"> 
 							<s:textfield type="text" name="titleSearch"
-								cssClass="form-control" placeholder="请输入主题名称" />
-							<button type="submit" class="btn btn-danger">搜索</button>
-						</div>
+								cssClass="form-control input-md" placeholder="请输入主题名称" />    
+							<span onclick="javascript: gotoPage(1)" class="input-group-addon btn btn-primary">搜索</span>  
+						</div>    
 
 						<table class="table table-hover table-condensed">
 							<thead>

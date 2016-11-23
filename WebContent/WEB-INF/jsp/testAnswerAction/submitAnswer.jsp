@@ -17,7 +17,7 @@
 <title>练习系统</title>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="<%=basePath%>js/jquery.js"></script>
+<script src="<%=basePath%>codemirror/jquery.js"></script>
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" />
 <link href="<%=basePath%>css/bootstrap-theme.min.css" rel="stylesheet" />
 <link href="<%=basePath%>css/sticky-footer.css" rel="stylesheet" />
@@ -97,8 +97,8 @@
 									<td><b>输入答案：</b></td>
 								</tr>
 								<tr>
-									<td><s:textarea id="code-editor" cssClass="form-control required"
-											name="answer" rows="30"></s:textarea></td>
+									<td><s:textarea id="code-editor"
+											cssClass="form-control required" name="answer" rows="30"></s:textarea></td>
 								</tr>
 								<tr>
 									<td><center>
@@ -116,7 +116,8 @@
 	</div>
 	<!-- 中间内容结束 -->
 
-	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
+	<script src="<%=basePath%>js/jquery.min.js"></script>
+	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%> 
 
 </body>
 

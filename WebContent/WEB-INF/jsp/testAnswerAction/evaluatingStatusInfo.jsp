@@ -1,4 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +14,14 @@
 <meta name="description" content="题库">
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
-<%@ include file="/WEB-INF/jsp/public/header.jspf"%>>
+<base href="<%=basePath%>">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="<%=basePath%>codemirror/jquery.js"></script>
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=basePath%>css/signin.css" rel="stylesheet">
+<link href="<%=basePath%>css/basic.css" rel="stylesheet" />
+<link href="<%=basePath%>css/bootstrap-theme.css" rel="stylesheet" />
+<link href="<%=basePath%>css/sticky-footer.css" rel="stylesheet" />
 
 <!-- 代码编辑器样式 -->
 <link href="<%=basePath%>codemirror/codemirror.css" type="text/css"
@@ -37,7 +50,7 @@
 				<ol class="breadcrumb panel-heading">
 					<li><a href="testAnswerAction_toAnswerListUI">评测状态 <span
 							class="glyphicon glyphicon-chevron-right"></span></a>
-					<li class="active">${id } ${question.title }<span
+					<li class="active">${id }${question.title }<span
 						class="glyphicon glyphicon-chevron-right"></li>
 					</li>
 				</ol>
@@ -86,7 +99,8 @@
 							<tr>
 								<td><b>试题名称</b></td>
 								<td><s:a
-										action="questionAction_toQuestionShowUI?questionSetId=%{question.scope.id}&id=%{question.id}" target="_blank">${question.title }</s:a></td>
+										action="questionAction_toQuestionShowUI?questionSetId=%{question.scope.id}&id=%{question.id}"
+										target="_blank">${question.title }</s:a></td>
 							</tr>
 							<tr>
 								<td><b>语言</b></td>
@@ -142,10 +156,7 @@
 	</div>
 	<!-- 中间内容结束 -->
 
-
-	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
-
-	<!------------------------- 代码编辑器 ------------------------->
+<!------------------------- 代码编辑器 ------------------------->
 	<script type="text/javascript"
 		src="<%=basePath%>codemirror/codemirror.min.js"></script>
 	<script src="<%=basePath%>codemirror/clike.js"></script>
@@ -196,6 +207,10 @@
 		}
 		setCode();
 	</script>
+
+	<script src="<%=basePath%>js/jquery.min.js"></script>
+	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%> 
+
 
 </body>
 

@@ -33,12 +33,12 @@
 
 					<!------- 搜索框 ------->
 					<form id="pageForm" action="userAction_toUserManageListUI" class="navbar-form navbar-left"
-						role="search" method="post">
-						<div class="form-group navbar-form navbar-left">
+						role="search" method="post"> 
+						<div class="input-group" style="width: 50%"> 
 							<s:textfield type="text" name="usernameSearch"
-								cssClass="form-control" placeholder="请输入用户名" /> 
-							<button type="submit" class="btn btn-danger">搜索</button>
-						</div>
+								cssClass="form-control input-md" placeholder="请输入用户名" />    
+							<span onclick="javascript: gotoPage(1)" class="input-group-addon btn btn-primary">搜索</span>  
+						</div> 
 					</form>
 
 					<table class="table table-bordered table-hover with-check  
