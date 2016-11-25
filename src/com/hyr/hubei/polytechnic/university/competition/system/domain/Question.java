@@ -66,11 +66,15 @@ public class Question {
 	/** 试题答案 存放xml格式文件 */
 	private String answersXml;
 
-	/** 试题图片信息 */
-	private Blob images;
-
 	/** 是否删除 0未删除 1已删除 默认值0 */
 	private Integer isdel = 0;
+
+	/** 图片上传地址 */
+	private String imagePath1;
+	private String imagePath2;
+	private String imagePath3;
+	private String imagePath4;
+	private String imagePath5;
 
 	public Long getId() {
 		return id;
@@ -208,14 +212,6 @@ public class Question {
 		this.answersXml = answersXml;
 	}
 
-	public Blob getImages() {
-		return images;
-	}
-
-	public void setImages(Blob images) {
-		this.images = images;
-	}
-
 	public Integer getIsdel() {
 		return isdel;
 	}
@@ -230,7 +226,47 @@ public class Question {
 
 	public void setContent(String content) {
 		this.content = content;
-	} 
+	}
+
+	public String getImagePath1() {
+		return imagePath1;
+	}
+
+	public void setImagePath1(String imagePath1) {
+		this.imagePath1 = imagePath1;
+	}
+
+	public String getImagePath2() {
+		return imagePath2;
+	}
+
+	public void setImagePath2(String imagePath2) {
+		this.imagePath2 = imagePath2;
+	}
+
+	public String getImagePath3() {
+		return imagePath3;
+	}
+
+	public void setImagePath3(String imagePath3) {
+		this.imagePath3 = imagePath3;
+	}
+
+	public String getImagePath4() {
+		return imagePath4;
+	}
+
+	public void setImagePath4(String imagePath4) {
+		this.imagePath4 = imagePath4;
+	}
+
+	public String getImagePath5() {
+		return imagePath5;
+	}
+
+	public void setImagePath5(String imagePath5) {
+		this.imagePath5 = imagePath5;
+	}
 
 	@Override
 	public String toString() {
@@ -238,8 +274,9 @@ public class Question {
 				+ title + ", description=" + description + ", content=" + content + ", inputFormat=" + inputFormat
 				+ ", outputFormat=" + outputFormat + ", sampleInput=" + sampleInput + ", sampleOutput=" + sampleOutput
 				+ ", careful=" + careful + ", cue=" + cue + ", runtime=" + runtime + ", memory=" + memory
-				+ ", createTime=" + createTime + ", scores=" + scores + ", answersXml=" + answersXml + ", images="
-				+ images + ", isdel=" + isdel + "]";
+				+ ", createTime=" + createTime + ", scores=" + scores + ", answersXml=" + answersXml + ", isdel="
+				+ isdel + ", imagePath1=" + imagePath1 + ", imagePath2=" + imagePath2 + ", imagePath3=" + imagePath3
+				+ ", imagePath4=" + imagePath4 + ", imagePath5=" + imagePath5 + "]";
 	}
 
 }

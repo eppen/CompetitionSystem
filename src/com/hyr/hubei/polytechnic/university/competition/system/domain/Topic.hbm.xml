@@ -52,8 +52,14 @@
 		<property name="careful" column="careful"></property>
 		<!-- 提示 -->
 		<property name="cue" column="cue"></property>
-		<!-- 图片 -->
-		<property name="images" column="images" type="blob"></property>
+
+		<!-- 图片上传路径 -->
+		<property name="imagePath1" column="imagePath1"></property>
+		<property name="imagePath2" column="imagePath2"></property>
+		<property name="imagePath3" column="imagePath3"></property>
+		<property name="imagePath4" column="imagePath4"></property>
+		<property name="imagePath5" column="imagePath5"></property>
+
 		<!-- 耗时要求 -->
 		<property name="runtime" column="runtime" type="double"
 			not-null="true"></property>
@@ -68,7 +74,7 @@
 		<set name="replies" cascade="delete">
 			<key column="topicId"></key>
 			<one-to-many class="Reply" />
-		</set> 
+		</set>
 		<!-- 回复总数 -->
 		<property name="replyCount" column="replyCount"></property>
 		<!-- 最新回复 一对一 -->

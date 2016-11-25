@@ -16,7 +16,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="active navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -41,14 +76,15 @@
 
 							<s:iterator value="recordList">
 								<tr>
-									<td><s:a action="topicAction_toTopicShowUI?id=%{topic.id}" target="_blank">${author.name }：回复
+									<td><s:a action="topicAction_toTopicShowUI?id=%{topic.id}"
+											target="_blank">${author.name }：回复
 											${user.name} :${content }</s:a> &nbsp;&nbsp;<span><s:date
-												name="postTime" format="yyyy-MM-dd hh:mm:ss" /></span></td> 
-									<td><span class="text-muted">回复我的主题：“</span>
-									<s:a action="topicAction_toTopicShowUI?id=%{topic.id}"
+												name="postTime" format="yyyy-MM-dd hh:mm:ss" /></span></td>
+									<td><span class="text-muted">回复我的主题：“</span> <s:a
+											action="topicAction_toTopicShowUI?id=%{topic.id}"
 											target="_blank">${topic.title }</s:a><span class="text-muted">”</span></td>
-									<td><s:a action="topicAction_toTopicShowUI?id=%{topic.id}"><span
-											class="glyphicon glyphicon-comment"></span>回复</s:a></td>
+									<td><s:a action="topicAction_toTopicShowUI?id=%{topic.id}">
+											<span class="glyphicon glyphicon-comment"></span>回复</s:a></td>
 								</tr>
 							</s:iterator>
 
@@ -56,7 +92,7 @@
 						</tbody>
 					</table>
 					<s:form id="pageForm" action="userAction_toUserAlertsUI"
-						role="search" method="post"> 
+						role="search" method="post">
 					</s:form>
 					<!-- 分页开始 -->
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>

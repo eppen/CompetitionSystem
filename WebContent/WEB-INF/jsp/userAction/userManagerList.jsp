@@ -16,7 +16,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="active navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -32,17 +67,20 @@
 				<div class="table-responsive">
 
 					<!------- 搜索框 ------->
-					<form id="pageForm" action="userAction_toUserManageListUI" class="navbar-form navbar-left"
-						role="search" method="post"> 
-						<div class="input-group" style="width: 50%"> 
+					<form id="pageForm" action="userAction_toUserManageListUI"
+						class="navbar-form navbar-left" role="search" method="post">
+						<div class="input-group" style="width: 50%">
 							<s:textfield type="text" name="usernameSearch"
-								cssClass="form-control input-md" placeholder="请输入用户名" />    
-							<span onclick="javascript: gotoPage(1)" class="input-group-addon btn btn-primary">搜索</span>  
-						</div> 
+								cssClass="form-control input-md" placeholder="请输入用户名" />
+							<span onclick="javascript: gotoPage(1)"
+								class="input-group-addon btn btn-primary">搜索</span>
+						</div>
 					</form>
 
-					<table class="table table-bordered table-hover with-check  
-						style="font-family: 微软雅黑; font-size: 16px;"> 
+					<table
+						class="table table-bordered table-hover with-check  
+						style="
+						font-family:微软雅黑; font-size: 16px;">
 						<thead>
 							<tr>
 								<th style="text-align: center;"></th>
@@ -61,43 +99,55 @@
 							<s:iterator value="recordList">
 								<tr>
 									<td>${id }</td>
-									<td><s:a action="userAction_toUserInfoUI?id=%{id}" target="_blank">${name }</s:a></td>
-									<td><s:a action="userAction_toUserInfoUI?id=%{id}" target="_blank">${username }</s:a></td>
-									<td>${gender }</td>  
+									<td><s:a action="userAction_toUserInfoUI?id=%{id}"
+											target="_blank">${name }</s:a></td>
+									<td><s:a action="userAction_toUserInfoUI?id=%{id}"
+											target="_blank">${username }</s:a></td>
+									<td>${gender }</td>
 									<td>${classes }</td>
-									<td>${telephone }</td> 
+									<td>${telephone }</td>
 									<td>${score }</td>
-									<td>${role.name}</td> 
+									<td>${role.name}</td>
 									<td>
-									
-									<!-- 如果是超级管理员 则没有不能对其进行修改权限 -->
-									<s:if test="role.name != '超级管理员'">   
-									
-									<s:if test="isBan==0">
-									<s:a action="userAction_updateUserIsBan?isBan=1&id=%{id}" cssClass="btn btn-default">禁言</s:a>
-									 <s:a action="userAction_updateUserIsBan?isBan=0&id=%{id}" cssClass="btn btn-default disabled">解除</s:a> 
-									</s:if>
-									<s:else>
-									<s:a action="userAction_updateUserIsBan?isBan=1&id=%{id}" cssClass="btn btn-default disabled">禁言</s:a> 
-									<s:a action="userAction_updateUserIsBan?isBan=0&id=%{id}" cssClass="btn btn-default">解除</s:a>  
-									</s:else>
-									 <s:a	action="userAction_resetUserPassword?id=%{id}" onClick="return confirm('确定要重置密码吗？')"	cssClass="btn btn-default">重置密码</s:a> 
-									  
-									 <s:if test="id != currentUser.id && currentUser.role.name=='超级管理员'">   
-											 <s:if test="role.name=='普通用户'"> 
-											 <s:a action="userAction_updateUserRole?id=%{id}&roleId=2" onClick="return confirm('确定要设置%{username}为管理员吗？')"	 cssClass="btn btn-info">设为管理员</s:a>
-											 </s:if> 
-											 <s:elseif test="role.name=='管理员'">
-											 <s:a action="userAction_updateUserRole?id=%{id}&roleId=3" onClick="return confirm('确定要取消%{username}的管理员权限吗？')"	 cssClass="btn btn-danger">取消管理员</s:a>
-											 </s:elseif>    
-									 </s:if>  
-									 
-									 </s:if>
-							
-									 </td>
+										<!-- 如果是超级管理员 则没有不能对其进行修改权限 --> <s:if
+											test="role.name != '超级管理员'">
+
+											<s:if test="isBan==0">
+												<s:a action="userAction_updateUserIsBan?isBan=1&id=%{id}"
+													cssClass="btn btn-default">禁言</s:a>
+												<s:a action="userAction_updateUserIsBan?isBan=0&id=%{id}"
+													cssClass="btn btn-default disabled">解除</s:a>
+											</s:if>
+											<s:else>
+												<s:a action="userAction_updateUserIsBan?isBan=1&id=%{id}"
+													cssClass="btn btn-default disabled">禁言</s:a>
+												<s:a action="userAction_updateUserIsBan?isBan=0&id=%{id}"
+													cssClass="btn btn-default">解除</s:a>
+											</s:else>
+											<s:a action="userAction_resetUserPassword?id=%{id}"
+												onClick="return confirm('确定要重置密码吗？')"
+												cssClass="btn btn-default">重置密码</s:a>
+
+											<s:if
+												test="id != currentUser.id && currentUser.role.name=='超级管理员'">
+												<s:if test="role.name=='普通用户'">
+													<s:a action="userAction_updateUserRole?id=%{id}&roleId=2"
+														onClick="return confirm('确定要设置%{username}为管理员吗？')"
+														cssClass="btn btn-info">设为管理员</s:a>
+												</s:if>
+												<s:elseif test="role.name=='管理员'">
+													<s:a action="userAction_updateUserRole?id=%{id}&roleId=3"
+														onClick="return confirm('确定要取消%{username}的管理员权限吗？')"
+														cssClass="btn btn-danger">取消管理员</s:a>
+												</s:elseif>
+											</s:if>
+
+										</s:if>
+
+									</td>
 								</tr>
 							</s:iterator>
- 
+
 						</tbody>
 					</table>
 

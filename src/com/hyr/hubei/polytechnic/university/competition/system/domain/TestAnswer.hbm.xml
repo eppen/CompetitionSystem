@@ -29,7 +29,7 @@
 		<property name="memory" column="memory"></property>
 		<!-- 试题标题 -->
 		<property name="questionTitle" column="questionTitle"></property>
-		<many-to-one name="question" class="Question" column="questionId"></many-to-one>
+		<many-to-one name="question" class="Question" column="questionId" cascade="delete"></many-to-one> 
 		<!-- 编程语言 -->
 		<property name="language" column="language" length="10"></property>
 		<!-- 提交的文本答案 -->

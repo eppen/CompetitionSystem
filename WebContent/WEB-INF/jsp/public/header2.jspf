@@ -1,0 +1,15 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<base href="<%=basePath%>">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>   
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet"> 
+<link href="<%=basePath%>css/basic.css" rel="stylesheet" />
+<link href="<%=basePath%>css/bootstrap-theme.css" rel="stylesheet" />
+<link href="<%=basePath%>css/sticky-footer.css" rel="stylesheet" />  
+<script type="text/javascript" src="<%=basePath%>codemirror/jquery.min.js"></script>    

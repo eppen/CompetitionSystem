@@ -12,16 +12,55 @@
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <!-- 1，引入js文件 -->
 <script type="text/javascript" src="<%=basePath%>fckeditor/fckeditor.js"></script>
-
-
-
+<!-- 文件上传自定义框架 -->
+<link href="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.css"
+	rel="stylesheet" type="text/css">
+<script src="<%=basePath%>js/LXXUploadNeeded/jquery-2.2.1.js"></script>
+<script src="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.js"></script>
+<!-- 文件上传相关验证 -->
+<script src="<%=basePath%>js/fileuploadvalidate.js"></script>
 <!-- 禁用响应式布局 -->
 </head>
 
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="active navbar-btn"><a
+						href="homeAction_toExchangeCentreUI">交流中心<span class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -42,7 +81,10 @@
 
 				<!--发表新主题开始-->
 				<div class="QuictReply">
-					<form action="topicAction_createTopic" method="post">
+					<s:form action="topicAction_createTopic" method="post"
+						enctype="multipart/form-data" cssClass="form-horizontal"
+						role="form">
+
 						<s:hidden name="type" value="0"></s:hidden>
 						<div style="padding-left: 3px;">
 							<table class="table table-striped">
@@ -59,7 +101,7 @@
 									<td class="no_color_bg"><s:textfield type="text"
 											cssStyle="font-size: 20px; font-family: '微软雅黑';" name="title"
 											cssClass="InputStyle text-center form-control required"
-											placeholder="请填写标题" style="width:100%" /></td> 
+											placeholder="请填写标题" style="width:100%" /></td>
 								</tr>
 								<tr class="Tint" height="200">
 									<td valign="top" class="Deep"><b>内容</b></td>
@@ -102,6 +144,11 @@
 											cssStyle="width: 100%; height: 100px;"></s:textarea></td>
 								</tr>
 								<tr>
+									<td width="100px"><b>试题图片</b></td>
+									<td><div id="LXXUploadPic" LXXCol="5" LXXRow="1"
+											LXXWidth="100" LXXHeight="100"></div></td>
+								</tr>
+								<tr>
 									<td width="100px"><b>输入格式</b></td>
 									<td><s:textarea name="inputFormat" cssClass="form-control"
 											rows="3"></s:textarea></td>
@@ -135,13 +182,13 @@
 									<td width="100px"><b>耗时要求</b></td>
 									<td><s:textfield type="text"
 											style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-											name="runtime" cssClass="form required" />ms</td>
+											name="runtime" cssClass="form number required" />ms</td>
 								</tr>
 								<tr>
 									<td width="100px"><b>内存要求</b></td>
 									<td><s:textfield type="text"
 											style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-											name="memory" cssClass="form required" />MB</td>
+											name="memory" cssClass="form number required" />MB</td>
 								</tr>
 								<tr height="30" class="Tint">
 									<td class="center" colspan="2" align="center">
@@ -150,7 +197,7 @@
 								</tr>
 							</table>
 						</div>
-					</form>
+					</s:form>
 					<div style="height: 130px;"></div>
 				</div>
 				<!--发表新主题结束-->

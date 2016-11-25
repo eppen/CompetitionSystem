@@ -20,7 +20,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="active navbar-btn"><a
+						href="homeAction_toExchangeCentreUI">交流中心<span class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -155,6 +190,45 @@
 															<td>${topic.description}</td>
 														</tr>
 														<tr>
+															<td></td>
+															<td>
+																<div class="col-md-8" style="margin-top: 2px">
+
+																	<s:if test="#topic.imagePath1!=null">
+																		<p>
+																			<img class="img-responsive"
+																				src='<s:property value ="#topic.imagePath1" />'>
+																		</p>
+																	</s:if>
+																	<s:if test="#topic.imagePath2!=null">
+																		<p>
+																			<img class="img-responsive"
+																				src='<s:property value ="#topic.imagePath2" />'>
+																		</p>
+																	</s:if>
+																	<s:if test="#topic.imagePath3!=null">
+																		<p>
+																			<img class="img-responsive"
+																				src='<s:property value ="#topic.imagePath3" />'>
+																		</p>
+																	</s:if>
+																	<s:if test="#topic.imagePath4!=null">
+																		<p>
+																			<img class="img-responsive"
+																				src='<s:property value ="#topic.imagePath4" />'>
+																		</p>
+																	</s:if>
+																	<s:if test="#topic.imagePath5!=null">
+																		<p>
+																			<img class="img-responsive"
+																				src='<s:property value ="#topic.imagePath5" />'>
+																		</p>
+																	</s:if>
+
+																</div>
+															</td>
+														</tr>
+														<tr>
 															<td width="100px"><b>题目内容</b></td>
 															<td>${topic.content}</td>
 														</tr>
@@ -218,7 +292,7 @@
 											</s:else> <s:if test="currentUser.id==#topic.author.id">
 												<s:a action="topicAction_toUpdateTopicUI?id=%{id}">
 													<img border="0" src="img/text.gif" />编辑</s:a>
-											</s:if> <s:if 
+											</s:if> <s:if
 												test="currentUser.id == #topic.author.id || currentUser.role.name== '管理员' || currentUser.role.name== '超级管理员' ">
 												<s:a cssClass="detail"
 													action="topicAction_deleteTopic?id=%{id}"

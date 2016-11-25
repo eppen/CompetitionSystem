@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <nav class="nav navbar-inverse navbar-fixed-top">
+   
 	<div class="container">
 
 		<div class="navbar-header">
@@ -15,7 +16,7 @@
 			<ul class="nav navbar-nav navbar-btn center-block text-center">
 				<li class="active navbar-btn"><a href="homeAction_toIndex">首页<span
 						class="sr-only"></span></a></li>
-				<li class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+				<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
 						class="sr-only"></span></a></li>
 				<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
 						class="sr-only"></span></a></li>

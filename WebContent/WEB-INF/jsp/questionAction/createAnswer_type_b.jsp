@@ -58,7 +58,7 @@
 		/*  if (event.propertyName.toLowerCase () == "value") {
 		      alert ("The new content: " + event.srcElement.value);
 		  }*/
-		var array = document.getElementsByName("fractionlist"); 
+		var array = document.getElementsByName("fractionlist");
 		var sum = 0;
 		for (var i = 0; i < array.length; i++) {
 			sum = parseFloat(sum) + parseFloat(array[i].value);
@@ -99,7 +99,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%> 
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="active navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -113,8 +148,8 @@
 
 				<h2 class="sub-header">添加试题</h2>
 				<div class="table-responsive">
-					<form action="questionAction_createQuestionAnswer" class="form-horizontal"
-						role="form" method="post">
+					<form action="questionAction_createQuestionAnswer"
+						class="form-horizontal" role="form" method="post">
 
 						<table class="table table-responsive">
 							<thead>
@@ -142,7 +177,8 @@
 										name="answerlist" class="form required" value="5.545" /></td>
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="fractionlist" class="form required digits" oninput="OnInput (event)"
+										name="fractionlist" class="form required digits"
+										oninput="OnInput (event)"
 										onpropertychange="OnPropChanged (event)" value="0" /></td>
 									<td><button type="button" class="close"
 											data-dismiss="alert" aria-label="Close">
@@ -152,7 +188,8 @@
 
 							</tbody>
 						</table>
-						<button disabled="false" id="btn_submit" type="submit" class="btn btn-lg btn-success btn-block">确认</button> 
+						<button disabled="false" id="btn_submit" type="submit"
+							class="btn btn-lg btn-success btn-block">确认</button>
 					</form>
 				</div>
 			</div>

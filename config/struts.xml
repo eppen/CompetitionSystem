@@ -10,7 +10,14 @@
 	<constant name="struts.action.extension" value=","></constant>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
-	<constant name="struts.multipart.maxSize" value="1024352351525242880" />
+
+	<!-- 设置该应用使用的解码集 -->
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<!-- 上传的全部图片的最大限制 -->
+	<constant name="struts.multipart.maxSize" value="1024102400" />
+
+	<!-- 临时存放文件的路径 -->
+	<constant name="struts.multipart.saveDir" value="d:/test" />
 
 	<package name="default" namespace="/" extends="struts-default">
 
@@ -111,6 +118,16 @@
 		<action name="questionAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.QuestionAction"
 			method="{1}">
+			<!-- 限制图片的格式和图片的大小 -->
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+			</interceptor-ref>
+			<!-- 默认的拦截器，必须要写 -->
+			<interceptor-ref name="myDefaultStack" />
+			<result name="input" type="redirectAction">questionAction_toCreateQuestionUI
+			</result>
 			<result name="toCreateQuestionUI">/WEB-INF/jsp/questionAction/createQuestion.jsp
 			</result>
 			<result name="toQuestionShowUI">/WEB-INF/jsp/questionAction/questionShow.jsp
@@ -153,14 +170,25 @@
 				<!-- 等待时间,执行时间没有超过此值,将不显示等待画面 (毫秒) -->
 				<param name="delay">1</param>
 			</interceptor-ref>
-			<result name="wait" type="redirectAction">testAnswerAction_toAnswerListUI</result>
-			<result name="toAnswerList" type="redirectAction">testAnswerAction_toAnswerListUI</result>
-		</action> 
+			<result name="wait" type="redirectAction">testAnswerAction_toAnswerListUI
+			</result>
+			<result name="toAnswerList" type="redirectAction">testAnswerAction_toAnswerListUI
+			</result>
+		</action>
 
 		<!-- 主题模块 -->
 		<action name="topicAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.TopicAction"
 			method="{1}">
+			<!-- 限制图片的格式和图片的大小 -->
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+			</interceptor-ref>
+			<!-- 默认的拦截器，必须要写 -->
+			<interceptor-ref name="myDefaultStack" />
+			<result name="input" type="redirectAction">topicAction_toCreateTopicUI</result>
 			<result name="toCreateTopicUI">/WEB-INF/jsp/topicAction/createTopic.jsp</result>
 			<result name="toCreateNormalTopicUI">/WEB-INF/jsp/topicAction/createNormalTopic.jsp
 			</result>
@@ -178,13 +206,14 @@
 			</result>
 			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId}
 			</result>
-			<result name="toQuestionShow" type="redirectAction">questionAction_toQuestionShowUI?questionSetId=${questionSetId}&amp;id=${questionId}</result>
+			<result name="toQuestionShow" type="redirectAction">questionAction_toQuestionShowUI?questionSetId=${questionSetId}&amp;id=${questionId}
+			</result>
 			<result name="toUpdateTopicAUI">/WEB-INF/jsp/topicAction/updateTopic.jsp
 			</result>
 			<result name="toUpdateTopicAnswerBUI">/WEB-INF/jsp/topicAction/updateAnswer_b.jsp
-			</result> 
-			
-		</action>  
+			</result>
+
+		</action>
 
 		<!-- 论坛：回复相关功能 -->
 		<action name="replyAction_*"
@@ -218,6 +247,21 @@
 			<result name="toUserVisitorUI">/WEB-INF/jsp/visitorAction/visitor.jsp
 			</result>
 		</action>
+
+		<action name="fileUpload"
+			class="com.hyr.hubei.polytechnic.university.competition.system.action.FileUploadAction">
+			<!-- 限制图片的格式和图片的大小 -->
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+			</interceptor-ref>
+			<!-- 默认的拦截器，必须要写 -->
+			<interceptor-ref name="defaultStack" />
+			<result name="input">/WEB-INF/jsp/fileUpLoad.jsp</result>
+			<result name="success">/WEB-INF/jsp/showUpload.jsp</result>
+		</action>
+		<!-- <constant name="struts.multipart.saveDir" value="d:/test"></constant> -->
 
 	</package>
 

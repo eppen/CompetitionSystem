@@ -12,13 +12,54 @@
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
 <!-- 1，引入js文件 -->
 <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
-
+<!-- 文件上传自定义框架 -->
+<link href="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.css"
+	rel="stylesheet" type="text/css">
+<script src="<%=basePath%>js/LXXUploadNeeded/jquery-2.2.1.js"></script>
+<script src="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.js"></script>
+<!-- 文件上传相关验证 -->
+<script src="<%=basePath%>js/fileuploadvalidate.js"></script>
 <!-- 禁用响应式布局 -->
 </head>
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="active navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -32,8 +73,9 @@
 
 				<h2 class="sub-header">添加试题</h2>
 				<div class="table-responsive">
-					<form action="questionAction_createQuestion"
-						class="form-horizontal" role="form" method="post">
+					<s:form action="questionAction_createQuestion" method="post"
+						enctype="multipart/form-data" cssClass="form-horizontal"
+						role="form">
 
 						<table class="table table-striped">
 							<tr height="50" class="Tint">
@@ -66,6 +108,13 @@
 								<td width="100px"><b>问题内容</b></td>
 								<td><textarea name="content" class="form-control required"
 										rows="6" style="width: 100%; height: 100px;"></textarea></td>
+							</tr>
+							<tr> 
+								<td width="100px"><b>试题图片</b></td>
+								<td>
+									<div id="LXXUploadPic" LXXCol="5" LXXRow="1" LXXWidth="100"
+										LXXHeight="100"></div>
+								</td>
 							</tr>
 							<tr>
 								<td width="100px"><b>输入格式</b></td>
@@ -106,10 +155,10 @@
 								<td><input type="text"
 									style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
 									name="memory" class="form required" value="5.545" />MB</td>
-							</tr> 
+							</tr>
 						</table>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>
-					</form>
+					</s:form>
 				</div>
 			</div>
 

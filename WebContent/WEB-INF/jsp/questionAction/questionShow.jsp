@@ -10,14 +10,49 @@
 <meta name="description" content="题库">
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
-<%@ include file="/WEB-INF/jsp/public/header.jspf"%>  
+<%@ include file="/WEB-INF/jsp/public/header2.jspf"%> 
 <!-- 禁用响应式布局 -->
 </head>
 
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="active navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -29,12 +64,12 @@
 
 				<!-- 路径 -->
 				<ol class="breadcrumb">
-					<li><a href="homeAction_toCompetitionSystemUI">试题集 <span 
+					<li><a href="homeAction_toCompetitionSystemUI">试题集 <span
 							class="glyphicon glyphicon-chevron-right"></span></a> <s:a
-							action="questionAction_toQuestionListUI?questionSetId=%{questionSetId}">${scope.title } <span  
-								class="glyphicon glyphicon-chevron-right"></span>    
+							action="questionAction_toQuestionListUI?questionSetId=%{questionSetId}">${scope.title } <span
+								class="glyphicon glyphicon-chevron-right"></span>
 						</s:a>
-					<li class="active">${title } <span 
+					<li class="active">${title }<span
 						class="glyphicon glyphicon-chevron-right"></li>
 					</li>
 				</ol>
@@ -48,10 +83,46 @@
 								<td>时间限制：${runtime }ms 内存限制：${memory }MB</td>
 							</tr>
 							<tr>
-								<td><b>问题描述</b></td></tr>
+								<td><b>问题描述</b></td>
+							</tr>
 							<tr>
-								<td>
-								${description }
+								<td>${description }</td>
+							</tr>
+							<tr> 
+								<td> 
+									<div class="col-md-7" style="margin-top: 2px">  
+										<s:if test="imagePath1!=null">
+											<p>
+												<img class="img-responsive"
+													src='<s:property value ="imagePath1" />'>
+											</p>
+										</s:if>
+										<s:if test="imagePath2!=null">
+											<p>
+												<img class="img-responsive"
+													src='<s:property value ="imagePath2" />'>
+											</p>
+										</s:if>
+										<s:if test="imagePath3!=null">
+											<p>
+												<img class="img-responsive"
+													src='<s:property value ="imagePath3" />'>
+											</p>
+										</s:if>
+										<s:if test="imagePath4!=null">
+											<p>
+												<img class="img-responsive"
+													src='<s:property value ="imagePath4" />'>
+											</p>
+										</s:if>
+										<s:if test="imagePath5!=null">  
+											<p>
+												<img class="img-responsive"
+													src='<s:property value ="imagePath5" />'>
+											</p>
+										</s:if>
+
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -90,11 +161,13 @@
 							<tr>
 								<td>${cue }<br /></td>
 							</tr>
-							<tr> 
+							<tr>
 								<td><center>
-										<s:a action="testAnswerAction_toSubmitAnswerUI?questionId=%{id}" cssClass="btn btn-warning btn-lg">提交答案</s:a>  
-									</center></td>   
-							</tr> 
+										<s:a
+											action="testAnswerAction_toSubmitAnswerUI?questionId=%{id}"
+											cssClass="btn btn-warning btn-lg">提交答案</s:a>
+									</center></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

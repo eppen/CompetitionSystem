@@ -1,12 +1,24 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
+import com.hyr.hubei.polytechnic.university.competition.system.cxf.Configuration;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
@@ -23,6 +35,12 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class QuestionAction extends ModelDrivenBaseAction<Question> {
 
+	private static final int BUFFER_SIZE = 16 * 1024;
+	private List<File> myFile = new ArrayList<File>();
+	private List<String> contentType = new ArrayList<String>();
+	private List<String> fileName = new ArrayList<String>(); // 文件名
+	private List<String> imageFileName = new ArrayList<String>();
+	private String caption;
 	private Long questionSetId;
 	private Long scopeId; // 创建的试题所属试题集ID
 	private String titleSearch; // 根据标题搜索内容
@@ -99,7 +117,7 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 	public String toCreateQuestionUI() throws AppException {
 		// 准备试题集数据
 		List<QuestionSet> questionSets = questionSetService.findAll();
-		ActionContext.getContext().put("questionSets", questionSets); 
+		ActionContext.getContext().put("questionSets", questionSets);
 
 		return "toCreateQuestionUI";
 	}
@@ -134,7 +152,57 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 		// 将创建好的数据进行保存
 		ActionContext.getContext().getSession().put("newquestion1", question);
 
-		// TODO 图片的上传 暂不处理
+		// 上传图片文件
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateNowStr = sdf.format(new Date());
+		String dirStr = ServletActionContext.getServletContext() // 得到图片保存的位置(根据root来得到图片保存的路径在tomcat下的该工程里)
+				.getRealPath("UploadImages") + "/" + dateNowStr + "/";
+		File file = new File(dirStr);
+		if (!file.isDirectory() || !file.exists()) {
+			file.mkdirs();
+		}
+
+		if (myFile == null)
+			return "input"; // 返回上传页面
+
+		// 图片的备份 在服务器外的文件夹中进行备份
+		File fileBak = new File(Configuration.getFileCachePath() + "/UploadImages/" + dateNowStr);
+		if (!fileBak.isDirectory() || !file.exists()) {
+			fileBak.mkdirs();
+		}
+
+		// 图片上传
+		for (int i = 0; i < myFile.size(); i++) {
+			// 将上次的图片文件名改为UUID 保存两份
+			UUID uuid = UUID.randomUUID();
+			String imageFileName = "[" + uuid.toString() + ".tmp]";
+			File imageFile = new File(dirStr + imageFileName);
+			File imageFileBak = new File(fileBak.getPath() + '/' + imageFileName);
+			copy(myFile.get(i), imageFile); // 把图片写入到上面设置的路径里
+			// 备份
+			copy(myFile.get(i), imageFileBak);
+			// 将图片url存入数据库
+			switch (i) {
+			case 0:
+				question.setImagePath1("UploadImages" + "/" + dateNowStr + "/" + imageFileName);
+				break;
+			case 1:
+				question.setImagePath2("UploadImages" + "/" + dateNowStr + "/" + imageFileName);
+				break;
+			case 2:
+				question.setImagePath3("UploadImages" + "/" + dateNowStr + "/" + imageFileName);
+				break;
+			case 3:
+				question.setImagePath4("UploadImages" + "/" + dateNowStr + "/" + imageFileName);
+				break;
+			case 4:
+				question.setImagePath5("UploadImages" + "/" + dateNowStr + "/" + imageFileName);
+				break;
+
+			default:
+				break;
+			}
+		}
 
 		// 创建试题后 前往创建答案页面
 		if (question.getType() == 1) {
@@ -334,4 +402,78 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 	public void setTitleSearch(String titleSearch) {
 		this.titleSearch = titleSearch;
 	}
+
+	public List<File> getMyFile() {
+		return myFile;
+	}
+
+	public void setMyFile(List<File> myFile) {
+		this.myFile = myFile;
+	}
+
+	public List<String> getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(List<String> contentType) {
+		this.contentType = contentType;
+	}
+
+	public List<String> getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(List<String> fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getCaption() {
+		return caption;
+	}
+
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
+
+	public static int getBufferSize() {
+		return BUFFER_SIZE;
+	}
+
+	public List<String> getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(List<String> imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
+	private static void copy(File src, File dst) {
+		try {
+			InputStream in = null;
+			OutputStream out = null;
+			try {
+				in = new BufferedInputStream(new FileInputStream(src), BUFFER_SIZE);
+				out = new BufferedOutputStream(new FileOutputStream(dst), BUFFER_SIZE);
+				byte[] buffer = new byte[BUFFER_SIZE];
+				while (in.read(buffer) > 0) {
+					out.write(buffer);
+				}
+			} finally {
+				if (null != in) {
+					in.close();
+				}
+				if (null != out) {
+					out.close();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static String getExtention(String fileName) {
+		int pos = fileName.lastIndexOf(".");
+		return fileName.substring(pos);
+	}
+
 }

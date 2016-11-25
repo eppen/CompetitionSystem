@@ -13,7 +13,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%> 
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="active navbar-btn"><a
+						href="homeAction_toHelpUI">帮助文档<span class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<div class="container jumbotron">
@@ -222,8 +257,7 @@
 				您可以使用下面的方式缴费：<br /> （1）<b>在线缴费</b>：选择"支付宝"，按提示缴费即可，实时到账，无手续费。<br />
 				<br /> （2）<b>邮局汇款</b>：通过邮局汇款，到账时间根据各地情况不同，为一至两周，邮局需收取相应汇款手续费。汇款后请登陆系统提交支付凭证。<br />
 				汇款信息：<span style="text-decoration: underline;">北京市海淀区万寿路27号院18#信箱，刘佳，100846</span>。<br />
-				请在汇款单附言中标注学校全称，以便核对查询。<br />
-				<br /> （3）<b>银行转账</b>：只接受学校公对公转账，到账时间根据银行不同，为1至7天，银行需收取相应转账手续费。汇款后请登陆系统提交支付凭证。<br />
+				请在汇款单附言中标注学校全称，以便核对查询。<br /> <br /> （3）<b>银行转账</b>：只接受学校公对公转账，到账时间根据银行不同，为1至7天，银行需收取相应转账手续费。汇款后请登陆系统提交支付凭证。<br />
 				银行账号：<span style="text-decoration: underline;">国信世纪人才服务（北京）有限公司</span><br />
 				开户银行：<span style="text-decoration: underline;">交通银行北京翠微路支行</span><br />
 				账户：<span style="text-decoration: underline;">110060836018150038530</span><br />

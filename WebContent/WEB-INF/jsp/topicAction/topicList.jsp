@@ -16,7 +16,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="active navbar-btn"><a
+						href="homeAction_toExchangeCentreUI">交流中心<span class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -37,18 +72,19 @@
 				<div class="container">
 					<a href="topicAction_toCreateTopicUI" class="btn btn-success">发表新主题</a>
 				</div>
-				<p></p> 
+				<p></p>
 
 				<div class="table-responsive">
 
 					<!------- 搜索框 ------->
-					<s:form id="pageForm" action="topicAction_toTopicListUI" 
+					<s:form id="pageForm" action="topicAction_toTopicListUI"
 						role="search" method="post">
-						<div class="input-group" style="width: 50%"> 
+						<div class="input-group" style="width: 50%">
 							<s:textfield type="text" name="titleSearch"
-								cssClass="form-control input-md" placeholder="请输入主题名称" />    
-							<span onclick="javascript: gotoPage(1)" class="input-group-addon btn btn-primary">搜索</span>  
-						</div>    
+								cssClass="form-control input-md" placeholder="请输入主题名称" />
+							<span onclick="javascript: gotoPage(1)"
+								class="input-group-addon btn btn-primary">搜索</span>
+						</div>
 
 						<table class="table table-hover table-condensed">
 							<thead>

@@ -70,8 +70,12 @@ public class Topic extends Article {
 	/** 提示 */
 	private String cue;
 
-	/** 试题图片信息 */
-	private Blob images;
+	/** 图片上传地址 */
+	private String imagePath1;
+	private String imagePath2;
+	private String imagePath3;
+	private String imagePath4;
+	private String imagePath5;
 
 	/** 耗时要求 */
 	private double runtime;
@@ -212,14 +216,6 @@ public class Topic extends Article {
 		this.cue = cue;
 	}
 
-	public Blob getImages() {
-		return images;
-	}
-
-	public void setImages(Blob images) {
-		this.images = images;
-	}
-
 	public double getRuntime() {
 		return runtime;
 	}
@@ -306,6 +302,46 @@ public class Topic extends Article {
 
 	public void setClassify(Integer classify) {
 		this.classify = classify;
+	}
+
+	public String getImagePath1() {
+		return imagePath1;
+	}
+
+	public void setImagePath1(String imagePath1) {
+		this.imagePath1 = imagePath1;
+	}
+
+	public String getImagePath2() {
+		return imagePath2;
+	}
+
+	public void setImagePath2(String imagePath2) {
+		this.imagePath2 = imagePath2;
+	}
+
+	public String getImagePath3() {
+		return imagePath3;
+	}
+
+	public void setImagePath3(String imagePath3) {
+		this.imagePath3 = imagePath3;
+	}
+
+	public String getImagePath4() {
+		return imagePath4;
+	}
+
+	public void setImagePath4(String imagePath4) {
+		this.imagePath4 = imagePath4;
+	}
+
+	public String getImagePath5() {
+		return imagePath5;
+	}
+
+	public void setImagePath5(String imagePath5) {
+		this.imagePath5 = imagePath5;
 	}
 
 }

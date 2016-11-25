@@ -19,7 +19,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="active navbar-btn"><a
+						href="homeAction_toExchangeCentreUI">交流中心<span class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -39,14 +74,14 @@
 				</ol>
 
 				<!--发表新主题开始-->
-				<div class="QuictReply"> 
-					<form action="topicAction_createTopic" method="post"> 
+				<div class="QuictReply">
+					<form action="topicAction_createTopic" method="post">
 						<s:hidden name="type" value="1"></s:hidden>
 						<div style="padding-left: 3px;">
 							<table class="table table-striped">
 								<tr>
 									<td width="100px"><b>主题类型</b></td>
-									<td><select class=" btn btn-default" 
+									<td><select class=" btn btn-default"
 										onchange="window.location=this.value;">
 											<option value="topicAction_toCreateNormalTopicUI">知识讨论</option>
 											<option value="topicAction_toCreateTopicUI">新增题目</option>
@@ -67,7 +102,8 @@
 								</tr>
 								<tr height="30" class="Tint">
 									<td class="center" colspan="2" align="center">
-										<button type="submit" onclick="getContent()" class="btn btn-success">确认</button>
+										<button type="submit" onclick="getContent()"
+											class="btn btn-success">确认</button>
 									</td>
 								</tr>
 							</table>
@@ -89,10 +125,10 @@
 		editor.BasePath = "fckeditor/";
 		editor.ToolbarSet = "simple"; //"simple";
 		editor.Width = "100%";
-		editor.Config['EnableAdvanceTable'] = false; 
-		editor.ReplaceTextarea();  
-	</script> 
-	
+		editor.Config['EnableAdvanceTable'] = false;
+		editor.ReplaceTextarea();
+	</script>
+
 
 
 

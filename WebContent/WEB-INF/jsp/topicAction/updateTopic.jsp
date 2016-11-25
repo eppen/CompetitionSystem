@@ -21,7 +21,42 @@
 <body>
 
 	<!--   	导航条开始    -->
-	<%@ include file="/WEB-INF/jsp/public/nav.jspf"%>
+	<nav class="nav navbar-inverse navbar-fixed-top">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<!-- 	描述：logo -->
+				<a class="navbar-brand"> <img src="img/ic_launcher.jpg"
+					style="width: 75px;" />
+				</a>
+			</div>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-btn center-block text-center">
+					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
+							class="sr-only"></span></a></li>
+					<li id="nav2" class="navbar-btn"><a href="homeAction_toHelpUI">帮助文档<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="homeAction_toCompetitionSystemUI">进入系统<span
+							class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a
+						href="testAnswerAction_toAnswerListUI">评测状态<span
+							class="sr-only"></span></a></li>
+					<li class="active navbar-btn"><a
+						href="homeAction_toExchangeCentreUI">交流中心<span class="sr-only"></span></a></li>
+					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+							class="sr-only"></span></a></li>
+				</ul>
+
+				<%@ include file="/WEB-INF/jsp/public/userMenu.jspf"%>
+			</div>
+
+		</div>
+	</nav>
 	<!--   	导航条结束    -->
 
 	<!-- 中间内容开始 -->
@@ -54,7 +89,7 @@
 								</tr>
 								<tr height="50" class="Tint">
 									<td width="50px" class="Deep"><b>标题</b></td>
-									<td class="no_color_bg">${title}</td> 
+									<td class="no_color_bg">${title}</td>
 								</tr>
 								<tr class="Tint" height="200">
 									<td valign="top" class="Deep"><b>内容</b></td>
@@ -68,14 +103,14 @@
 											cssStyle="font-size: 20px; font-family: '微软雅黑';width:100%"
 											name="questionTitle"
 											cssClass="text-center form-control required"
-											placeholder="请填写试题名称" /></td> 
+											placeholder="请填写试题名称" /></td>
 								</tr>
 								<s:hidden name="questionType" value="2"></s:hidden>
 								<tr>
 									<td width="100px"><b>编程语言</b></td>
 									<td><s:select name="language"
 											cssClass=" btn btn-default required" list="#{'JAVA':'JAVA'} ">
-										</s:select></td> 
+										</s:select></td>
 								</tr>
 								<tr>
 									<td width="100px"><b>所属试题集</b></td>

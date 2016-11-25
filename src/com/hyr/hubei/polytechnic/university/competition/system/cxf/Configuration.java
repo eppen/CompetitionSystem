@@ -8,19 +8,17 @@ import java.util.Properties;
  * 管理配置信息的（读取配置文件）
  * 
  * @author tyg
- * @category 配置信息 
+ * @category 配置信息
  * 
  */
-public class Configuration
-{
+public class Configuration {
 
 	private static int pageSize = 10;
+	private static String fileCachePath = "d:/FileUploadCache";
 
-	static
-	{
+	static {
 		InputStream in = null;
-		try
-		{
+		try {
 
 			// 加载default.properties配置文件
 			Properties props = new Properties();
@@ -29,33 +27,35 @@ public class Configuration
 
 			// 获取配置的值
 			pageSize = Integer.parseInt(props.getProperty("pageSize"));
+			fileCachePath = props.getProperty("fileCachePath");
 
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw new RuntimeException(e);
-		} finally
-		{
-			if (in != null)
-			{
-				try
-				{
+		} finally {
+			if (in != null) {
+				try {
 					in.close();
-				} catch (IOException e)
-				{
+				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
 			}
 		}
 	}
 
-	public static int getPageSize()
-	{
+	public static int getPageSize() {
 		return pageSize;
 	}
 
-	public static void setPageSize(int pageSize)
-	{
+	public static void setPageSize(int pageSize) {
 		Configuration.pageSize = pageSize;
+	}
+
+	public static String getFileCachePath() {
+		return fileCachePath;
+	}
+
+	public static void setFileCachePath(String fileCachePath) {
+		Configuration.fileCachePath = fileCachePath;
 	}
 
 }
