@@ -10,7 +10,8 @@
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
-
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
 <!------------   计算总分 判断是否为100分 100分才可以提交  ------------>
 <script type="text/javascript">
 	// Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9

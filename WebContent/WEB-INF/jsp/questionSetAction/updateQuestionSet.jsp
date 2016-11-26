@@ -10,6 +10,8 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="css/dashboard.css" rel="stylesheet" />
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
 <!-- 禁用响应式布局 -->
 </head>
 <body>

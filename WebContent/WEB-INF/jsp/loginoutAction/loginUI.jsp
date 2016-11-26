@@ -9,7 +9,6 @@
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
-
 </head>
 
 <body>
@@ -20,11 +19,11 @@
 			role="form" method="post">
 			<h2 class="form-signin-heading">请登录</h2>
 			<h3  style="color: red"><s:fielderror cssStyle=" list-style:none;"><s:param>loginerror</s:param></s:fielderror></h3>    
-			<s:textfield cssClass="form-control required" name="username"
+			<s:textfield cssClass="form-control" required="required" name="username"
 				placeholder="请输入用户名" />
 			<s:password type="password" cssClass="form-control required"
-				name="password" placeholder="请输入密码" />
-
+				name="password" required="required" placeholder="请输入密码" />
+ 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
 		</s:form>
 

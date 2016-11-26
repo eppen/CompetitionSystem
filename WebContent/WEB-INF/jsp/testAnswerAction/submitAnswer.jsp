@@ -56,6 +56,8 @@
 		createCodeMirrorEditor();
 	});
 </script>
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
 </head>
 
 <body>

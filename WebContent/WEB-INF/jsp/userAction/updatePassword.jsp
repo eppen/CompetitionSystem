@@ -10,7 +10,7 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
-<!-- 禁用响应式布局 -->
+<!-- 禁用响应式布局 --> 
 </head>
 <body>
 
@@ -78,7 +78,7 @@
 										</div>
 									</td>
 									<td><input type="password" name="oldPassword"
-										class="focus form-control" required="required" /></td>
+										class="focus form-control" required="required" /></td> 
 								</tr>
 								<tr>
 									<td>输入新密码</td>

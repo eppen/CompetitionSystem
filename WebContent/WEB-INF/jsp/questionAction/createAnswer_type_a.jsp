@@ -10,6 +10,8 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
 <!-- 禁用响应式布局 -->
 </head>
 <body>
@@ -43,7 +45,7 @@
 								<tr class="alert alert-dismissable">
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="answerlist" class="form required" value="5050" /></td>
+										name="answerlist" class="form" value="5050" /></td>
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
 										name="fractionlist" class="form required" readonly="true" value="100" /></td>    

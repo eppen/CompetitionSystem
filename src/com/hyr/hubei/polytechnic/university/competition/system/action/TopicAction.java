@@ -182,8 +182,14 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 				.preparePageBean(replyService, pageNum);
 
 		// TODO 判断主题类型 进入不同的展示页面
+		if (topic.getType() == 0) {
+			return "toTopicShowUI";
+		} else if (topic.getType() == 1) {
+			return "toTopicNormalShowUI";
+		} else {
+			return "error";
+		}
 
-		return "toTopicShowUI";
 	}
 
 	/**
@@ -228,7 +234,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		topic.setLanguage(model.getLanguage());
 		topic.setMemory(model.getMemory());
 		topic.setOutputFormat(model.getOutputFormat());
-		topic.setQuestionTitle(model.getQuestionTitle());
+		topic.setQuestionTitle(model.getQuestionTitle() + "");
 		topic.setQuestionType(model.getQuestionType());
 		topic.setRuntime(model.getRuntime());
 		topic.setSampleInput(model.getSampleInput());
@@ -536,6 +542,11 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		question.setScope(topic.getScope());
 		question.setTitle(topic.getQuestionTitle());
 		question.setType(topic.getQuestionType());
+		question.setImagePath1(topic.getImagePath1());
+		question.setImagePath2(topic.getImagePath2());
+		question.setImagePath3(topic.getImagePath3());
+		question.setImagePath4(topic.getImagePath4());
+		question.setImagePath5(topic.getImagePath5());
 
 		// 添加题目到数据库
 		questionService.save(question);

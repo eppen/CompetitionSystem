@@ -10,8 +10,6 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
-<!-- 1，引入js文件 -->
-<script type="text/javascript" src="fckeditor/fckeditor.js"></script>
 <!-- 文件上传自定义框架 -->
 <link href="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.css"
 	rel="stylesheet" type="text/css">
@@ -19,6 +17,10 @@
 <script src="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.js"></script>
 <!-- 文件上传相关验证 -->
 <script src="<%=basePath%>js/fileuploadvalidate.js"></script>
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
+<!-- 编辑框 -->
+<script src="<%=basePath%>js/ckeditor/ckeditor.js"></script>
 <!-- 禁用响应式布局 -->
 </head>
 <body>
@@ -106,10 +108,15 @@
 							</tr>
 							<tr>
 								<td width="100px"><b>问题内容</b></td>
-								<td><textarea name="content" class="form-control required"
-										rows="6" style="width: 100%; height: 100px;"></textarea></td>
+								<td>
+									<div class="grid-container">
+										<div class="grid-width-100"> 
+											<s:textarea name="content" id="editor"></s:textarea>
+										</div>
+									</div>
+								</td>
 							</tr>
-							<tr> 
+							<tr>
 								<td width="100px"><b>试题图片</b></td>
 								<td>
 									<div id="LXXUploadPic" LXXCol="5" LXXRow="1" LXXWidth="100"
@@ -148,13 +155,13 @@
 								<td width="100px"><b>耗时要求</b></td>
 								<td><input type="text"
 									style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-									name="runtime" class="form required" value="500" />ms</td>
+									name="runtime" class="form required number" value="500" />ms</td>
 							</tr>
 							<tr>
 								<td width="100px"><b>内存要求</b></td>
 								<td><input type="text"
 									style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-									name="memory" class="form required" value="5.545" />MB</td>
+									name="memory" class="form required number" value="5.545" />MB</td>
 							</tr>
 						</table>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">确认</button>
@@ -167,13 +174,16 @@
 	</div>
 	<!-- 中间内容结束 -->
 
-	<script type="text/javascript">
-		var editor = new FCKeditor('content');
-		editor.BasePath = "fckeditor/";
-		editor.ToolbarSet = "simple"; //"simple";
-		editor.Width = "100%";
-		editor.Config['EnableAdvanceTable'] = false;
-		editor.ReplaceTextarea();
+	<script> 
+		window.onload = function() {
+			CKEDITOR.replace('editor');
+		};
+
+		$("#submit").click(function() {
+			/* CKEDITOR.replace("editor1"); */
+			var title = $("#caption").val(); /*不能用.text()或.html()*/
+			var val = CKEDITOR.instances.editor.getData();
+		});
 	</script>
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>

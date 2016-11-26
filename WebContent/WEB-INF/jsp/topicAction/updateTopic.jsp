@@ -10,11 +10,10 @@
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
-<!-- 1，引入js文件 -->
-<script type="text/javascript" src="<%=basePath%>fckeditor/fckeditor.js"></script>
-
-
-
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
+<!-- 编辑框 -->
+<script src="<%=basePath%>js/ckeditor/ckeditor.js"></script>
 <!-- 禁用响应式布局 -->
 </head>
 
@@ -93,9 +92,12 @@
 								</tr>
 								<tr class="Tint" height="200">
 									<td valign="top" class="Deep"><b>内容</b></td>
-									<td valign="top" class="no_color_bg"><s:textarea
-											name="topicContent" cssClass="required"
-											cssStyle="width: 100%; height: 100px;"></s:textarea></td>
+									<td valign="top" class="no_color_bg"><div
+											class="grid-container">
+											<div class="grid-width-100">
+												<s:textarea name="topicContent" id="editor"></s:textarea>
+											</div>
+										</div></td>
 								</tr>
 								<tr>
 									<td width="100px"><b>试题名称</b></td>
@@ -127,9 +129,11 @@
 								</tr>
 								<tr>
 									<td width="100px"><b>问题内容</b></td>
-									<td><s:textarea name="content"
-											cssClass="form-control required" rows="6"
-											cssStyle="width: 100%; height: 100px;"></s:textarea></td>
+									<td><div class="grid-container">
+											<div class="grid-width-100">
+												<s:textarea name="content" id="editor2"></s:textarea>
+											</div>
+										</div></td>
 								</tr>
 								<tr>
 									<td width="100px"><b>输入格式</b></td>
@@ -191,22 +195,18 @@
 	</div>
 	<!-- 中间内容结束 -->
 
-	<script type="text/javascript">
-		var editor = new FCKeditor('content');
-		editor.BasePath = "fckeditor/";
-		editor.ToolbarSet = "simple"; //"simple"; 
-		editor.Width = "100%";
-		editor.Config['EnableAdvanceTable'] = false;
-		editor.ReplaceTextarea();
+	<script>
+		window.onload = function() {
+			CKEDITOR.replace('editor');
+			CKEDITOR.replace('editor2'); 
+		};
 
-		var editor2 = new FCKeditor('topicContent');
-		editor2.BasePath = "fckeditor/";
-		editor2.ToolbarSet = "simple"; //"simple";
-		editor2.Width = "100%";
-		editor2.Config['EnableAdvanceTable'] = false;
-		editor2.ReplaceTextarea();
+		$("#submit").click(function() {
+			/* CKEDITOR.replace("editor1"); */
+			var title = $("#caption").val(); /*不能用.text()或.html()*/
+			var val = CKEDITOR.instances.editor.getData();
+		});
 	</script>
-
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
 </body>

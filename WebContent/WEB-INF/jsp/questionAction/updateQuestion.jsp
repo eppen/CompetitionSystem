@@ -10,10 +10,10 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
-<!-- 禁用响应式布局 -->
-<!-- 1，引入js文件 -->
-<script type="text/javascript" src="fckeditor/fckeditor.js"></script>
-
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
+<!-- 编辑框 -->
+<script src="<%=basePath%>js/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -77,11 +77,11 @@
 										cssStyle="font-size: 20px; font-family: '微软雅黑';width:100%"
 										name="title" cssClass="text-center form-control required" /></td>
 							</tr>
-							<s:hidden name="type" value="2"></s:hidden> 
+							<s:hidden name="type" value="2"></s:hidden>
 							<tr>
 								<td width="100px"><b>编程语言</b></td>
-								<td><s:select name="language" cssClass=" btn btn-default required"
-										list="#{'JAVA':'JAVA'} ">
+								<td><s:select name="language"
+										cssClass=" btn btn-default required" list="#{'JAVA':'JAVA'} ">
 									</s:select></td>
 							</tr>
 							<tr>
@@ -98,9 +98,13 @@
 							</tr>
 							<tr>
 								<td width="100px"><b>问题内容</b></td>
-								<td><s:textarea name="content"
-										cssClass="form-control required" rows="6"
-										cssStyle="width: 100%; height: 100px;"></s:textarea></td>
+								<td>
+									<div class="grid-container">
+										<div class="grid-width-100">
+											<s:textarea name="content" cssClass="required"  id="editor"></s:textarea>
+										</div>
+									</div>
+								</td>
 							</tr>
 							<tr>
 								<td width="100px"><b>输入格式</b></td>
@@ -135,13 +139,13 @@
 								<td width="100px"><b>耗时要求</b></td>
 								<td><s:textfield type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-										name="runtime" cssClass="form required" />ms</td>
+										name="runtime" cssClass="form required number" />ms</td>
 							</tr>
 							<tr>
 								<td width="100px"><b>内存要求</b></td>
 								<td><s:textfield type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 10%;"
-										name="memory" cssClass="form required" />MB</td>
+										name="memory" cssClass="form required number" />MB</td>
 							</tr>
 						</table>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">修改</button>
@@ -154,13 +158,16 @@
 	</div>
 	<!-- 中间内容结束 -->
 
-	<script type="text/javascript">
-		var editor = new FCKeditor('content');
-		editor.BasePath = "fckeditor/";
-		editor.ToolbarSet = "simple"; //"simple";
-		editor.Width = "100%";
-		editor.Config['EnableAdvanceTable'] = false;
-		editor.ReplaceTextarea();
+	<script>
+		window.onload = function() {
+			CKEDITOR.replace('editor');
+		};
+
+		$("#submit").click(function() {
+			/* CKEDITOR.replace("editor1"); */
+			var title = $("#caption").val(); /*不能用.text()或.html()*/
+			var val = CKEDITOR.instances.editor.getData();
+		}); 
 	</script>
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>

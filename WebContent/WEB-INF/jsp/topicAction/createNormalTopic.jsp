@@ -10,10 +10,18 @@
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
-<!-- 1，引入js文件 -->
-<script type="text/javascript" src="<%=basePath%>fckeditor/fckeditor.js"></script>
-
-<!-- 禁用响应式布局 -->
+<!-- 文件上传自定义框架 -->
+<link href="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.css"
+	rel="stylesheet" type="text/css">
+<script src="<%=basePath%>js/LXXUploadNeeded/jquery-2.2.1.js"></script>
+<script src="<%=basePath%>js/LXXUploadNeeded/LXXUploadPic.js"></script>
+<!-- 文件上传相关验证 -->
+<script src="<%=basePath%>js/fileuploadvalidate.js"></script>
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
+<!-- 编辑框 -->
+<script src="<%=basePath%>js/ckeditor/ckeditor.js"></script>
+<!-- 禁用响应式布局 --> 
 </head>
 
 <body>
@@ -75,7 +83,9 @@
 
 				<!--发表新主题开始-->
 				<div class="QuictReply">
-					<form action="topicAction_createTopic" method="post">
+					<s:form action="topicAction_createTopic" method="post"
+						enctype="multipart/form-data" cssClass="form-horizontal"
+						role="form">
 						<s:hidden name="type" value="1"></s:hidden>
 						<div style="padding-left: 3px;">
 							<table class="table table-striped">
@@ -96,9 +106,17 @@
 								</tr>
 								<tr class="Tint" height="200">
 									<td valign="top" class="Deep"><b>内容</b></td>
-									<td valign="top" class="no_color_bg"><s:textarea
-											name="topicContent" cssClass="required"
-											cssStyle="width: 100%; height: 100px;"></s:textarea></td>
+									<td valign="top" class="no_color_bg"><div
+											class="grid-container">
+											<div class="grid-width-100">
+												<s:textarea name="topicContent" id="editor"></s:textarea>
+											</div>
+										</div></td>
+								</tr>
+								<tr>
+									<td width="100px"></td>
+									<td><div id="LXXUploadPic" LXXCol="5" LXXRow="1"
+											LXXWidth="100" LXXHeight="100"></div></td>
 								</tr>
 								<tr height="30" class="Tint">
 									<td class="center" colspan="2" align="center">
@@ -108,7 +126,7 @@
 								</tr>
 							</table>
 						</div>
-					</form>
+					</s:form>
 					<div style="height: 130px;"></div>
 				</div>
 				<!--发表新主题结束-->
@@ -120,17 +138,17 @@
 	<!-- 中间内容结束 -->
 
 
-	<script type="text/javascript">
-		var editor = new FCKeditor('topicContent');
-		editor.BasePath = "fckeditor/";
-		editor.ToolbarSet = "simple"; //"simple";
-		editor.Width = "100%";
-		editor.Config['EnableAdvanceTable'] = false;
-		editor.ReplaceTextarea();
+	<script>
+		window.onload = function() {
+			CKEDITOR.replace('editor');
+		};
+
+		$("#submit").click(function() {
+			/* CKEDITOR.replace("editor1"); */
+			var title = $("#caption").val(); /*不能用.text()或.html()*/
+			var val = CKEDITOR.instances.editor.getData();
+		});
 	</script>
-
-
-
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
 </body>

@@ -202,6 +202,8 @@
 			</result>
 			<result name="toTopicShowUI">/WEB-INF/jsp/topicAction/topicShow.jsp
 			</result>
+			<result name="toTopicNormalShowUI">/WEB-INF/jsp/topicAction/topicNormalShow.jsp
+			</result>
 			<result name="toTopicList" type="redirectAction">topicAction_toTopicListUI
 			</result>
 			<result name="toTopicShow" type="redirectAction">topicAction_toTopicShowUI?id=${topicId}

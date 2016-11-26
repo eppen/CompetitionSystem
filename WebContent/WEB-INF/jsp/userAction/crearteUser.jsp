@@ -10,6 +10,8 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/dashboard.css" rel="stylesheet" />
+<!-- 表单验证 -->
+<%@ include file="/WEB-INF/jsp/public/formvalidate.jspf"%>
 <!-- 禁用响应式布局 -->
 </head>
 <body>
@@ -82,7 +84,7 @@
 								<tr>
 									<td>重新输入姓名</td>
 									<td><input type="text" name="name"
-										class="form-control required" value="学生"/></td>  
+										class="form-control required  value="学生"/></td>  
 								</tr> 
 								<tr>
 									<td>用户级别</td>
