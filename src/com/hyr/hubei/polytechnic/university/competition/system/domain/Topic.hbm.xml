@@ -36,8 +36,7 @@
 		<!-- 编程语言 -->
 		<property name="language" column="language" length="10"></property>
 		<!-- 试题集 -->
-		<many-to-one name="scope" class="QuestionSet" column="scopeId"
-			lazy="false"></many-to-one>
+		<many-to-one name="scope" class="QuestionSet" column="scopeId" cascade="delete"></many-to-one> 
 		<!-- 试题描述 -->
 		<property name="description" column="description"></property>
 		<!-- 输入格式 -->

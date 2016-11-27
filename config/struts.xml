@@ -158,6 +158,8 @@
 			</result>
 			<result name="toAnswerInfoUI">/WEB-INF/jsp/testAnswerAction/evaluatingStatusInfo.jsp
 			</result>
+			<result name="toQuestionSubmitRecordUI">/WEB-INF/jsp/testAnswerAction/submitEvaluatingRecord.jsp
+			</result>
 		</action>
 
 		<!-- 检测答案模块 -->

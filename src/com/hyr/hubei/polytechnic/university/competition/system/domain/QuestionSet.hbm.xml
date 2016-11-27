@@ -11,19 +11,27 @@
 			<generator class="native" />
 		</id>
 		<!-- 试题集名称 -->
-		<property name="title" column="title" length="50" not-null="true" unique="true"></property>
+		<property name="title" column="title" length="50" not-null="true"
+			unique="true"></property>
 		<!-- 试题集的试题数量 -->
-		<property name="questionCount" column="questionCount" not-null="true" ></property> 
+		<property name="questionCount" column="questionCount"
+			not-null="true"></property>
 		<!-- 试题集描述 -->
 		<property name="description" column="description" not-null="true"></property>
 		<!-- 关联的试题 一对多 -->
-		<list name="questions" cascade="delete" lazy="true">     
-			<key column="questions" ></key>   
+		<list name="questions" cascade="delete" lazy="true">
+			<key column="questions"></key>
 			<index column="createTime" type="Date"></index>
-			<one-to-many class="Question"/> 
-		</list> 
+			<one-to-many class="Question" />
+		</list>
+		<!-- 关联的主题 一对多 -->
+		<set name="topics" lazy="true" cascade="delete">
+			<key column="scopeId"></key>
+			<one-to-many class="Topic" />
+		</set>
 		<!-- 更新时间 -->
-		<property name="updateTime" column="updateTime" type="timestamp" not-null="true"></property>
+		<property name="updateTime" column="updateTime" type="timestamp"
+			not-null="true"></property>
 		<!-- 是否被删除 -->
 		<property name="isdel" column="isdel" length="2" not-null="true"></property>
 

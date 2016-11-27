@@ -7,8 +7,7 @@
 %>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>   
-<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet"> 
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">  
 <link href="<%=basePath%>css/basic.css" rel="stylesheet" />
 <link href="<%=basePath%>css/bootstrap-theme.css" rel="stylesheet" />
 <link href="<%=basePath%>css/sticky-footer.css" rel="stylesheet" />  

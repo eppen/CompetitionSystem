@@ -67,7 +67,7 @@
 								class="glyphicon glyphicon-chevron-right"></span>
 						</s:a>
 					<li class="active">${title } <span  
-						class="glyphicon glyphicon-chevron-right"></li>
+						class="glyphicon glyphicon-chevron-right"></span></li> 
 					</li>
 				</ol>
 				<s:form id="pageForm"
@@ -100,7 +100,7 @@
 								<td><s:date name="createTime" format="yyyy年MM月dd日" /></td>
 								<td><s:a
 										action="questionAction_toQuestionShowUI?questionSetId=%{questionSetId}&id=%{id}">进入</s:a></td>
-								<td><s:a action="#">提交记录</s:a></td>
+								<td><s:a action="testAnswerAction_toQuestionSubmitRecordUI?questionId=%{id}">提交记录</s:a></td> 
 							</tr>
 							<s:set var="count" value="scope.questionCount" />
 						</s:iterator>

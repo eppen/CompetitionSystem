@@ -33,7 +33,6 @@
 				href="userAction_toUserManageListUI">用户管理</a></li>
 			<li class="alert-warning"><a
 				href="questionSetAction_toQuestionSetManageListUI">试题管理</a></li>
-			<li class="alert-warning"><a href="#">暗箱操作</a></li>
 		</s:if>
 	</ul>
 </div>

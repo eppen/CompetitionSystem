@@ -208,7 +208,6 @@
 							</table>
 						</div>
 					</s:form>
-					<div style="height: 130px;"></div>
 				</div>
 				<!--发表新主题结束-->
 

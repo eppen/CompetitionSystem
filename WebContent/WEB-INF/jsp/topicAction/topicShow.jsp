@@ -11,8 +11,9 @@
 <title>练习系统</title>
 <%@ include file="/WEB-INF/jsp/public/header.jspf"%>
 <link href="<%=basePath%>css/topic.css" rel="stylesheet">
-<!-- 1，引入js文件 -->
-<script type="text/javascript" src="fckeditor/fckeditor.js"></script>
+<link href="<%=basePath%>css/imageFD.css" rel="stylesheet" />
+<!-- 编辑框 -->
+<script src="<%=basePath%>js/ckeditor/ckeditor.js"></script>
 
 <!-- 禁用响应式布局 -->
 </head>
@@ -122,7 +123,7 @@
 				<!-- ~~~~~~~~~~~~~~~ 显示主帖 ~~~~~~~~~~~~~~~ -->
 				<s:if test="currentPage== 1">
 					<div class="ListArea table">
-						<table class="table table-hover" cellpadding="0" cellspacing="1"
+						<table cellpadding="0" cellspacing="1" 
 							width="100%">
 							<tr>
 								<td rowspan="3" width="130" class="PhotoArea" align="center"
@@ -196,32 +197,42 @@
 
 																	<s:if test="#topic.imagePath1!=null">
 																		<p>
-																			<img class="img-responsive"
-																				src='<s:property value ="#topic.imagePath1" />'>
+																			<a id="example1"
+																				href='<s:property value ="#topic.imagePath1" />'><img
+																				class="img-responsive"
+																				src='<s:property value ="#topic.imagePath1" />'></a>
 																		</p>
 																	</s:if>
 																	<s:if test="#topic.imagePath2!=null">
 																		<p>
-																			<img class="img-responsive"
-																				src='<s:property value ="#topic.imagePath2" />'>
+																			<a id="example2"
+																				href='<s:property value ="#topic.imagePath2" />'><img
+																				class="img-responsive"
+																				src='<s:property value ="#topic.imagePath2" />'></a>
 																		</p>
 																	</s:if>
 																	<s:if test="#topic.imagePath3!=null">
 																		<p>
-																			<img class="img-responsive"
-																				src='<s:property value ="#topic.imagePath3" />'>
+																			<a id="example3"
+																				href='<s:property value ="#topic.imagePath3" />'><img
+																				class="img-responsive"
+																				src='<s:property value ="#topic.imagePath3" />'></a>
 																		</p>
 																	</s:if>
 																	<s:if test="#topic.imagePath4!=null">
 																		<p>
-																			<img class="img-responsive"
-																				src='<s:property value ="#topic.imagePath4" />'>
+																			<a id="example4"
+																				href='<s:property value ="#topic.imagePath4" />'><img
+																				class="img-responsive"
+																				src='<s:property value ="#topic.imagePath4" />'></a>
 																		</p>
 																	</s:if>
 																	<s:if test="#topic.imagePath5!=null">
 																		<p>
-																			<img class="img-responsive"
-																				src='<s:property value ="#topic.imagePath5" />'>
+																			<a id="example5"
+																				href='<s:property value ="#topic.imagePath5" />'><img
+																				class="img-responsive"
+																				src='<s:property value ="#topic.imagePath5" />'></a>
 																		</p>
 																	</s:if>
 
@@ -378,19 +389,19 @@
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 					<!-- 分页结束 -->
 
-
 					<!--快速回复-->
 					<div class="QuictReply" id="quictReply">
 						<s:form action="replyAction_add?topicId=%{#topic.id}"
 							method="post">
+
 							<div style="padding-left: 3px;">
 								<table class="table table-striped">
 									<tr class="Tint" height="200">
-										<td valign="top" class="no_color_bg"><textarea
-												class="form-control" name="content"
-												style="width: 100%; height: 100px"></textarea></td>
-									</tr>
-									<tr height="30" class="Tint">
+										<div class="grid-container">
+											<div class="grid-width-100">
+												<s:textarea name="content" id="editor"></s:textarea>
+											</div>
+										</div>
 										<td class="center" colspan="2" align="center">
 											<button type="submit" class="btn btn-success">回复</button>
 										</td>
@@ -398,24 +409,39 @@
 								</table>
 							</div>
 						</s:form>
-						<div style="height: 130px;"></div>
 					</div>
+					 
 			</div>
 		</div>
 	</div>
 	<!-- 中间内容结束 -->
 
 
-	<script type="text/javascript">
-		var editor = new FCKeditor('content');
-		editor.BasePath = "fckeditor/";
-		editor.ToolbarSet = "simple"; //"simple"; 
-		editor.Width = "100%";
-		editor.Config['EnableAdvanceTable'] = false;
-		editor.ReplaceTextarea();
+	<script>
+		window.onload = function() {
+			CKEDITOR.replace('editor');
+		};
+
+		$("#submit").click(function() {
+			/* CKEDITOR.replace("editor1"); */
+			var title = $("#caption").val(); /*不能用.text()或.html()*/
+			var val = CKEDITOR.instances.editor.getData();
+		});
 	</script>
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
+
+	<script type="text/javascript" src="js/imageFD/jquery.min.js"></script>
+	<script type="text/javascript" src="js/imageFD/jquery.imgbox.pack.js"></script>
+	<script>
+		$(function() {
+			$("#example1").imgbox();
+			$("#example2").imgbox();
+			$("#example3").imgbox();
+			$("#example4").imgbox();
+			$("#example5").imgbox();
+		});
+	</script>
 </body>
 
 </html>

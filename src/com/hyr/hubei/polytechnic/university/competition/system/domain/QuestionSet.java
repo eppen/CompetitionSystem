@@ -2,6 +2,7 @@ package com.hyr.hubei.polytechnic.university.competition.system.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 2016-11-4 21:25:37
@@ -25,12 +26,14 @@ public class QuestionSet {
 	/** 试题集关联的试题 */
 	private List<Question> questions;
 
+	/** 主题关联的试题 */
+	private Set<Topic> topics;
+
 	/** 更新时间 以最后添加的试题时间为准 */
 	private Date updateTime;
 
 	/** 是否被删除 0未删除 1已删除 默认值0。如果删除试题集，需要将一系列的试题和评测答案都删除. */
 	private Integer isdel = 0;
-
 
 	public Long getId() {
 		return id;
@@ -86,6 +89,14 @@ public class QuestionSet {
 
 	public void setIsdel(Integer isdel) {
 		this.isdel = isdel;
+	}
+
+	public Set<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(Set<Topic> topics) {
+		this.topics = topics;
 	}
 
 }

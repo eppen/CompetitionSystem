@@ -81,6 +81,58 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 	}
 
 	/**
+	 * 试题提交记录页面
+	 */
+	public String toQuestionSubmitRecordUI() throws AppException {
+		ActionContext.getContext().put("question",questionService.getById(questionId)); 
+		// 准备数据
+		ActionContext.getContext().getValueStack().push(resultSearch);
+		System.out.println(resultSearch);
+		 
+		// 准备回显数据 返回当前登录用户的答案信息分页数据
+		if (titleNameSearch == null || titleNameSearch.equals("")) {
+			if (resultSearch.equals("评测结果")) {
+				// 默认搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			} else {
+				// 条件搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addWhereAndCondition("t.result=?", resultSearch)//
+						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			}
+		} else {
+			if (resultSearch.equals("评测结果")) {
+				// 默认搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addWhereAndCondition("t.question.title LIKE '%" + titleNameSearch + "%'")//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			} else {
+				// 条件搜索
+				new QueryHelper(TestAnswer.class, "t")//
+						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
+						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addWhereAndCondition("t.result=?", resultSearch)//
+						.addWhereAndCondition("t.question.title LIKE '%" + titleNameSearch + "%'")//
+						.addOrderByProperty("t.submitTime", false) //
+						.preparePageBean(testAnswerService, pageNum);
+			}
+
+		}
+		
+		return "toQuestionSubmitRecordUI";
+	}
+	
+	/**
 	 * 评测详情
 	 */
 	public String toAnswerInfoUI() throws AppException {

@@ -10,7 +10,8 @@
 <meta name="description" content="题库">
 <meta name="author" content="黄跃然 huangyueran">
 <title>练习系统</title>
-<%@ include file="/WEB-INF/jsp/public/header2.jspf"%> 
+<%@ include file="/WEB-INF/jsp/public/header2.jspf"%>
+<link href="<%=basePath%>css/imageFD.css" rel="stylesheet" />
 <!-- 禁用响应式布局 -->
 </head>
 
@@ -70,7 +71,7 @@
 								class="glyphicon glyphicon-chevron-right"></span>
 						</s:a>
 					<li class="active">${title }<span
-						class="glyphicon glyphicon-chevron-right"></li>
+						class="glyphicon glyphicon-chevron-right"></span></li>
 					</li>
 				</ol>
 
@@ -88,37 +89,42 @@
 							<tr>
 								<td>${description }</td>
 							</tr>
-							<tr> 
-								<td> 
-									<div class="col-md-7" style="margin-top: 2px">  
+							<tr>
+								<td>
+									<div class="col-md-7" style="margin-top: 2px">
 										<s:if test="imagePath1!=null">
 											<p>
-												<img class="img-responsive"
-													src='<s:property value ="imagePath1" />'>
+												<a id="example1" href='<s:property value ="imagePath1" />'><img
+													class="img-responsive"
+													src='<s:property value ="imagePath1" />'></a>
 											</p>
 										</s:if>
 										<s:if test="imagePath2!=null">
 											<p>
-												<img class="img-responsive"
-													src='<s:property value ="imagePath2" />'>
+												<a id="example2" href='<s:property value ="imagePath2" />'><img
+													class="img-responsive"
+													src='<s:property value ="imagePath2" />'></a>
 											</p>
 										</s:if>
 										<s:if test="imagePath3!=null">
 											<p>
-												<img class="img-responsive"
-													src='<s:property value ="imagePath3" />'>
+												<a id="example3" href='<s:property value ="imagePath3" />'><img
+													class="img-responsive"
+													src='<s:property value ="imagePath3" />'></a>
 											</p>
 										</s:if>
 										<s:if test="imagePath4!=null">
 											<p>
-												<img class="img-responsive"
-													src='<s:property value ="imagePath4" />'>
+												<a id="example4" href='<s:property value ="imagePath4" />'><img
+													class="img-responsive"
+													src='<s:property value ="imagePath4" />'></a>
 											</p>
 										</s:if>
-										<s:if test="imagePath5!=null">  
+										<s:if test="imagePath5!=null">
 											<p>
-												<img class="img-responsive"
-													src='<s:property value ="imagePath5" />'>
+												<a id="example5" href='<s:property value ="imagePath5" />'><img
+													class="img-responsive"
+													src='<s:property value ="imagePath5" />'></a>
 											</p>
 										</s:if>
 
@@ -179,6 +185,19 @@
 	<!-- 中间内容结束 -->
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
+
+	<script type="text/javascript" src="js/imageFD/jquery.min.js"></script>
+	<script type="text/javascript" src="js/imageFD/jquery.imgbox.pack.js"></script>
+	<script>
+		$(function() {
+			$("#example1").imgbox();
+			$("#example2").imgbox();
+			$("#example3").imgbox();
+			$("#example4").imgbox();
+			$("#example5").imgbox();
+		});
+	</script> 
+
 </body>
 
 </html>

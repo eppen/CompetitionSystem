@@ -59,7 +59,41 @@
 	<div class="container-fluid">
 		<div class="row">
 			<!-- 侧边栏 -->
-			<%@ include file="/WEB-INF/jsp/public/leftMenu.jspf"%>
+			<div class="col-sm-3 col-md-2 sidebar collapse"
+	style="position: absolute; top: 70px;">
+
+	<ul class="nav nav-sidebar">
+		<li class=""><a href="userAction_toUserCenterUI">个人信息</a></li>
+		<li><s:a
+				action="userAction_toUpdateUserUI?id=%{#session.user.id}">用户信息修改</s:a></li>
+		<li><s:a
+				action="userAction_toUpdateUserPasswordUI?id=%{#session.user.id}">修改密码</s:a></li>
+		<li><a href="userAction_toUserAlertsUI">我的提醒&nbsp;<s:if
+					test='#session.userReplysCount != 0'>
+					<span class="badge" style="background-color: #FF5400;">${userReplysCount}</span>
+				</s:if>
+		</a></li>
+		<li><a href="userAction_toUserTopicListUI">我的主题</a></li>
+		<li><a href="userAction_toUserFavoriteUI">我的收藏</a></li>
+		<li><a href="visitorAction_toUserVisitorUI">访客记录&nbsp;<s:if
+					test='#session.userVisitorsCount != 0'>
+					<span class="badge">${userVisitorsCount }</span>
+				</s:if>
+		</a></li>
+
+		<s:if test="#session.user.role.name=='超级管理员'">
+			<li class="active alert-warning"><a href="userAction_toCreateUserUI">新建用户</a></li>
+		</s:if>
+
+		<s:if
+			test="#session.user.role.name=='超级管理员' || #session.user.role.name=='管理员' ">
+			<li class="alert-warning"><a
+				href="userAction_toUserManageListUI">用户管理</a></li>
+			<li class="alert-warning"><a
+				href="questionSetAction_toQuestionSetManageListUI">试题管理</a></li>
+		</s:if>
+	</ul>
+</div>
 
 			<!-- 内容 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -82,7 +116,7 @@
 										class="form-control required" /></td>
 								</tr>
 								<tr>
-									<td>重新输入姓名</td>
+									<td>请输入姓名</td> 
 									<td><input type="text" name="name"
 										class="form-control required  value="学生"/></td>  
 								</tr> 
