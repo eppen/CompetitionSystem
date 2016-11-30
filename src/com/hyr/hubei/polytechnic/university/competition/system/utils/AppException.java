@@ -4,8 +4,7 @@ package com.hyr.hubei.polytechnic.university.competition.system.utils;
  * @author Administrator
  * @category 自定义的Action异常处理类
  */
-public class AppException extends Exception
-{
+public class AppException extends Exception {
 	private static final long serialVersionUID = -1051457807753607621L;
 
 	private int exceptionCode; // 异常编号
@@ -14,8 +13,7 @@ public class AppException extends Exception
 	/*
 	 * 构造方法 初始化返回异常的信息
 	 */
-	public AppException(String message)
-	{
+	public AppException(String message) {
 		super(message);
 		this.message = message;
 	}
@@ -23,8 +21,7 @@ public class AppException extends Exception
 	/*
 	 * 构造方法 初始化返回异常的信息和异常编号
 	 */
-	public AppException(int exceptionCode, String message)
-	{
+	public AppException(int exceptionCode, String message) {
 		super(message);
 		this.exceptionCode = exceptionCode;
 		this.message = message;
@@ -33,30 +30,25 @@ public class AppException extends Exception
 	/*
 	 * 返回详细的异常信息
 	 */
-	public String getDetailMessage()
-	{
+	public String getDetailMessage() {
 		String detailMessage = "Detail Message:" + exceptionCode + ":" + message;// 详细的异常信息
-		System.out.println(detailMessage); 
+		System.out.println(detailMessage);
 		return detailMessage;
 	}
 
-	public int getExceptionCode()
-	{
+	public int getExceptionCode() {
 		return exceptionCode;
 	}
 
-	public void setExceptionCode(int exceptionCode)
-	{
+	public void setExceptionCode(int exceptionCode) {
 		this.exceptionCode = exceptionCode;
 	}
 
-	public String getMessage()
-	{
+	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message)
-	{
+	public void setMessage(String message) {
 		this.message = message;
 	}
 

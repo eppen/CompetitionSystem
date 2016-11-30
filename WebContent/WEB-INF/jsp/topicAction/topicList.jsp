@@ -69,9 +69,13 @@
 					</li>
 				</ol>
 
+
 				<div class="container">
-					<a href="topicAction_toCreateTopicUI" class="btn btn-success">发表新主题</a>
+					<s:if test="#session.isBan==false">
+						<a href="topicAction_toCreateTopicUI" class="btn btn-success">发表新主题</a>
+					</s:if> 
 				</div>
+
 				<p></p>
 
 				<div class="table-responsive">
@@ -120,8 +124,7 @@
 											</s:if> <s:else>
 											${author.name }
 											</s:else></li>
-												<li class="list-unstyled CreateTime">
-												<li class="list-unstyled CreateTime"><s:date
+												<li class="list-unstyled CreateTime"><li class="list-unstyled CreateTime"><s:date
 														name="lastUpdateTime" format="yyyy年MM月dd日 hh:mm:ss" /></li>
 											</ul>
 										</td>
@@ -130,23 +133,26 @@
 							</tbody>
 						</table>
 
-						<!--  其他功能  -->
-						<table>
+						
+													<!--  其他功能  -->
+													<table>
 							<tr valign=bottom>
 								<td></td>
 								<td>
 									<%-- 使用自定义标签，以便于回显数据 --%> <s:select cssClass="btn btn-default"
-										name="viewType" list="%{  #{0:'全部主题', 1:'全部精华贴',2:'全部置顶贴'}  }" />
+																	name="viewType"
+																	list="%{  #{0:'全部主题', 1:'全部精华贴',2:'全部置顶贴'}  }" />
 									<s:select cssClass="btn btn-default" name="orderBy"
-										onchange="onSortByChange(this.value)"
-										list="%{ #{0:'默认排序(所有置顶帖在前面，并按最后更新时间降序排列)', 1:'只按最后更新时间排序', 2:'只按主题发表时间排序', 3:'只按回复数量排序'} }" />
+																	onchange="onSortByChange(this.value)"
+																	list="%{ #{0:'默认排序(所有置顶帖在前面，并按最后更新时间降序排列)', 1:'只按最后更新时间排序', 2:'只按主题发表时间排序', 3:'只按回复数量排序'} }" />
 									<s:select cssClass="btn btn-default" name="asc"
-										list="%{ #{false:'降序', true:'升序'} }" />
+																	list="%{ #{false:'降序', true:'升序'} }" />
 									<button type="submit" class="btn btn-warning">提交</button>
 								</td>
 							</tr>
 						</table>
-					</s:form>
+					
+												</s:form>
 
 					<!-- 分页开始 -->
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>

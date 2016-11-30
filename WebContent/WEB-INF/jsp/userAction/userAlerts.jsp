@@ -64,9 +64,9 @@
 	<ul class="nav nav-sidebar">
 		<li class=""><a href="userAction_toUserCenterUI">个人信息</a></li>
 		<li><s:a
-				action="userAction_toUpdateUserUI?id=%{#session.user.id}">用户信息修改</s:a></li>
+				action="userAction_toUpdateUserUI">用户信息修改</s:a></li>
 		<li><s:a
-				action="userAction_toUpdateUserPasswordUI?id=%{#session.user.id}">修改密码</s:a></li>
+				action="userAction_toUpdateUserPasswordUI">修改密码</s:a></li>
 		<li class="active"><a href="userAction_toUserAlertsUI">我的提醒&nbsp;<s:if
 					test='#session.userReplysCount != 0'>
 					<span class="badge" style="background-color: #FF5400;">${userReplysCount}</span>

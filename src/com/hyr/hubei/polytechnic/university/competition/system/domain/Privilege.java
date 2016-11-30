@@ -16,6 +16,14 @@ public class Privilege {
 	/** */
 	private String name;
 
+	public Privilege() {
+	}
+
+	public Privilege(String url, String name) {
+		this.url = url;
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -67,9 +67,9 @@
 	<ul class="nav nav-sidebar">
 		<li class=""><a href="userAction_toUserCenterUI">个人信息</a></li>
 		<li class="active"><s:a
-				action="userAction_toUpdateUserUI?id=%{#session.user.id}">用户信息修改</s:a></li>
+				action="userAction_toUpdateUserUI">用户信息修改</s:a></li>
 		<li><s:a
-				action="userAction_toUpdateUserPasswordUI?id=%{#session.user.id}">修改密码</s:a></li>
+				action="userAction_toUpdateUserPasswordUI">修改密码</s:a></li>
 		<li><a href="userAction_toUserAlertsUI">我的提醒&nbsp;<s:if
 					test='#session.userReplysCount != 0'>
 					<span class="badge" style="background-color: #FF5400;">${userReplysCount}</span>
@@ -127,7 +127,7 @@
 										<div class="input-group date form_datetime col-md-5"
 											data-date="1979-09-16" data-date-format="yyyy-MM-dd"
 											data-link-field="dtp_input1">
-											<s:textfield cssClass="form-control" name="birthdayStr"/> 
+											<s:textfield cssClass="form-control date" name="birthdayStr"/>  
 											<span class="input-group-addon"><span
 												class="glyphicon glyphicon-remove"></span></span> <span
 												class="input-group-addon"><span

@@ -20,7 +20,7 @@
 			<one-to-many class="User" />
 		</set>
 		<!-- 拥有权限 一对多 -->
-		<set name="privileges"  lazy="false">
+		<set name="privileges"  lazy="false" cascade="all"> 
 			<key column="roleId"></key>
 			<one-to-many class="Privilege"  />
 		</set>

@@ -10,7 +10,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>没有权限</title>
+<title>404 页面未找到</title>
 <style type="text/css"> 
 <!--
 body, td, th {
@@ -42,14 +42,14 @@ body {
 	<script language="javascript" type="text/javascript">
 		setTimeout(function() {
 			this.location.href = "homeAction_toIndex"
-		}, 10000); 
+		}, 5000);
 	</script>
 	<span class="STYLE12">&nbsp;:(</span>
 	<p class="STYLE7">
-		您没有相关操作的权限<br /> 10秒后为您跳转到首页，您可以在首页试着找找您所需要的信息。
+		您输入的网址我们没有找到。<br /> 5秒后为您跳转到首页，您可以在首页试着找找您所需要的信息。
 	</p>
 	<p class="STYLE7">
-		<span class="STYLE9">如果您想进行相关操作，请联系管理员</span>
+		<span class="STYLE9">如果您想了解更多信息，则可以稍后在线搜索此错误: 404 页面未找到</span>
 	</p>
 </body>
 

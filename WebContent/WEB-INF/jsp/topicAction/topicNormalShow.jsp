@@ -78,7 +78,7 @@
 				<!--显示主题标题等-->
 				<table class="table table-responsive" width="100%" border="0"
 					cellspacing="0" cellpadding="0">
-					<tr valign="bottom">  
+					<tr valign="bottom">
 						<td width="3" class="ForumPageTableTitleLeft">&nbsp;</td>
 						<td class="ForumPageTableTitle" style="font-size: 16px;"><b>本帖主题：${topic.title}</b></td>
 						<td class="ForumPageTableTitle" align="right"
@@ -317,27 +317,30 @@
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 					<!-- 分页结束 -->
 
-					<!--快速回复-->
-					<div class="QuictReply" id="quictReply">
-						<s:form action="replyAction_add?topicId=%{#topic.id}"
-							method="post">
+					<s:if test="#session.isBan==false">
+						<!--快速回复-->
+						<div class="QuictReply" id="quictReply">
+							<s:form action="replyAction_add?topicId=%{#topic.id}"
+								method="post">
 
-							<div style="padding-left: 3px;">
-								<table class="table table-striped">
-									<tr class="Tint" height="200">
-										<div class="grid-container">
-											<div class="grid-width-100">
-												<s:textarea name="content" id="editor"></s:textarea>
+								<div style="padding-left: 3px;">
+									<table class="table table-striped">
+										<tr class="Tint" height="200">
+											<div class="grid-container">
+												<div class="grid-width-100">
+													<s:textarea name="content" id="editor"></s:textarea>
+												</div>
 											</div>
-										</div>
-										<td class="center" colspan="2" align="center">
-											<button type="submit" class="btn btn-success">回复</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</s:form>
-					</div>
+											<td class="center" colspan="2" align="center">
+												<button type="submit" class="btn btn-success">回复</button>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</s:form>
+						</div>
+					</s:if> 
+					
 			</div>
 		</div>
 	</div>

@@ -388,7 +388,7 @@
 
 					<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 					<!-- 分页结束 -->
-
+					<s:if test="#session.isBan==false"> 
 					<!--快速回复-->
 					<div class="QuictReply" id="quictReply">
 						<s:form action="replyAction_add?topicId=%{#topic.id}"
@@ -410,6 +410,7 @@
 							</div>
 						</s:form>
 					</div>
+					</s:if>
 					 
 			</div>
 		</div>

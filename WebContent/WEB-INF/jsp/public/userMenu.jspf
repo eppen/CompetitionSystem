@@ -17,7 +17,7 @@
 					</s:if>
 			</a></li>
 			<li><s:a
-					action="userAction_toUpdateUserPasswordUI?id=%{#session.user.id}">修改密码</s:a></li>
+					action="userAction_toUpdateUserPasswordUI">修改密码</s:a></li>
 			<li class="divider"></li>
 			<li><a href="loginoutAction_logout">退出登录</a></li>
 		</ul></li>

@@ -27,9 +27,11 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.XMLUtils;
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
@@ -109,6 +111,15 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 					.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false)//
 					.preparePageBean(topicService, pageNum);
 		}
+
+		// 禁言:不能创建主题、不能发表评论。
+		User user = userService.getById(getCurrentUser().getId());
+		boolean isBan = false;
+		if (user.getIsBan() == 1) {
+			isBan = true;
+		}
+		ActionContext.getContext().getSession().put("isBan", isBan);
+
 		return "toTopicListUI";
 	}
 
@@ -181,6 +192,14 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 				.addOrderByProperty("r.postTime", true)//
 				.preparePageBean(replyService, pageNum);
 
+		// 禁言:不能创建主题、不能发表评论。
+		User user = userService.getById(getCurrentUser().getId());
+		boolean isBan = false;
+		if (user.getIsBan() == 1) {
+			isBan = true;
+		}
+		ActionContext.getContext().getSession().put("isBan", isBan);
+
 		// TODO 判断主题类型 进入不同的展示页面
 		if (topic.getType() == 0) {
 			return "toTopicShowUI";
@@ -199,6 +218,13 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 	 * @throws AppException
 	 */
 	public String toCreateTopicUI() throws AppException {
+		// 判断用户是否有权限 isBan
+		User user = userService.getById(getCurrentUser().getId());
+		if (user.getIsBan() == 1) {
+			// 跳转到没有权限页面
+			return "noPrivilegeUI";
+		}
+
 		// 准备回显的数据
 		List<QuestionSet> questionSets = questionSetService.findAll();
 		ActionContext.getContext().put("questionSets", questionSets);
@@ -213,7 +239,15 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 	 * @throws AppException
 	 */
 	public String toCreateNormalTopicUI() throws AppException {
-		return "toCreateNormalTopicUI";
+		// 判断用户是否有权限 isBan
+		User user = userService.getById(getCurrentUser().getId());
+		if (user.getIsBan() == 0) {
+			return "toCreateNormalTopicUI";
+		} else {
+			// 跳转到没有权限页面
+			return "noPrivilegeUI";
+		}
+
 	}
 
 	/**
@@ -223,6 +257,13 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 	 * @throws AppException
 	 */
 	public String createTopic() throws AppException {
+		// 判断用户是否有权限 isBan
+		User user = userService.getById(getCurrentUser().getId());
+		if (user.getIsBan() == 1) {
+			// 跳转到没有权限页面
+			return "noPrivilegeUI";
+		}
+
 		Topic topic = new Topic();
 		topic.setAuthor(getCurrentUser());
 		topic.setCareful(model.getCareful());
@@ -336,6 +377,13 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 	 * @throws AppException
 	 */
 	public String createTopicAnswer() throws AppException {
+		// 判断用户是否有权限 isBan
+		User user = userService.getById(getCurrentUser().getId());
+		if (user.getIsBan() == 1) {
+			// 跳转到没有权限页面
+			return "noPrivilegeUI";
+		}
+
 		// 取出上个页面设置的topic数据
 		Topic topic = (Topic) ActionContext.getContext().getSession().get("newtopic1");
 		// 总分
@@ -394,6 +442,12 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 		Topic topic = topicService.getById(model.getId());
 		ActionContext.getContext().getValueStack().push(topic); // 试题
 
+		// 判断登录用户是否是作者
+		if (topic.getAuthor().getId() != getCurrentUser().getId()) {
+			// 跳转到没有权限页面
+			return "noPrivilegeUI";
+		}
+
 		// TODO 统一异常处理
 		// 新增题目0 知识讨论1
 		if (topic.getType() == 0) {
@@ -411,6 +465,13 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 	 */
 	public String updateTopic() throws AppException {
 		Topic topic = topicService.getById(model.getId());
+
+		// 判断登录用户是否是作者
+		if (topic.getAuthor().getId() != getCurrentUser().getId()) {
+			// 跳转到没有权限页面
+			return "noPrivilegeUI";
+		}
+
 		topic.setCareful(model.getCareful());
 		topic.setContent(model.getContent());
 		topic.setCue(model.getCue());
@@ -458,6 +519,13 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 	public String updateTopicAnswer() throws AppException {
 		// 取出上个页面设置的topic数据
 		Topic topic = (Topic) ActionContext.getContext().getSession().get("newtopic1");
+
+		// 判断登录用户是否是作者
+		if (topic.getAuthor().getId() != getCurrentUser().getId()) {
+			// 跳转到没有权限页面
+			return "noPrivilegeUI";
+		}
+
 		// 总分
 		int totalScore = 0;
 		if (fractionlist != null) {
@@ -505,6 +573,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 	/** 更新主题类型 0普通 1精华 2置顶 */
 	public String updateTopicType() throws AppException {
 		Topic topic = topicService.getById(topicId);
+
 		topic.setClassify(typeId);
 
 		topicService.update(topic);

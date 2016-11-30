@@ -61,7 +61,7 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 */
 	public String toUpdateUserUI() throws AppException {
 		// 准备数据，回显用户信息
-		User user = userService.getById(model.getId());
+		User user = userService.getById(getCurrentUser().getId());
 		ActionContext.getContext().getValueStack().push(user);
 
 		List<Role> roleList = roleService.findAll();
@@ -86,13 +86,14 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 */
 	public String updateUser() throws AppException, ParseException {
 		// 1.从数据库中取出原对象
-		User user = userService.getById(model.getId());
+		User user = userService.getById(getCurrentUser().getId());
 		// 2.设置要修改的属性
 		user.setClasses(model.getClasses());
 		user.setEmail(model.getEmail());
 		user.setGender(model.getGender());
 		user.setName(model.getName());
 		user.setQq(model.getQq());
+		user.setTelephone(model.getTelephone());
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date birthday = format.parse(birthdayStr);
@@ -126,7 +127,7 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 * @throws AppException
 	 */
 	public String updateUserPassword() throws AppException {
-		User user = userService.getById(model.getId());
+		User user = userService.getById(getCurrentUser().getId()); 
 		String oldpassword2 = DigestUtils.md5Hex(oldPassword);
 		if (oldPassword != null && user.getPassword().equals(oldpassword2)) {
 			// 相等 原始密码输入成功
