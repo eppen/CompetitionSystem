@@ -21,13 +21,11 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 /**
  * 安装程序（初始化数据）
  * 
- * @author tyg
+ * @author 黄跃然
  * 
  */
 @Component
 public class Installer {
-	// UPDATE hyr_oa_reply SET deleted = 0;
-
 	@Resource
 	private SessionFactory sessionFactory;
 

@@ -59,40 +59,38 @@
 		<div class="row">
 			<!-- 侧边栏 -->
 			<div class="col-sm-3 col-md-2 sidebar collapse"
-	style="position: absolute; top: 70px;">
+				style="position: absolute; top: 70px;">
 
-	<ul class="nav nav-sidebar">
-		<li class=""><a href="userAction_toUserCenterUI">个人信息</a></li>
-		<li><s:a
-				action="userAction_toUpdateUserUI">用户信息修改</s:a></li>
-		<li><s:a
-				action="userAction_toUpdateUserPasswordUI">修改密码</s:a></li>
-		<li><a href="userAction_toUserAlertsUI">我的提醒&nbsp;<s:if
-					test='#session.userReplysCount != 0'>
-					<span class="badge" style="background-color: #FF5400;">${userReplysCount}</span>
-				</s:if>
-		</a></li>
-		<li><a href="userAction_toUserTopicListUI">我的主题</a></li>
-		<li class="active"><a href="userAction_toUserFavoriteUI">我的收藏</a></li>
-		<li><a href="visitorAction_toUserVisitorUI">访客记录&nbsp;<s:if
-					test='#session.userVisitorsCount != 0'>
-					<span class="badge">${userVisitorsCount }</span>
-				</s:if>
-		</a></li>
+				<ul class="nav nav-sidebar">
+					<li class=""><a href="userAction_toUserCenterUI">个人信息</a></li>
+					<li><s:a action="userAction_toUpdateUserUI">用户信息修改</s:a></li>
+					<li><s:a action="userAction_toUpdateUserPasswordUI">修改密码</s:a></li>
+					<li><a href="userAction_toUserAlertsUI">我的提醒&nbsp;<s:if
+								test='#session.userReplysCount != 0'>
+								<span class="badge" style="background-color: #FF5400;">${userReplysCount}</span>
+							</s:if>
+					</a></li>
+					<li><a href="userAction_toUserTopicListUI">我的主题</a></li>
+					<li class="active"><a href="userAction_toUserFavoriteUI">我的收藏</a></li>
+					<li><a href="visitorAction_toUserVisitorUI">访客记录&nbsp;<s:if
+								test='#session.userVisitorsCount != 0'>
+								<span class="badge">${userVisitorsCount }</span>
+							</s:if>
+					</a></li>
 
-		<s:if test="#session.user.role.name=='超级管理员'">
-			<li class="alert-warning"><a href="userAction_toCreateUserUI">新建用户</a></li>
-		</s:if>
+					<s:if test="#session.user.role.name=='超级管理员'">
+						<li class="alert-warning"><a href="userAction_toCreateUserUI">新建用户</a></li>
+					</s:if>
 
-		<s:if
-			test="#session.user.role.name=='超级管理员' || #session.user.role.name=='管理员' ">
-			<li class="alert-warning"><a
-				href="userAction_toUserManageListUI">用户管理</a></li>
-			<li class="alert-warning"><a
-				href="questionSetAction_toQuestionSetManageListUI">试题管理</a></li>
-		</s:if>
-	</ul>
-</div>
+					<s:if
+						test="#session.user.role.name=='超级管理员' || #session.user.role.name=='管理员' ">
+						<li class="alert-warning"><a
+							href="userAction_toUserManageListUI">用户管理</a></li>
+						<li class="alert-warning"><a
+							href="questionSetAction_toQuestionSetManageListUI">试题管理</a></li>
+					</s:if>
+				</ul>
+			</div>
 
 			<!-- 内容 -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -118,23 +116,28 @@
 						</thead>
 						<tbody>
 
-							<s:iterator value="recordList">
-								<tr>
-									<td><img src="<%=basePath%>img/topicType_${classify}.gif" /><a
-										href="rumenPratice.html"></td>
-									<td><s:a action="topicAction_toTopicShowUI?id=%{id}"
-											target="_blank">${title }</s:a></td>
-									<td><a href="#" target="_blank">${author.name }</td>
-									<td><s:date name="postTime" format="yyyy-MM-dd" /></td>
-									<td><s:if test="type==1">知识讨论								</s:if> <s:elseif
-											test="type==0">新增题目 
+							<s:if test="recordList!=null">     
+							
+								<s:iterator value="recordList">
+									<tr>
+										<td><img src="<%=basePath%>img/topicType_${classify}.gif" /><a
+											href="rumenPratice.html"></td>
+										<td><s:a action="topicAction_toTopicShowUI?id=%{id}"
+												target="_blank">${title }</s:a></td>
+										<td><s:a action="userAction_toUserInfoUI?id=%{author.id}"  
+												target="_blank">${author.name }</s:a></td> 
+										<td><s:date name="postTime" format="yyyy-MM-dd" /></td>
+										<td><s:if test="type==1">知识讨论								</s:if> <s:elseif
+												test="type==0">新增题目 
 										</s:elseif></td>
-									<td>${replyCount }</td>
-									<td>${laudCount }</td>
-									<td><s:a action="topicAction_toTopicShowUI?id=%{id}"
-											target="_blank">进入</s:a></td>
-								</tr>
-							</s:iterator>
+										<td>${replyCount }</td>
+										<td>${laudCount }</td>
+										<td><s:a action="topicAction_toTopicShowUI?id=%{id}"
+												target="_blank">进入</s:a></td>
+									</tr>
+								</s:iterator>
+								
+							</s:if> 
 
 						</tbody>
 					</table>

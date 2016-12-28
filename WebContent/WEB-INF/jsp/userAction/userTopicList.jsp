@@ -124,7 +124,7 @@
 										href="rumenPratice.html"></td>
 									<td><s:a action="topicAction_toTopicShowUI?id=%{id}"
 											target="_blank">${title }</s:a></td>
-									<td><a href="#" target="_blank">${author.name }</td>
+									<td>${author.name }</td>
 									<td><s:date name="postTime" format="yyyy-MM-dd" /></td>
 									<td><s:if test="type==1">
 											<span class="btn btn-warning">知识讨论</span>

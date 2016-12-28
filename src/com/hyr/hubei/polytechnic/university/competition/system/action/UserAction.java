@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Favorite;
+import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Role;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
@@ -104,7 +105,7 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 
 		// 更新后 更新session中登录用户数据
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		session.put("user", user); 
+		session.put("user", user);
 
 		return "toShowUserUI";
 	}
@@ -127,7 +128,7 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	 * @throws AppException
 	 */
 	public String updateUserPassword() throws AppException {
-		User user = userService.getById(getCurrentUser().getId()); 
+		User user = userService.getById(getCurrentUser().getId());
 		String oldpassword2 = DigestUtils.md5Hex(oldPassword);
 		if (oldPassword != null && user.getPassword().equals(oldpassword2)) {
 			// 相等 原始密码输入成功
@@ -196,13 +197,31 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 
 		// 获取用户已收藏的主题
 		List<Favorite> favorites = favoriteService.getByUserId(getCurrentUser().getId());
+		System.out.println("收藏长度:" + favorites.size());
 
-		QueryHelper queryHelper = new QueryHelper(Topic.class, "t");//
-		for (Favorite f : favorites) {
-			queryHelper.addWhereORCondition("t.id = ?", f.getFavoritePK().getTopicId());//
-		}
 		// .addWhereCondition("t.id IN ?",array)//
-		queryHelper.preparePageBean(topicService, pageNum);
+
+		// TODO 可能效率有问题 queryHelper.addWhereAndCondition("1 = 2");
+		if (favorites.size() > 0) {
+			QueryHelper queryHelper = new QueryHelper(Topic.class, "t");//
+			for (Favorite f : favorites) {
+				queryHelper.addWhereORCondition("t.id = ?", f.getFavoritePK().getTopicId());
+			}
+			queryHelper.preparePageBean(topicService, pageNum);
+		} else {
+			QueryHelper queryHelper = new QueryHelper(Topic.class, "t");//
+			queryHelper.addWhereAndCondition("1 = 2");
+			queryHelper.preparePageBean(topicService, pageNum);
+		}
+
+		// "FROM Favorite f WHERE f.favoritePK.userId= ? And f.status = 1
+		// ").setParameter(0, userId)
+		// new QueryHelper(Favorite.class, "f")//
+		// .addWhereAndCondition("f.favoritePK.userId=?",
+		// getCurrentUser().getId())//
+		// .addWhereAndCondition("f.status=?", 1)//
+		// .preparePageBean(questionService, pageNum);
+
 		return "toUserFavoriteUI";
 	}
 

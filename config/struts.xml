@@ -11,6 +11,8 @@
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
 
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+
 	<!-- 设置该应用使用的解码集 -->
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<!-- 上传的全部图片的最大限制 -->
@@ -44,7 +46,7 @@
 			<result name="loginUI">/WEB-INF/jsp/loginoutAction/loginUI.jsp</result>
 			<result name="noPrivilegeUI">/noPrivilegeUI.jsp</result>
 			<result name="error">/error.jsp</result>
-			<result name="noinclude">/noincludepriviligeUI.jsp</result> 
+			<result name="noinclude">/noincludepriviligeUI.jsp</result>
 		</global-results>
 
 		<!-- 统一异常处理 -->
@@ -68,13 +70,12 @@
 			method="{1}">
 			<result name="toIndex">/WEB-INF/jsp/homeAction/index.jsp</result>
 			<result name="toHelpUI">/WEB-INF/jsp/homeAction/help.jsp</result>
-			<result name="toSystemNoticeUI">/WEB-INF/jsp/homeAction/index.jsp</result>
-
+			<result name="toSystemNoticeUI">/WEB-INF/jsp/homeAction/notification.jsp</result>
 			<result name="toCompetitionSystemUI" type="redirectAction">questionSetAction_toQuestionSetListUI
-			</result>
+			</result> 
 			<result name="toExchangeCentreUI" type="redirectAction">topicAction_toTopicListUI
 			</result>
-			<result name="toContactInfoUI">/WEB-INF/jsp/homeAction/index.jsp</result>
+			<result name="toContactInfoUI">/WEB-INF/jsp/homeAction/contactInfo.jsp</result>
 		</action>
 
 		<!-- 用户模块 -->
@@ -173,12 +174,6 @@
 		<action name="scoringPointAction_*"
 			class="com.hyr.hubei.polytechnic.university.competition.system.action.ScoringPointAction"
 			method="{1}">
-			<interceptor-ref name="myDefaultStack"></interceptor-ref>
-			<interceptor-ref name="execAndWait">
-				<param name="includeMethods">submitAnswer</param>
-				<!-- 等待时间,执行时间没有超过此值,将不显示等待画面 (毫秒) -->
-				<param name="delay">1</param>
-			</interceptor-ref>
 			<result name="wait" type="redirectAction">testAnswerAction_toAnswerListUI
 			</result>
 			<result name="toAnswerList" type="redirectAction">testAnswerAction_toAnswerListUI

@@ -107,13 +107,13 @@
 							<tbody>
 								<tr>
 									<td>请输入用户名</td>
-									<td><input type="text" id="username1"
+									<td><input type="text" id="username1"  onkeyup="validate()"
 										class="form-control required" /></td>
 								</tr>
 								<tr>
 									<td>重新输入用户名</td>
-									<td><input type="text" name="username" id="username2"
-										class="form-control required" /></td>
+									<td><input type="text" name="username" id="username2"  onkeyup="validate()"
+										class="form-control required" /><span id="tishi"></span></td> 
 								</tr>
 								<tr>
 									<td>请输入姓名</td> 
@@ -137,7 +137,7 @@
 
 							</tbody>
 						</table>
-						<button class="btn btn-lg btn-primary btn-block" type="submit">确认添加</button>
+						<button class="btn btn-lg btn-primary btn-block"  id="submit" type="submit">确认添加</button> 
 					</form>
 				</div>
 			</div>
@@ -148,14 +148,14 @@
 	<!-- 中间内容结束 -->
 
 	<script>
-		function validate() {
+		function validate() { 
 			var pw1 = document.getElementById("username1").value;
 			var pw2 = document.getElementById("username2").value;
 			if (pw1 == pw2) {
-				document.getElementById("tishi").innerHTML = "<font color='green'>两次密码相同</font>";
+				document.getElementById("tishi").innerHTML = "<font color='green'>两次输入的用户名相同</font>";
 				document.getElementById("submit").disabled = false;
 			} else {
-				document.getElementById("tishi").innerHTML = "<font color='red'>两次密码不相同</font>";
+				document.getElementById("tishi").innerHTML = "<font color='red'>两次输入的用户名不相同</font>";  
 				document.getElementById("submit").disabled = true;
 			}
 		}

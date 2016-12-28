@@ -28,10 +28,10 @@
 				<ul class="nav navbar-nav navbar-btn center-block text-center">
 					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
 							class="sr-only"></span></a></li>
-					<li id="nav2" class="active navbar-btn"><a
+					<li id="nav2" class="navbar-btn"><a
 						href="homeAction_toHelpUI">帮助文档<span class="sr-only"></span></a></li>
-					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
-							class="sr-only"></span></a></li>
+					<li class="navbar-btn active"><a href="homeAction_toSystemNoticeUI">系统公告<span
+							class="sr-only"></span></a></li> 
 					<li class="navbar-btn"><a
 						href="homeAction_toCompetitionSystemUI">进入系统<span
 							class="sr-only"></span></a></li>

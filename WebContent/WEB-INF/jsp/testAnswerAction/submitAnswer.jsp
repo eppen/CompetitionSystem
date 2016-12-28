@@ -126,6 +126,9 @@
 				<div class="table-responsive jumbotron">
 					<s:form action="scoringPointAction_submitAnswer"
 						cssClass="form-signin" role="form" method="post">
+
+						<s:hidden name="randomTemp" value="%{#session.randomTemp}"></s:hidden>      
+						
 						<s:hidden name="questionId" value="%{id}"></s:hidden>
 						<table class="table table-condensed">
 							<tbody style="font-size: 16px; font-family: '微软雅黑';">

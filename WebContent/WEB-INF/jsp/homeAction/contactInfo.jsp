@@ -28,7 +28,7 @@
 				<ul class="nav navbar-nav navbar-btn center-block text-center">
 					<li class="navbar-btn"><a href="homeAction_toIndex">首页<span
 							class="sr-only"></span></a></li>
-					<li id="nav2" class="active navbar-btn"><a
+					<li id="nav2" class="navbar-btn"><a
 						href="homeAction_toHelpUI">帮助文档<span class="sr-only"></span></a></li>
 					<li class="navbar-btn"><a href="homeAction_toSystemNoticeUI">系统公告<span
 							class="sr-only"></span></a></li>
@@ -40,7 +40,7 @@
 							class="sr-only"></span></a></li>
 					<li class="navbar-btn"><a href="homeAction_toExchangeCentreUI">交流中心<span
 							class="sr-only"></span></a></li>
-					<li class="navbar-btn"><a href="homeAction_toContactInfoUI">联系方式<span
+					<li class="navbar-btn active"><a href="homeAction_toContactInfoUI">联系方式<span
 							class="sr-only"></span></a></li>
 				</ul>
 

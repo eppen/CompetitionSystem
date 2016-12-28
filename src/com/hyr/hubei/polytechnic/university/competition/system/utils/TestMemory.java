@@ -13,7 +13,7 @@ public class TestMemory extends Thread {
 	}
 
 	public long getRemSize() {
-		return 5500;
+		return 20;
 	}
 
 }

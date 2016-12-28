@@ -1,5 +1,9 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -21,7 +25,7 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 
 	private Long questionId; // 提交答案所属试题的ID
 	private String titleNameSearch; // 根据试题名 搜索字段
-	private String resultSearch="评测结果"; // 根据结果 搜索字段
+	private String resultSearch = "评测结果"; // 根据结果 搜索字段
 
 	/**
 	 * 提交答案页面
@@ -31,17 +35,22 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 		Question question = questionService.getById(questionId);
 		ActionContext.getContext().getValueStack().push(question);
 
+		// 生成随机数 防止缓存 无效
+		// Random random = new Random();
+		// double randomTemp = random.nextDouble();
+		// ActionContext.getContext().getSession().put("randomTemp", randomTemp);
+
 		return "toSubmitAnswerUI";
 	}
 
 	/**
-	 * 评测装填
+	 * 评测状态
 	 */
 	public String toAnswerListUI() throws AppException {
 
 		ActionContext.getContext().getValueStack().push(resultSearch);
 		System.out.println(resultSearch);
-		 
+
 		// 准备回显数据 返回当前登录用户的答案信息分页数据
 		if (titleNameSearch == null || titleNameSearch.equals("")) {
 			if (resultSearch.equals("评测结果")) {
@@ -84,18 +93,18 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 	 * 试题提交记录页面
 	 */
 	public String toQuestionSubmitRecordUI() throws AppException {
-		ActionContext.getContext().put("question",questionService.getById(questionId)); 
+		ActionContext.getContext().put("question", questionService.getById(questionId));
 		// 准备数据
 		ActionContext.getContext().getValueStack().push(resultSearch);
 		System.out.println(resultSearch);
-		 
+
 		// 准备回显数据 返回当前登录用户的答案信息分页数据
 		if (titleNameSearch == null || titleNameSearch.equals("")) {
 			if (resultSearch.equals("评测结果")) {
 				// 默认搜索
 				new QueryHelper(TestAnswer.class, "t")//
 						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
-						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addWhereAndCondition("t.question.id=?", questionId)//
 						.addOrderByProperty("t.submitTime", false) //
 						.preparePageBean(testAnswerService, pageNum);
 			} else {
@@ -103,7 +112,7 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 				new QueryHelper(TestAnswer.class, "t")//
 						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
 						.addWhereAndCondition("t.result=?", resultSearch)//
-						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addWhereAndCondition("t.question.id=?", questionId)//
 						.addOrderByProperty("t.submitTime", false) //
 						.preparePageBean(testAnswerService, pageNum);
 			}
@@ -112,7 +121,7 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 				// 默认搜索
 				new QueryHelper(TestAnswer.class, "t")//
 						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
-						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addWhereAndCondition("t.question.id=?", questionId)//
 						.addWhereAndCondition("t.question.title LIKE '%" + titleNameSearch + "%'")//
 						.addOrderByProperty("t.submitTime", false) //
 						.preparePageBean(testAnswerService, pageNum);
@@ -120,7 +129,7 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 				// 条件搜索
 				new QueryHelper(TestAnswer.class, "t")//
 						.addWhereAndCondition("t.student.id=?", getCurrentUser().getId())//
-						.addWhereAndCondition("t.question.id=?",questionId)//
+						.addWhereAndCondition("t.question.id=?", questionId)//
 						.addWhereAndCondition("t.result=?", resultSearch)//
 						.addWhereAndCondition("t.question.title LIKE '%" + titleNameSearch + "%'")//
 						.addOrderByProperty("t.submitTime", false) //
@@ -128,10 +137,10 @@ public class TestAnswerAction extends ModelDrivenBaseAction<TestAnswer> {
 			}
 
 		}
-		
+
 		return "toQuestionSubmitRecordUI";
 	}
-	
+
 	/**
 	 * 评测详情
 	 */
