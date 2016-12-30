@@ -72,7 +72,7 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 		testAnswerService.save(answer);
 
 		// 线程池另起线程进行编译计算
-		ExecutorService pool = Executors.newFixedThreadPool(1);
+		ExecutorService pool = Executors.newFixedThreadPool(2);
 		Runnable mthread = new Runnable() {
 			
 			@Override
@@ -195,9 +195,16 @@ public class ScoringPointAction extends ModelDrivenBaseAction<TestAnswer> implem
 																							// 保存编译出错信息
 								testAnswer.setResult("编译异常");
 							} else {
-								// 执行异常
-								scoringPoint.setResult("运行错误");
-								testAnswer.setResult("运行错误");
+								if(resultInfo.getExecTime() > question.getRuntime()){
+									// 执行异常
+									scoringPoint.setResult("运行超时");
+									testAnswer.setResult("运行超时");
+								}else {
+									// 执行异常
+									scoringPoint.setResult("运行错误");
+									testAnswer.setResult("运行错误");
+								} 
+							
 							}
 							scoringPoint.setScore(0);
 							testAnswer.setScores(testAnswer.getScores() + (int) scoringPoint.getScore());

@@ -168,8 +168,8 @@
 												<td><span class="Color_AC">${result }</span></td>
 												<td>${score }</td>
 												<td><s:if
-														test="runtime == -1 || result == '运行超时' || result =='编译异常' ">${result } </s:if>
-													<s:else>${runtime }ms</s:else></td>
+														test="runtime == -1 || result =='编译异常' ">${result } </s:if>
+													<s:else>${runtime }ms</s:else></td> 
 												<td><s:if test="memory == -1 || result =='编译异常' ">${result }</s:if>
 													<s:else>${memory }MB</s:else></td>
 											</tr>

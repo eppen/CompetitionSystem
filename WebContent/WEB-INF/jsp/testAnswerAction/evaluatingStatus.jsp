@@ -118,8 +118,8 @@
 								${scores }
 								</s:else></td>
 								<td><s:if
-										test="runtime == -1 || result == '运行超时' || result =='编译异常' ">
-								${result }
+										test="runtime == -1  || result =='编译异常' ">
+								${result } 
 								</s:if> <s:else>
 								${runtime }ms
 								</s:else></td>

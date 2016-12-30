@@ -22,6 +22,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.cxf.Configuration
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
+import com.hyr.hubei.polytechnic.university.competition.system.utils.HtmlReplaceUtil;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.XMLUtils;
 import com.opensymphony.xwork2.ActionContext;
@@ -129,24 +130,25 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 	 * @throws AppException
 	 */
 	public String createQuestion() throws AppException {
+		
 		// 准备试题所属试题集数据
 		QuestionSet questionSet = questionSetService.getById(scopeId);
 		// 设置属性
 		Question question = new Question();
-		question.setCareful(model.getCareful());
-		question.setCue(model.getCue());
-		question.setDescription(model.getDescription());
+		question.setCareful(HtmlReplaceUtil.getTextFromHtml(model.getCareful()));
+		question.setCue(HtmlReplaceUtil.getTextFromHtml(model.getCue()));
+		question.setDescription(HtmlReplaceUtil.getTextFromHtml(model.getDescription()));
 		question.setContent(model.getContent());
-		question.setInputFormat(model.getInputFormat());
+		question.setInputFormat(HtmlReplaceUtil.getTextFromHtml(model.getInputFormat()));
 		question.setLanguage(model.getLanguage());
 		question.setMemory(model.getMemory());
-		question.setOutputFormat(model.getOutputFormat());
+		question.setOutputFormat(HtmlReplaceUtil.getTextFromHtml(model.getOutputFormat()));
 		question.setRuntime(model.getRuntime());
-		question.setSampleInput(model.getSampleInput());
-		question.setSampleOutput(model.getSampleOutput());
+		question.setSampleInput(HtmlReplaceUtil.getTextFromHtml(model.getSampleInput()));
+		question.setSampleOutput(HtmlReplaceUtil.getTextFromHtml(model.getSampleOutput()));
 		question.setScope(questionSet);
 		question.setScores(100);
-		question.setTitle(model.getTitle());
+		question.setTitle(HtmlReplaceUtil.getTextFromHtml(model.getTitle()));
 		question.setType(model.getType());
 
 		// 将创建好的数据进行保存
@@ -324,20 +326,20 @@ public class QuestionAction extends ModelDrivenBaseAction<Question> {
 		Long newQSId = model.getScope().getId();
 
 		// 填写数据
-		question.setCareful(model.getCareful());
-		question.setCue(model.getCue());
-		question.setDescription(model.getDescription());
+		question.setCareful(HtmlReplaceUtil.getTextFromHtml(model.getCareful()));
+		question.setCue(HtmlReplaceUtil.getTextFromHtml(model.getCue()));
+		question.setDescription(HtmlReplaceUtil.getTextFromHtml(model.getDescription()));
 		question.setContent(model.getContent());
-		question.setInputFormat(model.getInputFormat());
+		question.setInputFormat(HtmlReplaceUtil.getTextFromHtml(model.getInputFormat()));
 		question.setLanguage(model.getLanguage());
 		question.setMemory(model.getMemory());
-		question.setOutputFormat(model.getOutputFormat());
+		question.setOutputFormat(HtmlReplaceUtil.getTextFromHtml(model.getOutputFormat()));
 		question.setRuntime(model.getRuntime());
-		question.setSampleInput(model.getSampleInput());
-		question.setSampleOutput(model.getSampleOutput());
+		question.setSampleInput(HtmlReplaceUtil.getTextFromHtml(model.getSampleInput()));
+		question.setSampleOutput(HtmlReplaceUtil.getTextFromHtml(model.getSampleOutput()));
 		question.setScope(model.getScope());
 		question.setScores(100);
-		question.setTitle(model.getTitle());
+		question.setTitle(HtmlReplaceUtil.getTextFromHtml(model.getTitle()));
 		question.setType(model.getType());
 
 		// TODO 存储修复后的答案

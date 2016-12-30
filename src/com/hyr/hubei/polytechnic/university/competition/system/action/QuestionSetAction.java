@@ -11,6 +11,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
+import com.hyr.hubei.polytechnic.university.competition.system.utils.HtmlReplaceUtil;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -70,8 +71,8 @@ public class QuestionSetAction extends ModelDrivenBaseAction<QuestionSet> {
 		// 准备创建的数据
 		QuestionSet questionSet = new QuestionSet();
 
-		questionSet.setDescription(model.getDescription());
-		questionSet.setTitle(model.getTitle());
+		questionSet.setDescription(HtmlReplaceUtil.getTextFromHtml(model.getDescription()));
+		questionSet.setTitle(HtmlReplaceUtil.getTextFromHtml(model.getTitle()));
 		questionSet.setUpdateTime(new Date());
 
 		questionSetService.save(questionSet);
@@ -113,8 +114,8 @@ public class QuestionSetAction extends ModelDrivenBaseAction<QuestionSet> {
 	 */
 	public String updateQuestion() throws AppException {
 		QuestionSet questionSet = questionSetService.getById(model.getId());
-		questionSet.setDescription(model.getDescription());
-		questionSet.setTitle(model.getTitle());
+		questionSet.setDescription(HtmlReplaceUtil.getTextFromHtml(model.getDescription()));
+		questionSet.setTitle(HtmlReplaceUtil.getTextFromHtml(model.getTitle()));
 
 		questionSetService.update(questionSet);
 

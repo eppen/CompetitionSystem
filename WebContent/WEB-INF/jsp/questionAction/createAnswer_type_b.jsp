@@ -206,19 +206,20 @@
 								<tr class="alert alert-dismissable">
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="inputlist" class="form required" value="5.545" /></td>
+										name="inputlist" class="form required" value="0" /></td>
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
-										name="answerlist" class="form required" value="5.545" /></td>
+										name="answerlist" class="form required" value="0" /></td>
 									<td><input type="text"
 										style="font-size: 18px; font-family: '微软雅黑'; width: 100%;"
 										name="fractionlist" class="form required digits"
 										oninput="OnInput (event)"
 										onpropertychange="OnPropChanged (event)" value="0" /></td>
-									<td><button type="button" class="close"
-											data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button></td>
+									<td style="text-align: center;" onclick="deletetr(this)">
+											<button type="button" class="btn btn-xs btn-link">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</td> 
 								</tr>
 
 							</tbody>
@@ -237,7 +238,46 @@
 
 	<%@ include file="/WEB-INF/jsp/public/footer.jspf"%>
 
-	<script type="text/javascript">
+	<script type="text/javascript"> 
+	function deletetr(tdobject) {
+		var td = $(tdobject);
+		td.parents("tr").remove(); 
+		//验证分数
+		var array = document.getElementsByName("fractionlist");
+		var sum = 0;
+		for (var i = 0; i < array.length; i++) {
+			sum = parseFloat(sum) + parseFloat(array[i].value);
+		}
+		$('#score_hint').html("当前总分值:" + sum);
+		if (sum != NaN || sum != null) {
+			if (sum == parseFloat(100)) {
+				//btn_submit
+				$('#btn_submit').removeAttr("disabled");
+				$('#score_waring').html("");
+				$('#score_hint').attr("class", "alert alert-success");
+			} else if (sum > parseFloat(100)) {
+				$('#btn_submit').attr("disabled", true);
+				$('#score_hint')
+						.html(
+								"当前总分值:"
+										+ sum
+										+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分数超出范围！");
+				$('#score_hint').attr("class", "alert alert-danger");
+			} else if (sum < parseFloat(100)) {
+				$('#btn_submit').attr("disabled", true);
+				$('#score_hint')
+						.html(
+								"当前总分值:"
+										+ sum
+										+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分数未达到100分！");
+				$('#score_hint').attr("class", "alert alert-warning");
+			} else {
+				$('#btn_submit').attr("disabled", true);
+			}
+
+		}
+	}
+	
 		$(function() {
 			//按钮点击事件
 			$("#btnAdd")
@@ -247,17 +287,18 @@
 								//构建新行
 								var newRow = "<tr class=\"alert alert-dismissable\">"
 										+ "<td>"
-										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"inputlist\" class=\"form required\" value=\"5.545\"/>"
+										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"inputlist\" class=\"form required\" value=\"0\"/>"
 										+ "</td>"
 										+ "<td>"
-										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"answerlist\" class=\"form required\" value=\"5.545\"/>"
+										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"answerlist\" class=\"form required\" value=\"0\"/>" 
 										+ "</td>"
 										+ "<td>"
 										+ "<input type=\"text\" style=\"font-size: 18px;font-family: '微软雅黑';width: 100%;\" name=\"fractionlist\" class=\"form required digits\" oninput=\"OnInput (event)\" onpropertychange=\"OnPropChanged (event)\" value=\"0\"/>"
 										+ "</td>"
-										+ "<td><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">"
+										+ "<td style=\"text-align: center;\" onclick=\"deletetr(this)\">"
+										+ "<button type=\"button\" class=\"btn btn-xs btn-link\">"
 										+ "<span aria-hidden=\"true\">&times;</span>"
-										+ "</button></td>" + "</tr>";
+										+ "</button>" + "</td>" + "</tr>"; 
 								//为表格追加新行
 								$("#mybody").append(newRow);
 							});

@@ -29,6 +29,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
+import com.hyr.hubei.polytechnic.university.competition.system.utils.HtmlReplaceUtil;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.XMLUtils;
 import com.opensymphony.xwork2.Action;
@@ -266,7 +267,7 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 
 		Topic topic = new Topic();
 		topic.setAuthor(getCurrentUser());
-		topic.setCareful(model.getCareful());
+		topic.setCareful(model.getCareful()); 
 		topic.setContent(model.getContent());
 		topic.setCue(model.getCue());
 		topic.setDescription(model.getDescription());
@@ -285,6 +286,31 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 			topic.setTitle("【新增题目】" + model.getTitle());
 		} else if (model.getType() == 1) {
 			topic.setTitle("【知识讨论】" + model.getTitle());
+		}
+		topic.setTopicContent(model.getTopicContent());
+		topic.setType(model.getType());
+		topic.setClassify(0);
+		
+		topic.setAuthor(getCurrentUser());
+		topic.setCareful(HtmlReplaceUtil.getTextFromHtml(model.getCareful()+""));
+		topic.setContent(model.getContent());
+		topic.setCue(HtmlReplaceUtil.getTextFromHtml(model.getCue()+""));
+		topic.setDescription(HtmlReplaceUtil.getTextFromHtml(model.getDescription()+""));
+		topic.setInputFormat(HtmlReplaceUtil.getTextFromHtml(model.getInputFormat()+""));
+		topic.setIpAddr(getRequestIP()); // 得到用户IP地址
+		topic.setLanguage(model.getLanguage());
+		topic.setMemory(model.getMemory());
+		topic.setOutputFormat(HtmlReplaceUtil.getTextFromHtml(model.getOutputFormat()+""));
+		topic.setQuestionTitle(HtmlReplaceUtil.getTextFromHtml(model.getQuestionTitle()+"") + "");
+		topic.setQuestionType(model.getQuestionType());
+		topic.setRuntime(model.getRuntime());
+		topic.setSampleInput(HtmlReplaceUtil.getTextFromHtml(model.getSampleInput()+""));
+		topic.setSampleOutput(HtmlReplaceUtil.getTextFromHtml(model.getSampleOutput()+""));
+		topic.setScores(model.getScores());
+		if (model.getType() == 0) {
+			topic.setTitle("【新增题目】" + HtmlReplaceUtil.getTextFromHtml(model.getTitle()));
+		} else if (model.getType() == 1) {
+			topic.setTitle("【知识讨论】" + HtmlReplaceUtil.getTextFromHtml(model.getTitle()));
 		}
 		topic.setTopicContent(model.getTopicContent());
 		topic.setType(model.getType());
@@ -472,21 +498,21 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 			return "noPrivilegeUI";
 		}
 
-		topic.setCareful(model.getCareful());
+		topic.setCareful(HtmlReplaceUtil.getTextFromHtml(model.getCareful()+""));
 		topic.setContent(model.getContent());
-		topic.setCue(model.getCue());
-		topic.setDescription(model.getDescription());
-		topic.setInputFormat(model.getInputFormat());
+		topic.setCue(HtmlReplaceUtil.getTextFromHtml(model.getCue()+""));
+		topic.setDescription(HtmlReplaceUtil.getTextFromHtml(model.getDescription()+""));
+		topic.setInputFormat(HtmlReplaceUtil.getTextFromHtml(model.getInputFormat()+""));
 		topic.setIpAddr(getRequestIP()); // 得到用户IP地址
 		topic.setLanguage(model.getLanguage());
 		topic.setMemory(model.getMemory());
-		topic.setOutputFormat(model.getOutputFormat());
-		topic.setQuestionTitle(model.getQuestionTitle());
+		topic.setOutputFormat(HtmlReplaceUtil.getTextFromHtml(model.getOutputFormat()+""));
 		topic.setQuestionType(model.getQuestionType());
 		topic.setRuntime(model.getRuntime());
-		topic.setSampleInput(model.getSampleInput());
-		topic.setSampleOutput(model.getSampleOutput());
+		topic.setSampleInput(HtmlReplaceUtil.getTextFromHtml(model.getSampleInput()+""));
+		topic.setSampleOutput(HtmlReplaceUtil.getTextFromHtml(model.getSampleOutput()+""));
 		topic.setTopicContent(model.getTopicContent());
+		topic.setQuestionTitle(HtmlReplaceUtil.getTextFromHtml(model.getQuestionTitle()+""));
 
 		// TODO 图片的上传 暂不处理
 
@@ -619,6 +645,10 @@ public class TopicAction extends ModelDrivenBaseAction<Topic> {
 
 		// 添加题目到数据库
 		questionService.save(question);
+		
+		// 更新试题集中试题总数
+		question.getScope().setQuestionCount(question.getScope().getQuestionCount()+1);
+		questionSetService.update(question.getScope());
 
 		// questionSetId topicId
 		ActionContext.getContext().put("questionSetId", question.getScope().getId());

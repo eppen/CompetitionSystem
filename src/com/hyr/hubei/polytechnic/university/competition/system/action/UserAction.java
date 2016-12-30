@@ -19,6 +19,7 @@ import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Visitor;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
+import com.hyr.hubei.polytechnic.university.competition.system.utils.HtmlReplaceUtil;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -89,12 +90,12 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 		// 1.从数据库中取出原对象
 		User user = userService.getById(getCurrentUser().getId());
 		// 2.设置要修改的属性
-		user.setClasses(model.getClasses());
-		user.setEmail(model.getEmail());
-		user.setGender(model.getGender());
-		user.setName(model.getName());
-		user.setQq(model.getQq());
-		user.setTelephone(model.getTelephone());
+		user.setClasses(HtmlReplaceUtil.getTextFromHtml(model.getClasses()));
+		user.setEmail(HtmlReplaceUtil.getTextFromHtml(model.getEmail()));
+		user.setGender(HtmlReplaceUtil.getTextFromHtml(model.getGender()));
+		user.setName(HtmlReplaceUtil.getTextFromHtml(model.getName()));
+		user.setQq(HtmlReplaceUtil.getTextFromHtml(model.getQq()));
+		user.setTelephone(HtmlReplaceUtil.getTextFromHtml(model.getTelephone()));
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date birthday = format.parse(birthdayStr);
@@ -364,11 +365,11 @@ public class UserAction extends ModelDrivenBaseAction<User> {
 	public String createUser() throws AppException {
 		// 创建用户
 		User user = new User();
-		user.setUsername(model.getUsername());
+		user.setUsername(HtmlReplaceUtil.getTextFromHtml(model.getUsername()));
 		user.setCreateTime(new Date());
 		user.setGender("男");
 		if (model.getName() != null || !model.getName().equals("")) {
-			user.setName(model.getName());
+			user.setName(HtmlReplaceUtil.getTextFromHtml(model.getName()));
 		} else {
 			user.setName("学生");
 		}
