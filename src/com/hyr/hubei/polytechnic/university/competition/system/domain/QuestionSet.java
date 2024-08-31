@@ -20,7 +20,7 @@ public class QuestionSet {
 	/** 试题集描述 */
 	private String description;
 
-	/** 试题集的实体书 */
+	/** 试题集的实体数 */
 	private Integer questionCount = 0;
 
 	/** 试题集关联的试题 */
