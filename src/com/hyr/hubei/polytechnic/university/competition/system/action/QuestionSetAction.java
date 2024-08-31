@@ -1,15 +1,12 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
-import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.QuestionSet;
-import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.HtmlReplaceUtil;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;

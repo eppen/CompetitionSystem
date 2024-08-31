@@ -32,7 +32,6 @@ import com.hyr.hubei.polytechnic.university.competition.system.utils.AppExceptio
 import com.hyr.hubei.polytechnic.university.competition.system.utils.HtmlReplaceUtil;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.QueryHelper;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.XMLUtils;
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 
 /**

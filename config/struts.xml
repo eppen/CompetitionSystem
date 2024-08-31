@@ -4,10 +4,11 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<!-- 禁用动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
 	<constant name="struts.configuration.xml.reload" value="true" />
 	<constant name="struts.action.extension" value=","></constant>
+	<!-- Set “struts.devMode” to “true” -->
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
 
@@ -20,6 +21,12 @@
 
 	<!-- 临时存放文件的路径 -->
 	<constant name="struts.multipart.saveDir" value="d:/test" />
+	<!-- Set “struts.class.reloading.watchList” to a comma separated list of directories, or jar files (absolute or relative paths) -->
+	<!-- https://struts.apache.org/plugins/spring/#class-reloading -->
+	<constant name="struts.class.reloading.watchList" value=""></constant>
+	
+	<!-- If you are using more than one object factory, (for example, by including both the Spring and Plexus plugins in your application) you will need to set the struts.objectFactory property -->
+	<constant name="struts.objectFactory" value="spring" />
 
 	<package name="default" namespace="/" extends="struts-default">
 

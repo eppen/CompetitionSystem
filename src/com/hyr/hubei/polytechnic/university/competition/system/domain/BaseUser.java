@@ -1,6 +1,5 @@
 package com.hyr.hubei.polytechnic.university.competition.system.domain;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 

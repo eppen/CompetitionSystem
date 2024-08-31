@@ -5,9 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.DaoSupportImpl;
-import com.hyr.hubei.polytechnic.university.competition.system.domain.Question;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
-import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.TopicService;
 
 /**

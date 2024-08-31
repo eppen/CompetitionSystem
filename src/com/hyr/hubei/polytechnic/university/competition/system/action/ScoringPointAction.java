@@ -27,7 +27,6 @@ import com.hyr.hubei.polytechnic.university.competition.system.service.QuestionS
 import com.hyr.hubei.polytechnic.university.competition.system.service.UserService;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.CompeteMainClassUtils;
-import com.hyr.hubei.polytechnic.university.competition.system.utils.KillProcessThread;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.ResolveXMLUtils;
 
 /**

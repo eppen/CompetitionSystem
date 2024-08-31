@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.hyr.hubei.polytechnic.university.competition.system.domain.ScoringPoint;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.service.FavoriteService;
 import com.hyr.hubei.polytechnic.university.competition.system.service.LaudService;

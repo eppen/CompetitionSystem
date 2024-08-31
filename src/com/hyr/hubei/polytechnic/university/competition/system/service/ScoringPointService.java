@@ -4,7 +4,6 @@ import javax.transaction.Transactional;
 
 import com.hyr.hubei.polytechnic.university.competition.system.base.DaoSupport;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.ScoringPoint;
-import com.hyr.hubei.polytechnic.university.competition.system.domain.TestAnswer;
 
 /**
  * @author huangyueran

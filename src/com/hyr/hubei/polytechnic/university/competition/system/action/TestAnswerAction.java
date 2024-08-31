@@ -1,9 +1,5 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
-import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 

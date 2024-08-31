@@ -20,6 +20,15 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:beans.xml</param-value>
 	</context-param>
+	<!-- Add this to web.xml: -->
+	<context-param>
+   <param-name>contextClass</param-name>
+   <param-value>org.apache.struts2.spring.ClassReloadingXMLWebApplicationContext</param-value>
+</context-param>
+ <context-param>
+  <param-name>log4jConfigLocation</param-name>
+  <param-value>classpath:log4j.properties</param-value>
+ </context-param>
 
 	<!-- 配置自己的用于做初始化工作的监听器，一定要配置到Spring的ContextLoaderListener的后面，因为要用到Spring的容器对象 -->
 	<listener>

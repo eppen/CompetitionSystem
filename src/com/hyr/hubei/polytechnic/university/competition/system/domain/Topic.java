@@ -1,8 +1,6 @@
 package com.hyr.hubei.polytechnic.university.competition.system.domain;
 
-import java.sql.Blob;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**

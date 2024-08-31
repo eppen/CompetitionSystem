@@ -1,7 +1,6 @@
 package com.hyr.hubei.polytechnic.university.competition.system.action;
 
 import java.util.Date;
-import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -9,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import com.hyr.hubei.polytechnic.university.competition.system.base.ModelDrivenBaseAction;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Reply;
 import com.hyr.hubei.polytechnic.university.competition.system.domain.Topic;
-import com.hyr.hubei.polytechnic.university.competition.system.domain.User;
 import com.hyr.hubei.polytechnic.university.competition.system.utils.AppException;
-import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 
